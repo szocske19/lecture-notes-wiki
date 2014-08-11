@@ -615,7 +615,7 @@ Version control
 
 1. Start by cloning the repository to your local computer. To do this, go to the **Git Repositories** view (from the **Window** | **Show View** | **Other...** window). Provide the clone URI to clone the Git repository.
 
-1. Right click the project an choose **Team** | **Share project..**. Choose **Git** and select the repository.
+1. Right click the project an choose **Team** | **Share project...**. Choose **Git** and select the repository.
 
 1. Add a ``.gitignore`` file to the project. Search for GitHub's ``gitignore`` repository (<https://github.com/github/gitignore>) repository and use the ``Maven.gitignore`` and the ``Java.gitignore`` files as a guideline.
 
