@@ -627,7 +627,7 @@ Maven
 
 1. Use **Maven** instead.
 
-![Maven and Ant trends](img/eclipse_basics/maven_ant_trends.png)
+    ![Maven and Ant trends](img/eclipse_basics/maven_ant_trends.png)
 
 1. Right click the ``carserver`` project, choose **Configure | Convert to Maven Project..**. Click **Finish**.
 
