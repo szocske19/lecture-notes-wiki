@@ -323,9 +323,9 @@ Derived feature
 
 1. Create a new EReference named ``otherEnding`` in the ``RelationEnding`` to itself. Set the following properties:
     - Changeable = false
-	- Derived = true
-	- Transient = true
-	- Volatile = false
+    - Derived = true
+    - Transient = true
+    - Volatile = false
 	
 1. Annote the pattern pattern ``other``:
     
