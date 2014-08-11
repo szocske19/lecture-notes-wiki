@@ -65,8 +65,8 @@ Simple workflow
 
 1. Let's add some workflow variables to the process. Click the process and choose the **Data** page. Create the following variables:
 
-    * ``applications``: is the collection of names of the downloadable applications. The type of this variable is ``Text`` and the multiplicity is **multiple**.
-    * ``selectedApplication``: The user will select one of the available application. This ``Text`` variable with single multiplicity contains its name.
+    1. ``applications``: is the collection of names of the downloadable applications. The type of this variable is ``Text`` and the multiplicity is **multiple**.
+    1. ``selectedApplication``: The user will select one of the available application. This ``Text`` variable with single multiplicity contains its name.
 
     ![The variables of the ``BrowseApplication`` process](img/bpmn/bonita_process_data.png)
     
