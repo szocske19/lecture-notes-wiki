@@ -244,7 +244,7 @@ General tips
 ------------
 
 * If anything goes wrong with the regeneration and there is problem with your code you have two options:
-* If the document was not edited by hand or it isn't valuable delete it. Generate the code again, and it should be fine. It works on the Manifest.MF and the plugin.xml too.
+* If the document was not edited by hand or it isn't valuable delete it. Generate the code again, and it should be fine. It works on the `Manifest.MF` and the `plugin.xml` too.
 * In other case don't be afraid of rewriting. For example if you delete an item from the metamodel the XMI that contains the instance model might have remaining tags with undefined type. That makes the XMI invalid, but it isn't necessary to start over the instance model; simply delete the unwanted part from the code by hand.
   
 References
