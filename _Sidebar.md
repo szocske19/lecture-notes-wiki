@@ -1,10 +1,10 @@
 ### Common
 
-* [Eclipse Basics](eclipse_basics)
+* [Eclipse basics](eclipse_basics)
 
 ### MDSD
 
-* [Code Generation](code_generation)
+* [Code generation](code_generation)
 * [EMF](emf)
 * [IncQuery](incquery)
 * [Yakindu](yakindu)
@@ -15,4 +15,4 @@
 * [BPMN](bpmn)
 * [Cassandra](cassandra)
 * [NoSQL](nosql)
-* [Web Services](web_services)
+* [Web services](web_services)
