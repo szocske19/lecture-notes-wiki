@@ -9,24 +9,3 @@ The course home pages are available here:
 * System Integration: <http://www.inf.mit.bme.hu/edu/courses/szolgint>
 
 If you find any errors, please email it to the authors: Oszkár Semeráth (<oszkar.semerath@gmail.com>) and Gábor Szárnyas (<szarnyasg@gmail.com>).
-
-### Common
-
-* [Eclipse Basics](eclipse_basics)
-
-### MDSD
-
-* [Code Generation](code_generation)
-* [EMF](emf)
-* [IncQuery](incquery)
-* [Yakindu](yakindu)
-
-### System Integration
-
-* [Bonita connector](bonita_connector)
-* [BPMN](bpmn)
-* [Cassandra](cassandra)
-* [NoSQL](nosql)
-* [Web Services](web_services)
-
-
