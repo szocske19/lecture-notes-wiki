@@ -55,9 +55,9 @@ Simple workflow
 
 1. Create the following tasks:
     
-    * ``Download the application names``: _script task_.
-    * ``Show the applications``: _human task_.
-    * ``Buy the application``: _abstract task_.
+    1. ``Download the application names``: _script task_.
+    1. ``Show the applications``: _human task_.
+    1. ``Buy the application``: _abstract task_.
     
 1. Note that the ``Show the applications`` human task uses the actor defined in the lane.
 
