@@ -9,3 +9,5 @@ The course home pages are available here:
 * System Integration: <http://www.inf.mit.bme.hu/edu/courses/szolgint>
 
 If you find any errors, please sign in with your GitHub account and edit this wiki.
+
+The notes are available from the sidebar.
