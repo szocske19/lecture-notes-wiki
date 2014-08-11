@@ -54,15 +54,15 @@ Simple workflow
 1. Click the **Bonita BPM Portal** link and browse this interface. Try to start a new workflow from this.
 
 1. Create the following tasks:
-
+    
     * ``Download the application names``: _script task_.
     * ``Show the applications``: _human task_.
     * ``Buy the application``: _abstract task_.
-
+    
 1. Note that the ``Show the applications`` human task uses the actor defined in the lane.
 
     ![The ``BrowseApplication`` process](img/bpmn/bonita_browse_application_process.png)
-    
+
 1. Let's add some workflow variables to the process. Click the process and choose the **Data** page. Create the following variables:
 
     * ``applications``: is the collection of names of the downloadable applications. The type of this variable is ``Text`` and the multiplicity is **multiple**.
