@@ -40,8 +40,7 @@ Modeling Framework | Empty EMF Project**. Name it to ``hu.bme.mit.mdsd.erdiagram
 ECore Model. Name it to ``ERDiagram.ecore``.
 
 1. A new editor opens  that shows that the model resource has a yet unnamed empty package. Fill the missing properties in the property view:
-    
-	* Name: ``ERDiagram``
+    * Name: ``ERDiagram``
     * Ns Prefix: ``hu.bme.mit.mdsd.erdiagram``
     * Ns URI: ``hu.bme.mit.mdsd.erdiagram``
     
@@ -56,7 +55,6 @@ the **Initialize ECore diagram File...** option. Name it to **ERDiagram.ecoredia
     ![A very simple Ecore model with two ``EClass``es and an ``EReference`` between them](img/emf/ERDiagram00.png)
 
 1. If you click on a model element you can edit its properties in the **Property view**.
-   
     * Specify the names of the ``EClass``es and the ``EReference``.
     * The ``EClass``es can be set to **Abstract** or **Interface** int this view.
     * The multiplicity of the relation is set to ``0..*``
@@ -84,8 +82,7 @@ the **Initialize ECore diagram File...** option. Name it to **ERDiagram.ecoredia
 The difference between the ``EAttribute`` and ``EReference`` is that the EAttribute is referring to an ``EDataTypes`` opposed to ``EReferences`` that endings to ``EClasses``.
 At this phase we have all visible details of the Entity Relation Diagrams.
     ![The metamodel completed with ``EAttributes``](img/emf/ERDiagram02.png)
-  
-   
+
 1. The metamodel lacks of ``EOperations``, because it is basically a data model.
 
 1. Adding namespace to the diagram, this could be the name of the diagram. The types of the attributes should be defined outside of the model, and referred by the diagram. 
