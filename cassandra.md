@@ -520,54 +520,54 @@ Integration
     Caused by: java.lang.ClassNotFoundException: com.datastax.driver.core.Statement
     ```
 
-    The reason for this is that the dependencies are not available for the application. To solve this, we have to
+    The reason for this is that the dependencies are not available for the application. To solve this, we have to do two additional steps.
 
-    (a) Copy the dependencies:
+1. Copy the dependencies:
 
-        ```xml
-        <plugin>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <executions>
-                <execution>
-                    <phase>install</phase>
-                    <goals>
-                        <goal>copy-dependencies</goal>
-                    </goals>
-                    <configuration>
-                        <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-        ```
+    ```xml
+    <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+            <execution>
+                <phase>install</phase>
+                <goals>
+                    <goal>copy-dependencies</goal>
+                </goals>
+                <configuration>
+                    <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
+    ```
 
-        The ``execution`` tag shows an error:
+    The ``execution`` tag shows an error:
 
-        ```
-        maven-dependency-plugin (goals "copy-dependencies", "unpack") is not supported by m2e.
-        ```
+    ```
+    maven-dependency-plugin (goals "copy-dependencies", "unpack") is not supported by m2e.
+    ```
 
-        Use the provided **Permanently mark goal copy-dependencies in pom.xml as ignored in Eclipse build.** fix. This adds a long ``<pluginManagement>`` tag.
+    Use the provided **Permanently mark goal copy-dependencies in pom.xml as ignored in Eclipse build.** fix. This adds a long ``<pluginManagement>`` tag.
 
-    (b) Add them to the classpath:
+1. Add them to the classpath:
 
-        ```xml
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
-            <configuration>
-                <archive>
-                    <manifest>
-                        [...]
-                        <addClasspath>true</addClasspath>
-                        <classpathPrefix>lib/</classpathPrefix>
-                    </manifest>
-                </archive>
-            </configuration>
-        </plugin>
-        ```
+    ```xml
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+            <archive>
+                <manifest>
+                    [...]
+                    <addClasspath>true</addClasspath>
+                    <classpathPrefix>lib/</classpathPrefix>
+                </manifest>
+            </archive>
+        </configuration>
+    </plugin>
+    ```
 
-        For some libraries (e.g. `emfjson`) you may get a `java.lang.NoClassDefFoundError` caused by a `java.lang.ClassNotFoundException`. The reason for this is that Maven sometimes resolves the `SNAPSHOT` string to the actual snapshot version in the generated JAR's `MANIFEST.MF` file (e.g. `org.eclipselabs.emfjson-0.7.0-SNAPSHOT.jar` becomes `org.eclipselabs.emfjson-0.7.0-20140221.135604-5`) but the filename of the dependency's JAR stays the same. To solve this, add a `<useUniqueVersions>false</useUniqueVersions>` element between the `<manifest>` tags (source: <http://jira.codehaus.org/browse/MJAR-156>).
+    For some libraries (e.g. `emfjson`) you may get a `java.lang.NoClassDefFoundError` caused by a `java.lang.ClassNotFoundException`. The reason for this is that Maven sometimes resolves the `SNAPSHOT` string to the actual snapshot version in the generated JAR's `MANIFEST.MF` file (e.g. `org.eclipselabs.emfjson-0.7.0-SNAPSHOT.jar` becomes `org.eclipselabs.emfjson-0.7.0-20140221.135604-5`) but the filename of the dependency's JAR stays the same. To solve this, add a `<useUniqueVersions>false</useUniqueVersions>` element between the `<manifest>` tags (source: <http://jira.codehaus.org/browse/MJAR-156>).
 
     Source: <http://stackoverflow.com/questions/97640/force-maven2-to-copy-dependencies-into-target-lib>
 
