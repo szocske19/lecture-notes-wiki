@@ -136,12 +136,12 @@ We will implement a workflow for the actions of the user.
 
 1. Create a _start event_, an _end event_ and create the following tasks:
 
-    * ``Authenticate``: _service task_
-    * ``User action``: _human task_
-    * ``Login failed``: _human task_
-    * ``Browse applications``: _call activity_
-    * ``Upload application``: _abstract task_
-    * ``Logout``: _human task_
+    1. ``Authenticate``: _service task_
+    1. ``User action``: _human task_
+    1. ``Login failed``: _human task_
+    1. ``Browse applications``: _call activity_
+    1. ``Upload application``: _abstract task_
+    1. ``Logout``: _human task_
 
     For the _human tasks_, set the actor to **Initiator**.
    
@@ -149,15 +149,15 @@ We will implement a workflow for the actions of the user.
 
 1. Time to create some variables:
 
-    * ``userID``: **Integer**
-    * ``username``: **Text**
-    * ``password``: **Text**
+    1. ``userID``: **Integer**
+    1. ``username``: **Text**
+    1. ``password``: **Text**
     
 1. Also create a new variable named ``action``. To create an enumeration, click **List of options...**. Set the **Name** to ``UserActionType`` and add the following options:
 
-    * ``Browse``
-    * ``Upload``
-    * ``Logout``
+    1. ``Browse``
+    1. ``Upload``
+    1. ``Logout``
 
     Click **OK** and **Finish**.
     
@@ -191,9 +191,9 @@ We will implement a workflow for the actions of the user.
 
 1. Now we have to create the conditions to the transitions from the XOR gateway. To do this, click on the transition and from the **Condition** combobox choose **Edit expression...**.
 
-    * For the transition to the ``Browse applications`` task, set the expression to ``action == "Browse"``.
-    * For the transition to the ``Upload application`` task, set the expression to ``action == "Upload"``.
-    * For the transition to the ``Logout`` task, tick the **Default flow** checkbox.
+    1. For the transition to the ``Browse applications`` task, set the expression to ``action == "Browse"``.
+    1. For the transition to the ``Upload application`` task, set the expression to ``action == "Upload"``.
+    1. For the transition to the ``Logout`` task, tick the **Default flow** checkbox.
     
 1. The user can browse and upload applications multiple times. To implement this in the process, we have to create loops. Add the necessary transitions from the ``Browse applications`` and the ``Upload applications`` task.
 
