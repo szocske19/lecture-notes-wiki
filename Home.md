@@ -11,3 +11,5 @@ The course home pages are available here:
 If you find any errors, please sign in with your GitHub account and edit this wiki.
 
 The notes are available from the sidebar.
+
+{{_Sidebar}}
