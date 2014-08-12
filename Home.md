@@ -1,4 +1,5 @@
-## Introduction
+Introduction
+============
 
 This document is a collection of technology descriptions and laboratory instructions for the _Model Driven Software Development_ and _Service Integration_ courses. The courses are part of the computer engineering master's programme _Dependable System Design_ held at the Budapest University of Technology and Economics by the Fault Tolerant Systems Research Group (FTSRG).
 
