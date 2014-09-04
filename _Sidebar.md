@@ -1,6 +1,6 @@
 ### Common
 
-* [Eclipse basics](eclipse_basics) ([PDF](http://ftsrg.github.io/mdsd/2014/eclipse_basics.pdf))
+* [Eclipse basics](wiki/eclipse_basics) ([PDF](http://ftsrg.github.io/mdsd/2014/eclipse_basics.pdf))
 
 ### MDSD
 
