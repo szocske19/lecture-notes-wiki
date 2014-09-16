@@ -416,11 +416,11 @@ Code generation laboratory
 	- You can call the Xtend code from java (like ``generator.generateDataModel(dataModel)``).
 	- You can call the java code from Xtend (like ``GeneratorHelper::createJavaFile``).
 	- A field can be easily accessed like it would be an attribute (or C# property), without calling the``get``/``set`` method. Of course this is only a syntactic sugar.
-	- The ``'''Hello world!'''`` expression returns a ``CharSequence`` with the content. This is similar to the expression ``"Hello world!"`` with the type``String``.
+	- The ``'''Hello world!'''`` expression returns a ``CharSequence`` with the content. This is similar to the expression ``"Hello world!"`` with the type ``String``.
 	
 1. From now on only the template will be edited. At first we create some simple method. 
 
-    A ``Relation` has two ``RelationEnding``. It is useful if the opposite of an ending is accessable:
+    A ``Relation`` has two ``RelationEnding``. It is useful if the opposite of an ending is accessable:
 	
 	```java
 	def otherEnding(RelationEnding ending) {
