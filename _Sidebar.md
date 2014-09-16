@@ -4,8 +4,8 @@
 
 ### MDSD
 
-* [Code generation](https://github.com/FTSRG/MDSD/wiki/code_generation) ([PDF](http://ftsrg.github.io/mdsd/2014/eclipse_basics.pdf))
 * [EMF](https://github.com/FTSRG/MDSD/wiki/emf) ([PDF](http://ftsrg.github.io/mdsd/2014/emf.pdf))
+* [Code generation](https://github.com/FTSRG/MDSD/wiki/code_generation) ([PDF](http://ftsrg.github.io/mdsd/2014/code_generation.pdf))
 * [IncQuery](https://github.com/FTSRG/MDSD/wiki/incquery) ([PDF](http://ftsrg.github.io/mdsd/2014/incquery.pdf))
 * [Yakindu](https://github.com/FTSRG/MDSD/wiki/yakindu) ([PDF](http://ftsrg.github.io/mdsd/2014/yakindu.pdf))
 
