@@ -1,6 +1,6 @@
 ### Theory
 
-* [Introduction to MDE]
+* [[Introduction to MDE]]
 
 ### Technology
 
