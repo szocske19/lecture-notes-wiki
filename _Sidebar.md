@@ -1,8 +1,8 @@
-### Theory
+## Theory
 
 * [[Introduction to MDE]]
 
-### Technology
+## Technology
 
 #### MDSD 2015
 
