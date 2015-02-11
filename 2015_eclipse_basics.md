@@ -8,8 +8,6 @@ The following chapter serves as an introduction to the Eclipse Development Envir
 
 ![](http://eclipsesource.com/blogs/wp-content/uploads/2014/06/splash-luna.png)
 
-![The splashscreen of Eclipse Kepler](img/eclipse_basics/eclipse_logo.png)
-
 Eclipse is a free, open-source software development environment and a platform for plug-in development. Members of the Eclipse Foundation include Cisco, IBM, Intel, Google, SAP, Siemens, etc. A list of Eclipse Foundation Members is available here: <http://www.eclipse.org/membership/showAllMembers.php>.
 
 In this section we will cover the basic concepts in Eclipse.
