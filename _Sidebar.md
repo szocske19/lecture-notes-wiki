@@ -9,6 +9,10 @@
 * [Eclipse basics](https://github.com/FTSRG/MDSD/wiki/2015_eclipse_basics) 
 * [EGit](https://github.com/FTSRG/MDSD/wiki/2015/git) 
 
+#### Lectures
+
+* [Lecture 1 - Basics](https://github.com/FTSRG/MDSD/wiki/Lecture-01) 
+
 ### MDSD 2014
 
 * [EMF](https://github.com/FTSRG/MDSD/wiki/emf) ([PDF](http://ftsrg.github.io/mdsd/2014/emf.pdf))
