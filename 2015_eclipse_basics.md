@@ -46,7 +46,7 @@ Further reading: <http://help.eclipse.org/kepler/index.jsp?topic=/org.eclipse.pl
 
 ### Package Explorer and Project Explorer ###
 
-![The Package Explorer and the Project Explorer in the same workspace](img/eclipse_basics/package_vs_project_explorer.png)
+![The Package Explorer and the Project Explorer in the same workspace](img/eclipse_basics/2015_package_vs_project_explorer.png)
 
 You may want to show the ``.project`` file in the **Package Explorer**. In order to do so, click the downward pointing triangle in the upper right corner, pick **Filters...** and untick the **.* resources** checkbox.
 
@@ -71,22 +71,14 @@ In addition to the basic file management this operation is useful for the versio
 The **Package Explorer** and **Project Explorer** uses a lot of different icons and pictograms. You can find the description if these here: 
 <http://help.eclipse.org/kepler/index.jsp?topic=/org.eclipse.jdt.doc.user/reference/ref-icons.htm>
 
-### Subversion ###
-
-**Apache Subversion** (<http://subversion.apache.org/>), often abbreviated SVN is a widely used open-source version control system.
-
-Eclipse does not include an SVN client by default. You can install the **Subversive** plug-in from your Eclipse distribution's (e.g. Kepler's) update site by following the instructions provided here: <http://www.eclipse.org/subversive/>.
-
-For basic usage you only need the **Subversive SVN Team Provider** package. Complete the installation and restart Eclipse. Eclise will ask you to install a Subversive Connector. Choose one which is compatible with your SVN server's version, install and restart Eclipse again.
-
-The pictograms of **Subversive** are similar to the one of **Subclipse**: <http://stackoverflow.com/questions/3917925/what-do-the-arrow-icons-in-subclipse-mean>
-
 User interface
 --------------
 
 ### Workbench ###
 
 Upon launching, after you choose the workspace location, the workbench window is shown. A workbench window offers _perspectives_. A perspective contains editors, such as the Java Editor and views, such as the Project Explorer.
+
+![An empty workbench without any opened views](img/eclipse_basics/2015_workbench.png)
 
 ### Editors ###
 
