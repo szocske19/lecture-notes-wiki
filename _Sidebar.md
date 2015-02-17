@@ -1,6 +1,6 @@
-## Theory
+## Lectures
 
-* [[Introduction to MDE]]
+* [Lecture 1 - Basics](https://github.com/FTSRG/MDSD/wiki/Lecture-01) 
 
 ## Technology
 
@@ -8,10 +8,6 @@
 
 * [Eclipse basics](https://github.com/FTSRG/MDSD/wiki/2015_eclipse_basics) 
 * [EGit](https://github.com/FTSRG/MDSD/wiki/2015/git) 
-
-#### Lectures
-
-* [Lecture 1 - Basics](https://github.com/FTSRG/MDSD/wiki/Lecture-01) 
 
 ### MDSD 2014
 
