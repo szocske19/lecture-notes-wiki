@@ -13,7 +13,28 @@ EGit tutorial
 [EGit](https://www.eclipse.org/egit/) is an Eclipse built-in git client. It comes with most of the standard Eclipse distributions and probably you won't need to install it.
 
 The easiest way to use EGit is to open the Git perspective. To do so press ctrl+3 and type git.
+
 ![Opening the Git perspective](img/git/1-quickaccess-git-perspective.png)
 
+It has all the important views for using git, namely: Git Repositories, History, Git Staging, Git Reflog. Let's focus on the Git Repositories view. You may browse your existing repositories, _create_ new one locally, _add_ an existing one, and _clone_ a remote git repository. Let's clone a simple repository created only for this tutorial.
 
+![Opening the Git perspective](img/git/2-clone-repo.png)
+
+The repository and the URI for clone command can be found [here](https://github.com/n-a-sz/mdsd-git-demo).
+
+![Opening the Git perspective](img/git/3-repo-uri.png)
+
+Also note, that you may connect to a repository with different protocols: https, ssh, git. You may read more about their pros and cons [here](http://git-scm.com/book/it/v2/Git-on-the-Server-The-Protocols).
+
+The destination folder should be also given, the default folder is the User/<username>/git/<repo-name>. Let's leave it there now. In this wizard you may also import the projects to the eclipse workspace with a help of a checkbox.
+
+![Opening the Git perspective](img/git/4-location.png)
+
+You may also import the projects by right clicking on the Project (or Package) Explorer and clicking import and either by "Existing Projects into workplace" from the repository folder or by "Projects from Git" and choosing the repository.
+
+![Opening the Git perspective](img/git/9-import-project.png)
+
+Let's look at the Git Repositories view:
+
+![Opening the Git perspective](img/git/5-repositories-view.png)
 
