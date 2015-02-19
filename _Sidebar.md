@@ -7,7 +7,7 @@
 ### MDSD 2015
 
 * [Eclipse basics](https://github.com/FTSRG/MDSD/wiki/2015_eclipse_basics) 
-* [EGit](https://github.com/FTSRG/MDSD/wiki/2015/git) 
+* [EGit](https://github.com/FTSRG/MDSD/wiki/git) 
 
 ### MDSD 2014
 
