@@ -28,7 +28,7 @@ The repository and the URI for the clone command can be found [here](https://git
 
 Also note, that you may connect to a repository with different protocols: https, ssh, git. You may read more about their pros and cons [here](http://git-scm.com/book/it/v2/Git-on-the-Server-The-Protocols).
 
-The destination folder should be also given, the default folder in Windows is the User/user-name/git/repo-name. Let's leave it there now. In this wizard you may also import the projects to the eclipse workspace with a help of a checkbox.
+The destination folder should be also given, the default folder in Windows is the Users/user-name/git/repo-name. Let's leave it there now. In this wizard you may also import the projects to the eclipse workspace with a help of a checkbox.
 
 ![](img/git/4-location.png)
 
