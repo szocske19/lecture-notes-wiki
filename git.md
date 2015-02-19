@@ -10,6 +10,8 @@ From [Wikipedia](http://en.wikipedia.org/wiki/Git_(software)):
 EGit tutorial
 -------------
 
+### Basics
+
 [EGit](https://www.eclipse.org/egit/) is an Eclipse built-in git client. It comes with most of the standard Eclipse distributions and probably you won't need to install it.
 
 The easiest way to use EGit is to open the Git perspective. To do so press ctrl+3 and type git.
@@ -20,7 +22,7 @@ It has all the important views for using git, namely: Git Repositories, History,
 
 ![Clone a repository](img/git/2-clone-repo.png)
 
-The repository and the URI for clone command can be found [here](https://github.com/n-a-sz/mdsd-git-demo).
+The repository and the URI for the clone command can be found [here](https://github.com/n-a-sz/mdsd-git-demo).
 
 ![](img/git/3-repo-uri.png)
 
@@ -51,7 +53,7 @@ Here you may see the commits (versions), their dependency and other metadatas ab
 
 The Git Reflog view shows the local history of your executed git commands.
 
-Before discussing the Staging view let's configure git with our name and email address. This is required as this data will be added to every commit. It is stored in the .gitconfig file under the home folder (Users/<user-name>/.gitconfig). EGit provides a GUI for this configuration in Window/Preferences//Team/Git/Configuration, as seen in the following screenshot:
+Before discussing the Staging view, let's configure git with our name and email address. This is required as this data will be added to every commit. It is stored in the .gitconfig file under the home folder (Users/<user-name>/.gitconfig). EGit provides a GUI for this configuration in Window/Preferences//Team/Git/Configuration, as seen in the following screenshot:
 
 ![](img/git/8-git-user.png)
 
@@ -62,6 +64,8 @@ Let's change something in the Java project, for example by modifying the only cl
 Take a look at the History view. The new commit has appeared, the master branch has moved with the commit along with HEAD (as it is pointing to the branch itself). The origin/master branch is stayed as there were no synchronization with the "origin" remote git repository.
 
 ![History view, new commit](img/git/11-first-commit.png)
+
+### Branching, resolving conflicts
 
 In the following we will learn how to resolve conflicts, with the _merge_ and _rebase_ commands by imitating others work with local branches. Let's create a new branch named "feature" pointing to our previous commit - right click on commit, Create Branch.
 
@@ -75,6 +79,47 @@ The feature branch has disappeared, as the default configuration of the view is 
 
 ![New branch](img/git/14-show-branches.png)
 
+Create an other commit (on the master branch), which modifies a same line modified in the feature branch and check the History view. Then use the merge command on the context menu. The merge command creates a new commit from two other commits: 1) the one, which is checked out and 2) the one which you bring up the context menu. Executing the command, it will alert us if there was a conflict or it was successful without problem.
 
+![Merge](img/git/15-merge.png)
+![Conflicting](img/git/16-conflicting.png)
 
+If there is a conflict, git will mark the problematic files and also modifies them in such a way, that the two version of the conflicting hunk (part of the file) will be there.
 
+![Conflict in the file](img/git/17-conflict.png)
+
+To solve the conflict, modify the file to the desired final version (also deleting the helper lines) and stage it. The commit message will automatically fill out with basic information.
+
+![Solving the conflict](img/git/18-solve.png)
+
+Now, the history should look something like this:
+
+![History after merge](img/git/19-merge-history.png)
+
+Note, that the feature branch stayed where it was, but the master branch (HEAD) is moved to the new commit.
+
+Let's try out the rebase command by creating a new commit on the feature branch. Then rebase it on the master branch:
+
+![Before rebase](img/git/21-rebaseon.png)
+
+The result should be something like this:
+
+![After rebase](img/git/22-after-rebase.png)
+
+As you can see, the new commit with the same message has a different Id, hence the original commit has disappeared. Actually it is still there as git never deletes any data unless explicitly commanded to do so, but there's nothing pointing on it (branch or HEAD), hence the history view doesn't show it.
+
+There is a third outcome of merging (beside of successful and conflicting) which is the fast-forward. Let's checkout the master branch and merge it with the feature branch. It will be moved (fast-forwarded) to the last commit.
+
+![Fast-forward](img/git/23-checkout-and-merge.png)
+
+### Other concepts
+
+**Stash** is a very useful feature in git, basically it makes a commit with all pending changes and makes a reference to it. It's function is to save your work and restore your working directory to its initial state. Later on you can apply it anywhere (rebase without a commit).
+
+![Create stash](img/git/24-stash.png)
+![Apply stash](img/git/25-apply-stash.png)
+
+To put a new project to the repository, you can use the Team/Share Project command on the project'c context menu, then choose the a repository.
+
+![Share project](img/git/26-share-project.png)
+![Share project2](img/git/27-share-project2.png)
