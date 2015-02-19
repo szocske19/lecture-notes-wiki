@@ -28,7 +28,7 @@ The repository and the URI for the clone command can be found [here](https://git
 
 Also note, that you may connect to a repository with different protocols: https, ssh, git. You may read more about their pros and cons [here](http://git-scm.com/book/it/v2/Git-on-the-Server-The-Protocols).
 
-The destination folder should be also given, the default folder in Windows is the User/<user-name>/git/<repo-name>. Let's leave it there now. In this wizard you may also import the projects to the eclipse workspace with a help of a checkbox.
+The destination folder should be also given, the default folder in Windows is the User/user-name/git/repo-name. Let's leave it there now. In this wizard you may also import the projects to the eclipse workspace with a help of a checkbox.
 
 ![](img/git/4-location.png)
 
@@ -53,7 +53,7 @@ Here you may see the commits (versions), their dependency and other metadatas ab
 
 The Git Reflog view shows the local history of your executed git commands.
 
-Before discussing the Staging view, let's configure git with our name and email address. This is required as this data will be added to every commit. It is stored in the .gitconfig file under the home folder (Users/<user-name>/.gitconfig). EGit provides a GUI for this configuration in Window/Preferences//Team/Git/Configuration, as seen in the following screenshot:
+Before discussing the Staging view, let's configure git with our name and email address. This is required as this data will be added to every commit. It is stored in the .gitconfig file under the home folder (Users/user-name/.gitconfig). EGit provides a GUI for this configuration in Window/Preferences//Team/Git/Configuration, as seen in the following screenshot:
 
 ![](img/git/8-git-user.png)
 
