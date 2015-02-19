@@ -119,7 +119,7 @@ There is a third outcome of merging (beside of successful and conflicting) which
 ![Create stash](img/git/24-stash.png)
 ![Apply stash](img/git/25-apply-stash.png)
 
-To put a new project to the repository, you can use the Team/Share Project command on the project'c context menu, then choose the a repository.
+To put a new project to the repository, you can use the Team/Share Project command on the project's context menu, then choose the a repository.
 
 ![Share project](img/git/26-share-project.png)
 ![Share project2](img/git/27-share-project2.png)
