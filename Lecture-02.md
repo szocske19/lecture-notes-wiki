@@ -38,13 +38,13 @@ Graphical/Textual view of the instance model. You don't need to present every in
  
 ### Types of Models 
 1. Modelled properties
-- **static models:** structural shape, connection, etc. class diagram, ER-diagram.  
-- **dynamic models:** the dynamic behaviour -- sequence diagram, BPMN, compiler event processing 
+    - **static models:** structural shape, connection, etc. class diagram, ER-diagram.  
+    - **dynamic models:** the dynamic behaviour -- sequence diagram, BPMN, compiler event processing 
 2. Purpose/usage
-- **traceability models:** follow the chain of elements and bind the requirements to a part of the system meaning that it is responsible for a specific requirement. And the other way around as well.  
-- **execution trace models:** -- sequence models. The specific run of the system 
-- **analysis models**  
-- **simulation models** 
+    - **traceability models:** follow the chain of elements and bind the requirements to a part of the system meaning that it is responsible for a specific requirement. And the other way around as well.  
+    - **execution trace models:** -- sequence models. The specific run of the system 
+    - **analysis models**  
+    - **simulation models** 
  
 ### Metamodeling 
 To represent the models itself -- means of abstraction, highlighting the properties of the models. 
