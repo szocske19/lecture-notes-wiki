@@ -1,6 +1,7 @@
 ## Lectures
 
 * [Lecture 1 - Basics](https://github.com/FTSRG/MDSD/wiki/Lecture-01) 
+* [Lecture 2](https://github.com/FTSRG/MDSD/wiki/Lecture-02) 
 
 ## Technology
 
