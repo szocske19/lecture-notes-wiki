@@ -108,8 +108,8 @@ An Ecore model has a root object, representing the whole model. The children of 
 More detailed illustrations of the metamodel can be found in the [EMF Documentation](http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/package-summary.html#details).
 
 Sources:
-Text from Dániel Stein. Incremental Static Analysis of Large Source Code Repositories. Bachelor's thesis,Budapest University of Technology and Economics, Budapest, 12/2014 2014. 
-[scm] Gábor Szárnyas. Superscalable modeling. Master's thesis, Budapest University of Technology and Economics, Budapest, 12/2013 2013.
+* Text from Dániel Stein. Incremental Static Analysis of Large Source Code Repositories. Bachelor's thesis,Budapest University of Technology and Economics, Budapest, 12/2014 2014. 
+* [scm] Gábor Szárnyas. Superscalable modeling. Master's thesis, Budapest University of Technology and Economics, Budapest, 12/2013 2013.
 
 -----
 
