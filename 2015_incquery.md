@@ -24,3 +24,27 @@ After the install process, you should restart Eclipse.
 ![Install window](img/incquery2/install2.png)
 
 For a faster installation, advanced users can untick out the _Contact all update sites during install..._ field, but they have to install _Xtend_ and _Xtext_ technologies manually.
+
+Setup the Laboratory
+--------------------
+
+1. Import the projects from [here](projects/incquery-metamodel.zip).
+1. Run as **Eclipse Application**.
+1. Import the project from [here](projects/incquery-example.zip) to the runtime Eclipse and check the instance model.
+1. Create a new IncQuery project in the host Eclipse and name it to ```hu.bme.mit.mdsd.erdiagram.queries```.
+1. Create a new query definition in a package named ```hu.bme.mit.mdsd.erdiagram``` and a file named ```queries.eiq```. In the wizard create an empty query. Fill the first query:
+    
+	```java
+	package hu.bme.mit.mdsd.erdiagram
+	
+	import "hu.bme.mit.mdsd.erdiagram"
+
+	pattern entityWithName(entity, name) {
+		Entity.Name(entity,name);
+	}
+	```
+
+1. Load the query and the instance model to the **Query Explorer**.
+
+Query Explorer
+--------------
