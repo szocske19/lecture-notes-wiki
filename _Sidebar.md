@@ -10,6 +10,7 @@
 * [Eclipse basics](https://github.com/FTSRG/MDSD/wiki/2015_eclipse_basics) 
 * [EGit](https://github.com/FTSRG/MDSD/wiki/git) 
 * [EMF](https://github.com/FTSRG/MDSD/wiki/2015_emf)
+* [IncQuery](https://github.com/FTSRG/MDSD/wiki/2015_incquery)
 
 ### MDSD 2014
 
