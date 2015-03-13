@@ -1,17 +1,16 @@
-## Theory
+## Lectures
 
-* [[Introduction to MDE]]
+* [Lecture 1: Basics](https://github.com/FTSRG/MDSD/wiki/Lecture-01) 
+* [Lecture 2: Principles – Languages and Models](https://github.com/FTSRG/MDSD/wiki/Lecture-02) 
 
 ## Technology
 
 ### MDSD 2015
 
 * [Eclipse basics](https://github.com/FTSRG/MDSD/wiki/2015_eclipse_basics) 
-* [EGit](https://github.com/FTSRG/MDSD/wiki/2015/git) 
-
-#### Lectures
-
-* [Lecture 1 - Basics](https://github.com/FTSRG/MDSD/wiki/Lecture-01) 
+* [EGit](https://github.com/FTSRG/MDSD/wiki/git) 
+* [EMF](https://github.com/FTSRG/MDSD/wiki/2015_emf)
+* [IncQuery](https://github.com/FTSRG/MDSD/wiki/2015_incquery)
 
 ### MDSD 2014
 
