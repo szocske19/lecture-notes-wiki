@@ -171,7 +171,7 @@ Validation
 
 EMF-IncQuery provides facilities to create validation rules based on the pattern language of the framework. These rules can be evaluated on various EMF instance models and upon violations of constraints, markers are automatically created in the Eclipse Problems View.
 
-The **@Constraint** annotation can be used to mark a pattern as a validation rule. If the framework finds at least one pattern with such annotation. This project will be used by the validation framework later in your runtime Eclipse configuration.
+The **@Constraint** annotation can be used to mark a pattern as a validation rule. If the framework finds at least one pattern with such annotation.
 
 Annotation parameters:
  * _location:_ The location of constraint represents the pattern parameter (the object) the constraint violation needs to be attached to.
@@ -200,6 +200,36 @@ For example:
 Derived features
 ----------------
 
+To define a derived feature in your EMF metamodel, you have set the following attributes of the feature:
+ * derived = true (to indicate that the value of the feature is computed from the model)
+ * changeable = false (to remove setter methods)
+ * transient = true (to avoid persisting the value into file)
+ * volatile = true (to remove the field declaration in the object)
+
 EMF-IncQuery supports the definition of efficient, incrementally maintained, well-behaving derived features in EMF by using advanced model queries and incremental evaluation for calculating the value of derived features and providing automated code generation for integrating into existing applications.
 
-The **@
+The **@QueryBasedFeature** annotation can be used to mark a pattern as a derived feature realization. If the framework can find out the feature from the signature of the pattern (_patter name_, _first paramter type_, _second paramter type_), the annotation parameters can be empty.
+
+Annotation parameters:
+ * feature ="featureName" (default: pattern name) - indicates which derived feature is defined by the pattern
+ * source ="Src" (default: first parameter) - indicates which query parameter (using its name) is the source EObject, the inferred type of this parameter indicates which EClass generated code has to be modified
+ * target ="Trg" (default: second parameter) - indicates which query parameter (using its name) is the target of the derived feature
+ * kind ="single/many/counter/sum/iteration" (default: feature.isMany?many:single) - indicates what kind of calculation should be done on the query results to map them to derived feature values
+ * keepCache ="true/false" (default: true) - indicates whether a separate cache should be kept with the current value. Single and Many kind derived features can work without keeping an additional cache, as the EMF-IncQuery RETE network already keeps a cache of the current values.
+ 
+For example:
+
+	Extend our ER Diagram metamodel with following _other_ reference of the ```RelationEnding``` eClass and set the required properties.
+
+	![Derived Feature](img/incquery2/new_reference.png)
+
+	```java
+	@QueryBasedFeature
+	pattern other(ending:RelationEnding, other) {
+		Relation.leftEnding(relation, ending);
+		Relation.rightEnding(relation, other);
+	} or {
+		Relation.rightEnding(relation, ending);
+		Relation.leftEnding(relation, other);
+	}
+	```
