@@ -219,9 +219,9 @@ Annotation parameters:
  
 For example:
 
-	Extend our ER Diagram metamodel with following _other_ reference of the ```RelationEnding``` eClass and set the required properties.
+Extend our ER Diagram metamodel with following _other_ reference of the ```RelationEnding``` eClass and set the required properties.
 
-	![Derived Feature](img/incquery2/new_reference.png)
+![Derived Feature](img/incquery2/new_reference.png)
 
 	```java
 	@QueryBasedFeature
@@ -233,3 +233,102 @@ For example:
 		Relation.leftEnding(relation, other);
 	}
 	```
+
+Advanced Queries
+----------------
+
+1. Create **Support** patterns for the inheritance:
+
+    ```java
+	//@QueryExplorer(display = false)
+	pattern superEnitities(entity, superEntity) {
+		Entity.isA(entity, superEntity);
+	}
+
+	//@QueryExplorer(display = false)
+	pattern allSuperEntities(entity, superEntity) {
+		find superEnitities+(entity, superEntity);
+	}
+	```
+
+1. Create a pattern that detects a circle in the type hierarchy:
+
+    ```java
+	pattern circleInTypeHierarchy(entity) {
+		find allSuperEntities(entity, entity);
+	}
+	```
+
+1. Create a pattern that detects a (transitive) diamond in the type type hierarchy:
+
+	```java
+	pattern diamondInTypeHierarchy(entity1, entity2, entity3, entity4) {
+		find allSuperEntities(entity1,entity2);
+		find allSuperEntities(entity1,entity3);
+		entity2 != entity3;
+		find allSuperEntities(entity2,entity4);
+		find allSuperEntities(entity3,entity4);
+	}
+	```
+
+1. Every diamond has matched at least two times. This should be prevented if we make the pattern assimetric by defining somehow that ``entity2 < entity3``. Let us define an ordering relation between the entities:
+
+    ```java
+	pattern order(a, b) {
+		Entity.Name(a, name1);
+		Entity.Name(b, name2);
+		check(
+			name1.compareTo(name2) < 0
+		);
+	}
+	```
+	
+	And change the diamond code:
+	
+	```java
+	pattern diamondInTypeHierarchy(entity1, entity2, entity3, entity4) {
+		find allSuperEntities(entity1,entity2);
+		find allSuperEntities(entity1,entity3);
+		//entity2 != entity3;
+		find order(entity2, entity3);
+		find allSuperEntities(entity2,entity4);
+		find allSuperEntities(entity3,entity4);
+	}
+	```
+
+1. By the way, calculate the infimum of the order:
+    
+	```java
+	pattern FirstInOrder(first: Entity) {
+		neg find order(_, first);
+	}
+	```
+1. Extend the patterns to get the inherited relations and attributes too:
+
+    ```java
+	pattern attribute(entity, attribute) {
+		Entity.attributes(entity,attribute);
+	} or {
+		find allSuperEntities(entity, superEntity);
+		find attribute(superEntity, attribute);
+	}
+	```
+
+    and
+
+    ```java
+	pattern relation(entity1, entity2) {
+		Relation.leftEnding.target(relation, entity1);
+		Relation.rightEnding.target(relation, entity2);
+	} or {
+		find allSuperEntities(entity1, superEntity);
+		find relation(superEntity, entity2);
+	}
+	```
+	
+References
+----------
+
+Pattern Language: http://incquery.net/node/66
+Validation Framework: http://incquery.net/node/130
+Query Based Features: http://incquery.net/node/131
