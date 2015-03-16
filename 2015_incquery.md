@@ -330,5 +330,5 @@ References
 ----------
 
 * Pattern Language: https://wiki.eclipse.org/EMFIncQuery/UserDocumentation/QueryLanguage
-* Validation Framework: http://incquery.net/node/130
-* Query Based Features: http://incquery.net/node/131
+* Validation Framework: https://wiki.eclipse.org/EMFIncQuery/UserDocumentation/Validation
+* Query Based Features: https://wiki.eclipse.org/EMFIncQuery/UserDocumentation/Query_Based_Features
