@@ -329,6 +329,6 @@ Advanced Queries
 References
 ----------
 
-Pattern Language: http://incquery.net/node/66
-Validation Framework: http://incquery.net/node/130
-Query Based Features: http://incquery.net/node/131
+* Pattern Language: http://incquery.net/node/66
+* Validation Framework: http://incquery.net/node/130
+* Query Based Features: http://incquery.net/node/131
