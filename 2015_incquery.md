@@ -219,9 +219,9 @@ Annotation parameters:
  
 For example:
 
-	Extend our ER Diagram metamodel with following _other_ reference of the ```RelationEnding``` eClass and set the required properties.
+Extend our ER Diagram metamodel with following _other_ reference of the ```RelationEnding``` eClass and set the required properties.
 
-	![Derived Feature](img/incquery2/new_reference.png)
+![Derived Feature](img/incquery2/new_reference.png)
 
 	```java
 	@QueryBasedFeature
