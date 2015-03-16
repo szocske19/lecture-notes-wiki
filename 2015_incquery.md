@@ -50,8 +50,156 @@ Query Explorer
 --------------
 
 **Query Explorer** is the primary debug tool for debugging IncQuery patterns runtime. To open the view: _Window/Show View/Others/EMF-IncQuery/Query Explorer_ or you can simply press the _CTRL + 3_ shortcut and start to type the name of the view. On the left side of the view, there will be patterns inherited from the host eclipse. The middle part will show you the matches of the patterns. To achive this, we have to load a model into the view:
+
 1.  Open our example instance model (_example.erdiagram_)
 1.  then press the green arrow button on the view.
 
 ![Query Explorer](img/incquery2/query_explorer.png)
 
+Pattern Language
+----------------
+
+1. Structure your source code to 4 blocks like this:
+
+//-------------------------------
+// Support
+//-------------------------------
+
+//-------------------------------
+// Validate
+//-------------------------------
+
+//-------------------------------
+// Derived
+//-------------------------------
+
+Every pattern goes to one of those categories. The ```entityWithName``` goes to Support. 
+
+As you can see, every pattern have a unique name and several parameters. Inside the body of the patterns, there different constraints. Our first example describes a feature constraint. It states that ```entity``` variable is of eClass ```Entity``` and its ```name``` attribute is the value of ```name``` variable.
+
+1. Create a query to the **Validate** that checks if the name of a ``NamedElement`` is only an empty string:
+
+    ```java
+	pattern emptyNamedElement(element: NamedElement) {
+		NamedElement.Name(element, "");
+	}
+	```
+   This pattern shows, that the parameters can be typed immediately in the parameters list.	
+
+1. Create a query to the **Validate** that checks if two entity has the same name:
+
+    ```java
+	pattern sameNamedEntities(entity1, entity2, commonName) {
+		Entity.Name(entity1, commonName);
+		Entity.Name(entity2, commonName);
+		entity1!=entity2;
+	}
+	```
+	
+	This pattern shows the ```!=``` (_not equal_) operator to select two different entites from the instance model. (Use the ```==``` operator to equality)
+
+1. Create a query to the **Validate** that checks if the name starts with a noncapital letter:
+
+    ```java
+	pattern entityStartsWithSmallCase(entity) {
+		Entity.Name(entity,name);
+		check (
+			!name.matches("^[A-Z].+")
+		);
+	}
+	```
+	
+	This pattern shows the ```check``` block where you can write a wide range of _Xbase_ expressions (similar to Java). In this case, we define a regular expression.
+	
+1. Create a query to the **Derived** that gets the other endign of a relation ending:
+    
+	```java
+	pattern other(ending:RelationEnding, other) {
+		Relation.leftEnding(relation, ending);
+		Relation.rightEnding(relation, other);
+	} or {
+		Relation.rightEnding(relation, ending);
+		Relation.leftEnding(relation, other);
+	}
+	```
+	
+	This pattern shows how to connect independent bodies in a pattern. To do this, we use the ```or``` keyword that states the pattern has a match if the first _or_ the second _or_ the third _or_ etc body has a match.
+	
+1. Create a query to the **Support** that summarizes this three validation condition:
+
+    ```java
+	pattern badEntity(entity, name) {
+		find sameNamedEntities(entity, _other, name);
+	} or {
+		Entity.Name(entity, name);
+		find emptyNamedElement(entity);
+	} or {
+		Entity.Name(entity, name);
+		find entityStartsWithSmallCase(entity);
+	}
+	```
+	
+	This pattern shows how to reuse previously defined patterns as sub patterns. To do this, we use the ```find``` keyword then write the id of the sub pattern and finally add the variables. (Variables starting with ```_``` define _don't care_ variables, hence you cannot use them in other lines of the pattern)
+
+1. Create a query to the **Support** that matches to the well-named entities:
+
+    ```java
+	pattern goodEntity(entity, name) {
+		Entity.Name(entity, name);
+		neg find badEntity(entity,_);
+	}
+	```
+	
+	This pattern shows ```neg find``` expression to express negation. Those actual parameters of the negative pattern call that are not used elsewhere in the calling body will be quantified; this means that the calling pattern only matches if no substitution of these calling variables could be found.
+	
+1. Create a query to the **Support** that counts the number of attributes of an entity:  
+
+   ```java
+   pattern attribute(entity, attr) {
+        Entity.attributes(entity, attr);
+   }
+
+   pattern countAttribute(entity : Entity, M) {
+	    M == count find attribute(entity, _);
+   }
+   ```
+   
+   This pattern shows ```count find``` expression that aggregates multiple matches of a called pattern into a single value.
+   
+Validation
+----------
+
+EMF-IncQuery provides facilities to create validation rules based on the pattern language of the framework. These rules can be evaluated on various EMF instance models and upon violations of constraints, markers are automatically created in the Eclipse Problems View.
+
+The **@Constraint** annotation can be used to mark a pattern as a validation rule. If the framework finds at least one pattern with such annotation. This project will be used by the validation framework later in your runtime Eclipse configuration.
+
+Annotation parameters:
+ * _location:_ The location of constraint represents the pattern parameter (the object) the constraint violation needs to be attached to.
+ * _message:_ The message to display when the constraint violation is found. The message may refer the parameter variables between $ symbols, or their EMF features, such as in $Param1.name$.
+ * _severity:_ "warning" or "error"
+ * _targetEditorId:_ An Eclipse editor ID where the validation framework should register itself to the context menu. Use "*" as a wildcard if the constraint should be used always when validation is started.
+ 
+To find a specific editor id, we can use the _Plug-in Selection Spy_ tool with a _SHIFT + ALT + F1_ shortcut.
+
+![Plug-in Selection Spy](img/incquery2/spy.png)
+
+For example:
+
+	```java
+	@Constraint(targetEditorId = "ERDiagram.presentation.ERDiagramEditorID",
+				severity = "error", 
+				message = "The name is not unique",
+				location = entity1)
+	pattern sameNamedEntities(entity1, entity2, commonName) {
+		Entity.Name(entity1, commonName);
+		Entity.Name(entity2, commonName);
+		entity1!=entity2;
+	}
+	```
+
+Derived features
+----------------
+
+EMF-IncQuery supports the definition of efficient, incrementally maintained, well-behaving derived features in EMF by using advanced model queries and incremental evaluation for calculating the value of derived features and providing automated code generation for integrating into existing applications.
+
+The **@
