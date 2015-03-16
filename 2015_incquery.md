@@ -48,3 +48,10 @@ Setup the Laboratory
 
 Query Explorer
 --------------
+
+**Query Explorer** is the primary debug tool for debugging IncQuery patterns runtime. To open the view: _Window/Show View/Others/EMF-IncQuery/Query Explorer_ or you can simply press the _CTRL + 3_ shortcut and start to type the name of the view. On the left side of the view, there will be patterns inherited from the host eclipse. The middle part will show you the matches of the patterns. To achive this, we have to load a model into the view:
+1.  Open our example instance model (_example.erdiagram_)
+1.  then press the green arrow button on the view.
+
+![Query Explorer](img/incquery2/query_explorer.png)
+
