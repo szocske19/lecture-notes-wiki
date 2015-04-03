@@ -61,6 +61,7 @@ Pattern Language
 
 1. Structure your source code to 4 blocks like this:
 
+```java
 //-------------------------------
 // Support
 //-------------------------------
@@ -72,6 +73,7 @@ Pattern Language
 //-------------------------------
 // Derived
 //-------------------------------
+```
 
 Every pattern goes to one of those categories. The ```entityWithName``` goes to Support. 
 
