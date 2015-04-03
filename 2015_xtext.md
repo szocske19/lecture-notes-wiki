@@ -248,3 +248,138 @@ Check out the generated AST
 Create an Xtext language with existing AST metamodel
 ----------------------------------------------------
 
+1. Import the projects from [here](projects/incquery-metamodel.zip).
+1. Switch the AST line
+
+	From (this line implies to generate AST metamodel):	
+	```java
+	generate eRDiagramDSL "http://www.bme.hu/mit/mdsd/erdiagram/text/ERDiagramDSL"
+	```
+	
+	To (this line imports our metamodel):
+	```java
+	import "platform:/resource/hu.bme.mit.mdsd.erdiagram/model/erdiagram.ecore" as er
+	```
+	
+	The metamodel can be access via _er::_ prefix.
+	
+1. Change return values of rules and correct the reference and attribute names:
+
+	```java
+	grammar hu.bme.mit.mdsd.erdiagram.text.ERDiagramDSL 
+	with org.eclipse.xtext.common.Terminals
+	
+	import "platform:/resource/hu.bme.mit.mdsd.erdiagram/model/erdiagram.ecore" as er
+	
+	ERDiagram returns er::EntityRelationDiagram:
+		attributetypes+=AttributeType*
+		entities+=Entity+
+		relations+=Relation*
+	;
+	
+	Relation returns er::Relation:
+		'relation'
+		leftEnding=RelationEnding
+		rightEnding=RelationEnding
+	;
+	
+	RelationEnding returns er::RelationEnding:
+		target=[er::Entity] 
+		'(' 
+		(multiplicity=Multiplicity & 
+			(nullable?='nullable')?
+		) ')'
+	;
+	
+	enum Multiplicity returns er::MultiplicityType:
+		One = "One" | Many = "Many"
+	;
+	
+	Entity returns er::Entity:
+		'entity' name=ID ('isA' isA+=[er::Entity])? 
+		'{' 
+		((attributes+=Attribute) 
+		(',' attributes+=Attribute)*)?
+		'}'
+	;
+	
+	Attribute returns er::Attribute:
+		name=ID ':' type=[er::AttributeType] (isKey?='key')?
+	;
+	
+	AttributeType returns er::AttributeType:
+		'type' name=ID ';'?
+	;
+	```	
+
+1. Do not forget to delete the exported packages in the MANIFEST.MF and to rebuild the infrastructure
+1. Finished
+	From now, the language uses our metamodel to build AST
+	
+Scoping
+-------
+
+Scoping defines which elements are referable by a given reference. For instance, we don't want to enable self inheritance.
+
+1. Open our scope provider
+
+	![Scope Provider](img/xtext/scoping.png)
+
+1. Create the following method:
+
+	```java
+	class ERDiagramDSLScopeProvider extends AbstractDeclarativeScopeProvider {
+
+		def scope_Entity_isA(Entity ctx, EReference ref){
+			Scopes::scopeFor((ctx.eContainer as EntityRelationDiagram).entities.filter[x | x != ctx]);
+		}
+	
+	}
+	```
+	
+	A scope method follows the ```scope_[EClass]_[EStructuralFeature](EClass param1, EReference ref)``` syntax. This scope restrict the available objects for the _isA_ reference of all the _Entity_ EClass. The ```Scopes``` class contains static methods to create scope descriptions from a list of EObjects.
+	
+	_Note: This is an Xtend file (further description: http://eclipse.org/xtend/)_
+
+1. Check out in our example (Runtime Eclipse, example.er file)
+
+Validation
+----------
+
+Static analysis is always required for any language. In this example, we want to raise an error if a cycle occurs in the inheritance graph.
+
+1. Open our validator
+
+	![Validator](img/xtext/validation.png)
+	
+1. Create the following method with ```@Check``` annotation
+
+	```
+	class ERDiagramDSLValidator extends AbstractERDiagramDSLValidator {
+	
+		public static val CYCLE = "CYCLE";
+	
+		@Check
+		def checkCycleInInheritance(Entity ctx) {
+			checkCycleInInheritance(ctx, ctx.isA)
+		}
+	
+		def checkCycleInInheritance(Entity ctx, Collection<Entity> parents) {
+			if (parents.contains(ctx)) {
+				error("Cycle in the inheritance graph", ERDiagramPackage.Literals.ENTITY__IS_A,CYCLE);
+				return;
+			}
+			for (parent : parents) {
+				checkCycleInInheritance(ctx, ctx.isA);
+			}
+		}
+	
+	}
+	```
+	
+	_Note: not all cases are covered with this code, so don't use it a real project._
+
+1. Check out in our example (Runtime Eclipse, example.er file)
+
+
+	
