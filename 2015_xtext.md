@@ -381,5 +381,9 @@ Static analysis is always required for any language. In this example, we want to
 
 1. Check out in our example (Runtime Eclipse, example.er file)
 
+References
+==========
+
+* detailed documentation: https://eclipse.org/Xtext/documentation/
 
 	
