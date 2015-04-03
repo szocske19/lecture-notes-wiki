@@ -1,15 +1,13 @@
 # Xtext
 
 ## Creating a textual language
-Xtext
-=====
 
 ![The logo of Xtext](img/xtext/logo.jpg)
 
 homesite: https://eclipse.org/Xtext/
 
 Install Xtext
-=============
+-------------
 
 Install from eclipse market place: search for Xtext -> Click _Install_ -> etc.
 
@@ -20,7 +18,7 @@ Install from eclipse market place: search for Xtext -> Click _Install_ -> etc.
 _Note: This will also install the Xtend packages._
 
 Create an Xtext language without existing AST metamodel
-=======================================================
+-------------------------------------------------------
 
 1. Create a new Xtext project with the following name: ```hu.bme.mit.mdsd.erdiagram.text```. Name of the language will be ```hu.bme.mit.mdsd.erdiagram.text.ERDiagramDSL```. It should conform to a fully qualified class name. Extension will be ```er```.
 
@@ -181,7 +179,7 @@ enum Multiplicity:
 ```
 
 Building infrastructure
-=======================
+-----------------------
 
 When you modifies your _xtext_ files, you have to build the infrastructure for your language. The following figure shows where click to generate.
 
@@ -192,7 +190,7 @@ The generation may fail due to a missing plug-in. To solve this problem, add the
 ![Add plug-in to MANIFEST.MF](img/xtext/add-equinox-common.png)
 
 Try our new language
-====================
+--------------------
 
 1. Create a general project
 
@@ -217,7 +215,7 @@ Right click on project -> Configuration -> Add Xtext nature
 1. Now, you have a working language.
 
 Check out the generated AST
-===========================
+---------------------------
 
 1. Create an example file with 'er' extension and fill it with the following content:
 
@@ -248,5 +246,5 @@ This will show you the AST built from the text.
 ![AST of the text](img/xtext/tree-editor.png)
 
 Create an Xtext language with existing AST metamodel
-=======================================================
+----------------------------------------------------
 
