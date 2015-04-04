@@ -3,11 +3,11 @@ Yakindu
 
 From Wikipedia (<http://en.wikipedia.org/wiki/YAKINDU_Statechart_Tools>): Yakindu (<http://statecharts.org/>) Statechart Tools (SCT) is an open source tool for the specification and development of reactive, event-driven systems with the help of state machines. It consists of an easy-to-use tool for graphical editing and provides validation, simulation and code generators for different target platforms. The users come from both the industrial and academic sectors.''
 
-![The logo of Yakindu](yakindu/yakindu_logo.png)
+![The logo of Yakindu](mdsd/2014/yakindu/yakindu_logo.png)
 
 Yakindu is developed by itemis, the same company that created Xtext.
 
-![The logo of itemis](yakindu/itemis_logo.png)
+![The logo of itemis](mdsd/2014/yakindu/itemis_logo.png)
 
 Prerequisites
 -------------
@@ -43,7 +43,7 @@ Modeling
 
 1. Create the statechart #1 as shown on the figure.
 
-    ![Statechart #1](yakindu/statechart_1.png)
+    ![Statechart #1](mdsd/2014/yakindu/statechart_1.png)
 
 1. Run the statechart (**Run As | YAKINDU Statechart**) and experiment with the **Simulation View**.
 
@@ -51,11 +51,11 @@ Modeling
     
     You can edit the **Transition Priority** in the **Choice**'s **Properties** view (Right click the **Choice** on the canvas and pick **Show Properties View**).
     
-    ![Statechart #2](yakindu/statechart_2.png)
+    ![Statechart #2](mdsd/2014/yakindu/statechart_2.png)
     
 1. Extend your statechart to #3 by adding a new **Composite State** called ``Frontend``.
     
-    ![Statechart #3](yakindu/statechart_3.png)
+    ![Statechart #3](mdsd/2014/yakindu/statechart_3.png)
     
 1. Modify the statechart definition block to the following:
 
@@ -78,11 +78,11 @@ Modeling
     
 1. Using the new events, extend your statechart to #4 by adding a new **Composite State** called ``Database``.
     
-    ![Statechart #4](yakindu/statechart_4.png)
+    ![Statechart #4](mdsd/2014/yakindu/statechart_4.png)
     
 1. Modify your statechart to get #5 by adding a new **Shallow History** to the ``Frontend`` state.
     
-    ![Statechart #5](yakindu/statechart_5.png)
+    ![Statechart #5](mdsd/2014/yakindu/statechart_5.png)
 
 Code generation
 ---------------
@@ -174,7 +174,7 @@ Code generation
     
 1. Modify your statechart's transitions accodingly to get statechart #6.
 
-    ![Statechart #6](yakindu/statechart_6.png)        
+    ![Statechart #6](mdsd/2014/yakindu/statechart_6.png)        
     
 1. After this, the ``raiseExecute()`` will be visible. Continue expanding the ``main`` method with the following:
     

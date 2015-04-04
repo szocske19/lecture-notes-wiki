@@ -6,7 +6,7 @@ Introduction
 
 The following chapter serves as an introduction to the Eclipse Development Environment. Eclipse is used in  both the Model Driven Software Development and Service Integration courses.
 
-![The splashscreen of Eclipse Kepler](mdsd/2015/eclipse_basics/eclipse_logo.png)
+![The splashscreen of Eclipse Kepler](mdsd/2014/mdsd/2015/eclipse_basics/eclipse_logo.png)
 
 Eclipse is a free, open-source software development environment and a platform for plug-in development. Members of the Eclipse Foundation include Cisco, IBM, Intel, Google, SAP, Siemens, etc. A list of Eclipse Foundation Members is available here: <http://www.eclipse.org/membership/showAllMembers.php>.
 
@@ -46,11 +46,11 @@ Further reading: <http://help.eclipse.org/kepler/index.jsp?topic=/org.eclipse.pl
 
 ### Package Explorer and Project Explorer ###
 
-![The Package Explorer and the Project Explorer in the same workspace](eclipse_basics/package_vs_project_explorer.png)
+![The Package Explorer and the Project Explorer in the same workspace](mdsd/2014/eclipse_basics/package_vs_project_explorer.png)
 
 You may want to show the ``.project`` file in the **Package Explorer**. In order to do so, click the downward pointing triangle in the upper right corner, pick **Filters...** and untick the **.* resources** checkbox.
 
-![The **Filters...** menu in the **Package Explorer**](eclipse_basics/package_explorer_filters.png)
+![The **Filters...** menu in the **Package Explorer**](mdsd/2014/eclipse_basics/package_explorer_filters.png)
 
 To show the ``.project`` file in the **Project Explorer**, click the downward pointing triangle in the upper right corner, pick **Customize View...** and untick the **.* resources** checkbox.
 
@@ -104,7 +104,7 @@ The **Problems view** shows the warnings and errors in the workspace's projects.
 
 The **Error Log** shows the errors occured in Eclipse. It shows the error message, the date and the plug-in that produced the error.
 
-![Show error and warning on selection](eclipse_basics/problems.png)
+![Show error and warning on selection](mdsd/2014/eclipse_basics/problems.png)
 
 Further reading:
 
@@ -124,13 +124,13 @@ Java applications typically use AWT (Abstract Window Toolkit) or the Swing toolk
 
 SWT (Standard Widget Toolkit) is a GUI framework that was developed for the Eclipse project by IBM. It uses native components and offers good performance. Today, SWT is maintained by the Eclipse Foundation. Since the SWT implementation is different for each platform, a platform-specific SWT library (JAR file) must be distributed with each application. A number of SWT widgets are available at <http://eclipse.org/swt/widgets/>.
 
-![SWT widgets on different platforms](eclipse_basics/swt.png)
+![SWT widgets on different platforms](mdsd/2014/eclipse_basics/swt.png)
 
 ### Search ###
 
 * Search in files: press ``Ctrl``+``H`` to display the **Search** window and choose the **File Search** tab. If the window has many tabs, the **File Search** tab may be hidden. The solution is to resize the **Search** window or use the arrows in the upper right corner to show the rest of the tabs.
 
-![The **File Search** tab may does not appear at first: resize the window or use the arrows](eclipse_basics/search.png)
+![The **File Search** tab may does not appear at first: resize the window or use the arrows](mdsd/2014/eclipse_basics/search.png)
 
 Configuration
 -------------
@@ -219,7 +219,7 @@ You can access the content assist by pressing ``Ctrl``+``Space``. Press ``Enter`
 
 Pay attention to the package names. For example, the ``List`` class is available both in ``java.awt`` and ``java.util``.
 
-![Some classes are available in more packages](eclipse_basics/content_assist.png)
+![Some classes are available in more packages](mdsd/2014/eclipse_basics/content_assist.png)
 
 You can use the content assist by only typing the abbreviation of the desired item. For example, if you have ``java.io.InputStreamReader`` imported, you can type ``ISR`` and the content assist will propose ``InputStreamReader``.
 
@@ -538,7 +538,7 @@ Go to **File | New | Other...**. Here you can choose any type of projects your E
 Jetty
 -----
 
-![The logo of Jetty](eclipse_basics/jetty_logo.png)
+![The logo of Jetty](mdsd/2014/eclipse_basics/jetty_logo.png)
 
 1. Create a new Java project ``hu.bme.mit.inf.carserver``.
 
@@ -623,11 +623,11 @@ Jetty
 Maven
 -----
 
-![The logo of Maven](eclipse_basics/maven_logo.png)
+![The logo of Maven](mdsd/2014/eclipse_basics/maven_logo.png)
 
 1. Use **Maven** instead.
 
-    ![Maven and Ant trends](eclipse_basics/maven_ant_trends.png)
+    ![Maven and Ant trends](mdsd/2014/eclipse_basics/maven_ant_trends.png)
 
 1. Right click the ``carserver`` project, choose **Configure | Convert to Maven Project..**. Click **Finish**.
 
@@ -678,7 +678,7 @@ Plug-in project
     
 1. Run the plug-in project. This time, the **Print!** button will show the cars in the fleet.
 
-![The message shown in the plug-in project](eclipse_basics/message.png)
+![The message shown in the plug-in project](mdsd/2014/eclipse_basics/message.png)
 
 Version control
 ---------------
@@ -699,17 +699,17 @@ Click **Finish**. In the **Commit** window fill the commit message and click **O
 
 If you ever decide to stop using version control for a project (e.g. your version tracking got messed up), go to right click menu and choose **Team | Disconnect**. When Eclipse prompts you to confirm the question, choose the **Also delete the SVN meta-information from the file system.** which deletes the hidden ``.svn`` directories.
 
-![Use the first option when disconnecting from SVN](eclipse_basics/svn_disconnect.png)
+![Use the first option when disconnecting from SVN](mdsd/2014/eclipse_basics/svn_disconnect.png)
 
 You can commit files by choosing **Team | Commit...**, update files by **Update**. You can also make good use of the **Revert** and **Revert to commit** options.
 
 If more than one person works on a file, a conflict can emerge. 
 
-![Conflicting resources](eclipse_basics/svn_commit_conflict.png)
+![Conflicting resources](mdsd/2014/eclipse_basics/svn_commit_conflict.png)
 
 To resolve the conflict, use the **Team Synchonizing** perspective or right click on the file and choose **Team | Edit Conflicts**.
 
-![Resolving the conflict in the **Team Synchronizing** perspective](eclipse_basics/svn_conflict_resolve.png)
+![Resolving the conflict in the **Team Synchronizing** perspective](mdsd/2014/eclipse_basics/svn_conflict_resolve.png)
 
 Further reading: <http://help.eclipse.org/kepler/index.jsp?topic=/org.eclipse.platform.doc.user/tasks/tasks-115.htm>
 

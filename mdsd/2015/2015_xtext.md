@@ -2,7 +2,7 @@
 
 ## Creating a textual language
 
-![The logo of Xtext](xtext/logo.jpg)
+![The logo of Xtext](mdsd/2015/xtext/logo.jpg)
 
 homesite: https://eclipse.org/Xtext/
 
@@ -11,9 +11,9 @@ Install Xtext
 
 Install from eclipse market place: search for Xtext -> Click _Install_ -> etc.
 
-![Eclipse Marketplace... inside Help menu](xtext/market_place.png)
+![Eclipse Marketplace... inside Help menu](mdsd/2015/xtext/market_place.png)
 
-![Install Xtext from Marketplace](xtext/install_xtext.png)
+![Install Xtext from Marketplace](mdsd/2015/xtext/install_xtext.png)
 
 _Note: This will also install the Xtend packages._
 
@@ -22,7 +22,7 @@ Create an Xtext language without existing AST metamodel
 
 1. Create a new Xtext project with the following name: ```hu.bme.mit.mdsd.erdiagram.text```. Name of the language will be ```hu.bme.mit.mdsd.erdiagram.text.ERDiagramDSL```. It should conform to a fully qualified class name. Extension will be ```er```.
 
-![Install Xtext from Marketplace](xtext/new-project.png)
+![Install Xtext from Marketplace](mdsd/2015/xtext/new-project.png)
 
 This will produce a simple ```Hello``` language with greetings messages. It is worth to check this language.
 
@@ -183,11 +183,11 @@ Building infrastructure
 
 When you modifies your _xtext_ files, you have to build the infrastructure for your language. The following figure shows where click to generate.
 
-![Generate infrastructure](xtext/generate_infrastructure.png)
+![Generate infrastructure](mdsd/2015/xtext/generate_infrastructure.png)
 
 The generation may fail due to a missing plug-in. To solve this problem, add the _org.eclipse.equinox.common_ plug-in to the _MANIFEST.MF_ file.
 
-![Add plug-in to MANIFEST.MF](xtext/add-equinox-common.png)
+![Add plug-in to MANIFEST.MF](mdsd/2015/xtext/add-equinox-common.png)
 
 Try our new language
 --------------------
@@ -196,17 +196,17 @@ Try our new language
 
 	_New->Project...->General->Project_ Name: hu.bme.mit.mdsd.erdiagram.text.example
 	
-	![General Project](xtext/general_project.png)
+	![General Project](mdsd/2015/xtext/general_project.png)
 
 1. Create a file with 'er' extension
 
 	_New->File_ Name: example.er 
 	
-	![General File with 'er' extension](xtext/general_file.png)
+	![General File with 'er' extension](mdsd/2015/xtext/general_file.png)
 	
 	Add xtex nature in the pop-up window.
 	
-	![Xtext nature pop-up](xtext/xtext_nature.png)
+	![Xtext nature pop-up](mdsd/2015/xtext/xtext_nature.png)
 
 1. (Optional, if you missed the pop-up window) Add Xtext nature
 
@@ -239,11 +239,11 @@ Check out the generated AST
 
 	Right click on the file -> Open -> Open with... -> Simple Ecore Model Editor
 	
-	![Open with Simple Ecore Model Editor](xtext/ecore_editor.png)
+	![Open with Simple Ecore Model Editor](mdsd/2015/xtext/ecore_editor.png)
 	
 	This will show you the AST built from the text.
 	
-	![AST of the text](xtext/tree-editor.png)
+	![AST of the text](mdsd/2015/xtext/tree-editor.png)
 
 Create an Xtext language with existing AST metamodel
 ----------------------------------------------------
@@ -323,7 +323,7 @@ Scoping defines which elements are referable by a given reference. For instance,
 
 1. Open our scope provider
 
-	![Scope Provider](xtext/scoping.png)
+	![Scope Provider](mdsd/2015/xtext/scoping.png)
 
 1. Create the following method:
 
@@ -350,7 +350,7 @@ Static analysis is always required for any language. In this example, we want to
 
 1. Open our validator
 
-	![Validator](xtext/validation.png)
+	![Validator](mdsd/2015/xtext/validation.png)
 	
 1. Create the following method with ```@Check``` annotation
 

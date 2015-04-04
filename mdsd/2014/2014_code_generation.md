@@ -15,7 +15,7 @@ In recent years, the TIOBE index (<http://www.tiobe.com/index.php/content/paperi
 
 Like Java, Scala is strongly object-oriented and statically typed but also uses elements from functional programming. Scala natively supports building concurrent applications.
 
-![The logo of Scala](code_generation/scala_logo.png)
+![The logo of Scala](mdsd/2014/code_generation/scala_logo.png)
 
 ### Groovy ###
 **Home page:** <http://groovy.codehaus.org/>
@@ -24,14 +24,14 @@ Groovy is a script-like language with functional elements. Most syntactically co
 
 **Remark:** in Bonita (<http://www.bonitasoft.com/>), used on the Service Integration course, you can specify expressions in Groovy (<http://www.bonitasoft.com/resources/documentation/groovy>).
 
-![The logo of Groovy](code_generation/groovy_logo.png)
+![The logo of Groovy](mdsd/2014/code_generation/groovy_logo.png)
 
 ### Clojure ###
 **Home page:** <http://clojure.org/>
 
 Clojure is a dialect of the Lisp programming language. Software created in Clojure can be compiled to run on the JVM, the .NET Common Language Runtime (CLR) or a JavaScript engine. Clojure is a functional language which strongly support building concurrent applications.
 
-![The logo of Clojure](code_generation/clojure_logo.png)
+![The logo of Clojure](mdsd/2014/code_generation/clojure_logo.png)
 
 Code generation with Eclipse technologies
 -----------------------------------------
@@ -41,7 +41,7 @@ Code generation with Eclipse technologies
 
 Xtext is a framework creating programming languages and domain-specific languages. Xtext is capable of generating the parser the interpreter and provide Eclipse IDE support for the language. The developers task is to define language's grammar in ``.xtext`` files (<http://www.eclipse.org/Xtext/documentation.html#_1>). Xtext's components build on the Eclipse Modeling Framework (EMF), so Xtext development can be easily integrated with other EMF based technologies (e.g. GMF).
 
-![The logo of Xtext](code_generation/xtext_logo.png)
+![The logo of Xtext](mdsd/2014/code_generation/xtext_logo.png)
 
 ### Xbase ###
 **Home page:** <http://wiki.eclipse.org/Xbase>
@@ -54,7 +54,7 @@ Xbase is statically typed. It's features include closures and operator overloadi
 
 **Remark:** the ``check`` expression in IncQuery patterns (<http://viatra.inf.mit.bme.hu/incquery>) are written in Xbase.
 
-![The logo of Xbase](code_generation/xbase_logo.png)
+![The logo of Xbase](mdsd/2014/code_generation/xbase_logo.png)
 
 ### Xpand ###
 
@@ -86,7 +86,7 @@ Xtend is a JVM based language. It's grammar and editor was created with Xtext. T
 
 Xtend can cover the whole process of generating code from an EMF model, including the definition of the templates and imperative code that executes the process.
 
-![The logo of Xtend](code_generation/xtend_logo.png)
+![The logo of Xtend](mdsd/2014/code_generation/xtend_logo.png)
 
 JPA
 ===
@@ -213,7 +213,7 @@ This tutorial shows a simple example that covers most of the JPA technology.
 
 1. Check the database: new tables have been created, and there is one that contains the producers.
 
-    ![The result of the first persist](code_generation/dbresult1.png)
+    ![The result of the first persist](mdsd/2014/code_generation/dbresult1.png)
 
 1. To link the dealers with the producers a new manager class is defined:
     

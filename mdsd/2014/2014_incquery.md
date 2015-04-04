@@ -1,7 +1,7 @@
 IncQuery
 ========
 
-![The logo of EMF-IncQuery](incquery/logo.png)
+![The logo of EMF-IncQuery](mdsd/2014/incquery/logo.png)
 
 Setup
 -----

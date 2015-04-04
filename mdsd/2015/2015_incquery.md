@@ -1,7 +1,7 @@
 EMF-IncQuery (Pattern Language)
 ===============================
 
-![The logo of EMF-IncQuery](incquery/logo.png)
+![The logo of EMF-IncQuery](mdsd/2015/incquery/logo.png)
 
 homesite: https://www.eclipse.org/incquery/
 
@@ -16,12 +16,12 @@ http://download.eclipse.org/incquery/updates/release
 
 Switch back to your Eclipse instance and select the _Help/Install New Software..._
 
-![Select _Help/Install New Software..._](incquery/install.png)
+![Select _Help/Install New Software..._](mdsd/2015/incquery/install.png)
 
 Paste the copied URL to the _Work with_ field, than press _Enter_. When the view is updated, select the _EMF-IncQuery SDK_. Tick the _Contact all update sites during install..._ field. Press _Next_, then _Next_ and finally _Finish_.
 After the install process, you should restart Eclipse.
 
-![Install window](incquery/install2.png)
+![Install window](mdsd/2015/incquery/install2.png)
 
 For a faster installation, advanced users can untick out the _Contact all update sites during install..._ field, but they have to install _Xtend_ and _Xtext_ technologies manually.
 
@@ -54,7 +54,7 @@ Query Explorer
 1.  Open our example instance model (_example.erdiagram_)
 1.  then press the green arrow button on the view.
 
-![Query Explorer](incquery/query_explorer.png)
+![Query Explorer](mdsd/2015/incquery/query_explorer.png)
 
 Pattern Language
 ----------------
@@ -183,7 +183,7 @@ Annotation parameters:
  
 To find a specific editor id, we can use the _Plug-in Selection Spy_ tool with a _SHIFT + ALT + F1_ shortcut.
 
-![Plug-in Selection Spy](incquery/spy.png)
+![Plug-in Selection Spy](mdsd/2015/incquery/spy.png)
 
 For example:
 
@@ -223,7 +223,7 @@ For example:
 
 Extend our ER Diagram metamodel with following _other_ reference of the ```RelationEnding``` eClass and set the required properties.
 
-![Derived Feature](incquery/new_reference.png)
+![Derived Feature](mdsd/2015/incquery/new_reference.png)
 
 	```java
 	@QueryBasedFeature

@@ -18,19 +18,19 @@ The Actor model originally appeared in 1973 [6]. The main idea of the actor mode
 
 Akka is a toolkit and runtime for building highly concurrent, distributed, and fault-tolerant event-driven applications on the JVM [1].
 
-![](akka/transistor-count.png)
+![](intlab/akka/transistor-count.png)
 
 Figure 1: Intel CPU introductions (graph updated August 2009) [5].
 
-![](akka/actor-model.png)
+![](intlab/akka/actor-model.png)
 
 Figure 2: The Actor Model [7].
 
-![](akka/scala-logo.png)
+![](intlab/akka/scala-logo.png)
 
 Figure 3: The Logo of the Scala Programming Language.
 
-![](akka/akka-logo.png)
+![](intlab/akka/akka-logo.png)
 
 Figure 4: The Logo of the Akka toolkit
 
