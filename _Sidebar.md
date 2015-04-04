@@ -5,7 +5,7 @@
 
 ## Technology
 
-### System integration 2015
+### System Integration 2015
 
 * [Akka](Akka)
 
