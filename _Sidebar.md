@@ -26,9 +26,8 @@
 
 ### System Integration 2014
 
-* [Eclipse basics](sysint/eclipse_basics)
-* [Bonita connector](sysint/bonita_connector)
-* [BPMN](sysint/bpmn)
-* [Cassandra](sysint/cassandra)
-* [NoSQL](sysint/nosql)
-* [Web services](sysint/web_services)
+* [Bonita connector](bonita_connector)
+* [BPMN](bpmn)
+* [Cassandra](cassandra)
+* [NoSQL](nosql)
+* [Web services](web_services)

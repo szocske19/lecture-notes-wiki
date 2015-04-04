@@ -21,7 +21,7 @@ Apache Tomcat
 
 From Wikipedia (<http://en.wikipedia.org/wiki/Apache_Tomcat>): ,,Apache Tomcat is an open source web server and servlet container developed by the Apache Software Foundation. Tomcat implements the Java Servlet and the JavaServer Pages (JSP) specifications from Sun Microsystems, and provides a ,pure Java' HTTP web server environment for Java code to run.''
 
-![The logo of Tomcat](web_services/logo.jpg)
+![The logo of Tomcat](sysint/web_services/logo.jpg)
 
 WSDL
 ----
@@ -81,11 +81,11 @@ Eclipse provides a bunch of plug-ins called _Web Tools Platform_ (WTP) to aid th
   
   1. Choose **Apache | Apache Tomcat v7.0**.
     
-    ![An error message is displayed while installing Tomcat](web_services/install_1.png)
+    ![An error message is displayed while installing Tomcat](sysint/web_services/install_1.png)
   
   1. Click **Next**. Change the name to ``FTSRG Tomcat``. Click **Download and install...** and choose the installation location. Wait for the installation to complete: the _Unknown version of Tomcat was specified._ error message will disappear.
 
-    ![After the installation is completed, the error message disappears](web_services/install_2.png) 
+    ![After the installation is completed, the error message disappears](sysint/web_services/install_2.png) 
   
   1. Click **Finish**.
   
@@ -214,7 +214,7 @@ Further reading: <http://wiki.eclipse.org/Creating_a_Bottom-Up_Java_Web_Service>
       
     Go through the pages with the **Next** button and click **Finish**.
         
-    ![The **Web Service** wizard](web_services/web_service_wizard.png)     
+    ![The **Web Service** wizard](sysint/web_services/web_service_wizard.png)     
 
 1. While deploying, you will get a warning that the ``Application`` class does not have a default no-arg contructor.
 
@@ -252,9 +252,9 @@ Further reading: <http://wiki.eclipse.org/Creating_a_Bottom-Up_Java_Web_Service>
     
 1. You can observe the traffic in the **TCP/IP Monitor**. To make the XML messages more readable, change **Byte** to **Web Browser** for both the **Request** and the **Response** messages.
     
-    ![Inserting a new application to the application store](web_services/tcp_ip_monitor_insert.png)
+    ![Inserting a new application to the application store](sysint/web_services/tcp_ip_monitor_insert.png)
     
-    ![Listing the applications from the application store](web_services/tcp_ip_monitor_list.png)
+    ![Listing the applications from the application store](sysint/web_services/tcp_ip_monitor_list.png)
 
 JAX-RS
 ------
@@ -352,7 +352,7 @@ To use create REST services, we have to use Jersey. Jersey is the reference impl
     
     The reason for this is that Eclipse not deploy dependencies (JAR files) resolved by Maven to the web application. To correct this, go to the project's **Properties** window, choose **Deployment Assembly** page. Click **Add...**, **Java Build Path Entries**, **Maven Dependencies**.
     
-    ![**Deployment Assembly**](web_services/deployment_assembly.png)
+    ![**Deployment Assembly**](sysint/web_services/deployment_assembly.png)
     
     If you don't use Maven, you have to put the JAR files to the ``WebContent/WEB-INF/lib`` directory and add them to the project's build path.
 
@@ -466,9 +466,9 @@ Tomcat has an administration page called **Tomcat Web Application Manager**. How
 
 You have to change the **Server Location** from **Use workspace metadata** to **Use Tomcat installation**. If you have already started an application on the server, the radiobuttons will be disabled. To enable them stop the server (right click, **Stop**) and do a clean operation (right click, **Clean...**). After that, the radiobuttons should be enabled again.
 
-![If you have already deployed an application, the **Server Location** radiobuttons are disabled](web_services/server_settings_1.png)
+![If you have already deployed an application, the **Server Location** radiobuttons are disabled](sysint/web_services/server_settings_1.png)
 
-![Choose the **Use Tomcat installation** option](web_services/server_settings_2.png)
+![Choose the **Use Tomcat installation** option](sysint/web_services/server_settings_2.png)
 
 Start the server. Now you can access the Tomcat Web Application Manager on <http://localhost:8080/manager/html>. However, you can't log in yet: you have to define a user. To do so, go to the Tomcat installation directory and add the following to the ``conf/tomcat-users.xml`` file's ``<tomcat-users>`` element:
 
@@ -479,7 +479,7 @@ Start the server. Now you can access the Tomcat Web Application Manager on <http
 
 You should be able to login with the user ``admin`` and the password ``admin``.
 
-![The Tomcat Web Application Manager listing the ``appstore`` application](web_services/web_application_manager.png)
+![The Tomcat Web Application Manager listing the ``appstore`` application](sysint/web_services/web_application_manager.png)
 
 ### Performance monitoring ###
 
@@ -516,9 +516,9 @@ The simplicity of the REST style enables us to test REST applications without wr
 
     Create an ``Accept`` field in the header and set it to ``application/json``.
     
-![A POST operation with an XML payload on the application store](web_services/rest_client_1.png)
+![A POST operation with an XML payload on the application store](sysint/web_services/rest_client_1.png)
 
-![A GET operation on the application store returning JSON](web_services/rest_client_2.png)
+![A GET operation on the application store returning JSON](sysint/web_services/rest_client_2.png)
 
 Google App Engine
 -----------------

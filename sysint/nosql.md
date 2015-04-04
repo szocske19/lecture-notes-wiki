@@ -1,7 +1,7 @@
 NoSQL
 =====
 
-![The logo of Neo4j](nosql/neo4j_logo.png)
+![The logo of Neo4j](sysint/nosql/neo4j_logo.png)
 
 Neo4j console
 -------------
@@ -66,7 +66,7 @@ Neo4j provides an online REPL (read--evaluate--print loop) console at <http://co
     RETURN n, r, m, s, o
     ```
 
-![The online console of Neo4j](nosql/online_console.png)
+![The online console of Neo4j](sysint/nosql/online_console.png)
 
 Embedded mode
 -------------
@@ -265,9 +265,9 @@ Run the previous Cypher query and observe how compact it's output is.
 
 You can access the web administration interface: <http://localhost:7474/webadmin/>. Observe the dashboard and play with the data browser.
 
-![Visualisation settings in the **Data browser**](nosql/webui_settings.png)
+![Visualisation settings in the **Data browser**](sysint/nosql/webui_settings.png)
 
-![Visualisation of the graph in the **Data browser**](nosql/webui_graph.png)
+![Visualisation of the graph in the **Data browser**](sysint/nosql/webui_graph.png)
 
 ### REST API in Java ###
 

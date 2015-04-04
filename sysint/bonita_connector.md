@@ -50,7 +50,7 @@ Creating a Connector
 Database Integration
 --------------------
 
-![Database connector configuration](bonita_connector/connector-settings-1.png)
+![Database connector configuration](sysint/bonita_connector/connector-settings-1.png)
 
 1. In this section, we integrate our workflow with a MySQL database. Start the **MySQL Workbench 6.0 CE** application.
 
@@ -125,9 +125,9 @@ To test the SOA web service, open the **Google Chrome** browser and start the **
 
 _Notes:_ we can generate the SOA envelope with the **Eclipse WTP platform**. If you generate the client (as seen in the _web service laboratory_), you can observe the SOA envelope in the **TCP/IP monitor**.
 
-![SOA web service](bonita_connector/webservice-soap-1.png)
+![SOA web service](sysint/bonita_connector/webservice-soap-1.png)
 
-![SOA web service](bonita_connector/webservice-soap-2.png)
+![SOA web service](sysint/bonita_connector/webservice-soap-2.png)
 
 
 #### SoapUI ####
@@ -136,13 +136,13 @@ SoapUI (<http://www.soapui.org/>) is a tool capable of generating SOA envelopes 
 
 Just create a **New SOAP Project**, add the ``ApplicationManager.wsdl`` WSDL file as **Initial WSDL**. Tick **Create Requests** and click **OK**. The SOA envelope will be generated.
 
-![SOA web service](bonita_connector/soapui.png)
+![SOA web service](sysint/bonita_connector/soapui.png)
 
 ### REST Web Service ###
 
 To observe the REST web service, simply visit <http://localhost:80/appstore-rest/rest/applicationmanager/generate/20>.
 
-![Using the **Advanced REST client** for accessing the REST service](bonita_connector/jax-rs.png)
+![Using the **Advanced REST client** for accessing the REST service](sysint/bonita_connector/jax-rs.png)
 
 Creating a SOAP Connector
 -------------------------

@@ -8,7 +8,7 @@ BPMN (Business Process Model and Notation) is a widely used graphical representa
 
 On the Service Integration course, we will use Bonita as our BPMN editor and workflow framework. Bonita is an Eclipse RCP application. 
 
-![The logo of BonitaSoft](bpmn/bonita_logo.png)
+![The logo of BonitaSoft](sysint/bpmn/bonita_logo.png)
 
 Sources
 -------
@@ -27,7 +27,7 @@ Simple workflow
 
 1. Start **Bonita Studio**. Bonita will prompt you to register. You can choose to skip it but it's highly recommended to register because registration provides access to well-made official tutorials and thorough documentation.
 
-    ![The opening screen of Bonita](bpmn/bonita_opening.png)
+    ![The opening screen of Bonita](sysint/bpmn/bonita_opening.png)
 
 1. Create a new process from **Diagram | New**.
 
@@ -39,7 +39,7 @@ Simple workflow
 
 1. Add an _end event_ to the workflow. Connect the ``Acknowledge`` task to the end event.
 
-    ![The ``BrowseApplication`` process](bpmn/bonita_hello_task_editor.png)
+    ![The ``BrowseApplication`` process](sysint/bpmn/bonita_hello_task_editor.png)
 
 1. Let's create a graphical user interface for this task.  Choose the **Application** tab. On the **Forms** page click **Add...**. Click **Finish**.
 
@@ -47,7 +47,7 @@ Simple workflow
 
 1. Click the **Run** button or choose your process in the **Server | Run** menu. The generated web page will show in a browser.
 
-    ![The ``Hello task`` in the browser](bpmn/bonita_hello_task_browser.png)
+    ![The ``Hello task`` in the browser](sysint/bpmn/bonita_hello_task_browser.png)
 
 1. On the web interface, you can control the workflow by the buttons provided. In this example, if you click the **Submit1** button, the workflow finishes.
 
@@ -61,20 +61,20 @@ Simple workflow
     
 1. Note that the ``Show the applications`` human task uses the actor defined in the lane.
 
-    ![The ``BrowseApplication`` process](bpmn/bonita_browse_application_process.png)
+    ![The ``BrowseApplication`` process](sysint/bpmn/bonita_browse_application_process.png)
 
 1. Let's add some workflow variables to the process. Click the process and choose the **Data** page. Create the following variables:
 
     1. ``applications``: is the collection of names of the downloadable applications. The type of this variable is ``Text`` and the multiplicity is **multiple**.
     1. ``selectedApplication``: The user will select one of the available application. This ``Text`` variable with single multiplicity contains its name.
 
-    ![The variables of the ``BrowseApplication`` process](bpmn/bonita_process_data.png)
+    ![The variables of the ``BrowseApplication`` process](sysint/bpmn/bonita_process_data.png)
     
 1. Let's create a script that substitutes the calling of other services. Select the **Download the application names** task and go to the **Connectors** page. Add a new script by selecting **Script | Groovy 1.8 -- Execute a Groovy 1.8 script**.
 
 1. Name the script instance to **Get the applications**, time it to the **enter** phase of the activity and hit **Next**. Select the **Edit...** button. A Groovy editor will appear. This allows us to edit a Java-like expression or a method body where every flow variable is available.
 
-    ![The Groovy editor](bpmn/bonita_groovy_editor.png)
+    ![The Groovy editor](sysint/bpmn/bonita_groovy_editor.png)
 
 1. Create this script that returns a collection of application name:
 
@@ -95,7 +95,7 @@ Simple workflow
     
     We also want to put the name of the selected value to a variable, so edit that the ``selectedApplication`` variable takes value of ``field_Radio_buttons1``.
     
-    ![The final properties of the radiobuttons](bpmn/bonita_radio_buttons.png)
+    ![The final properties of the radiobuttons](sysint/bpmn/bonita_radio_buttons.png)
 
 1. The message of the **Acknowledge** action should refer to the selected variable, so let's set it. If you closed the editor page go to the properties of the action select the **Application** page and edit the **Hello task** pageflow.
 
@@ -119,13 +119,13 @@ Simple workflow
 
 1. Add a **Catch error** item to the **Buy the application** action from the palette. Create a human task for the initiator and edit the control flow:
     
-    ![Error handling flow](bpmn/bonita_error_handling.png)
+    ![Error handling flow](sysint/bpmn/bonita_error_handling.png)
     
     Create a webpage for the task where there is a message that shows **Error in the web services!**.
 
 1. Run the workflow and select the first application. It looks like that the workflow stops but eventually the next action arrives to the inbox.
 
-![The final process with exception handling](bpmn/bonita_browse_application_process_exceptions.png)
+![The final process with exception handling](sysint/bpmn/bonita_browse_application_process_exceptions.png)
 
 Complex workflow
 ----------------
@@ -161,7 +161,7 @@ We will implement a workflow for the actions of the user.
 
     Click **OK** and **Finish**.
     
-    ![The ``UserActionType``](bpmn/bonita_useractiontype.png)
+    ![The ``UserActionType``](sysint/bpmn/bonita_useractiontype.png)
 
 1. To create the login screen, click on the ``UserWorkflow`` _pool_. On the **Application tab**'s **Entry Pageflow** page add a new form named ``Login``. 
 
@@ -169,7 +169,7 @@ We will implement a workflow for the actions of the user.
 
 1. Set the password field's **Field type** to **Password**.
 
-    ![The login screen](bpmn/bonita_login_screen.png)
+    ![The login screen](sysint/bpmn/bonita_login_screen.png)
 
 1. Connect the _start event_ to the ``Authenticate`` task. This is a service task which simulates the authentication of the user. Add a new **Groovy** connector named ``Simulation of Authentication``.
 
@@ -203,11 +203,11 @@ We will implement a workflow for the actions of the user.
 
 1. Create a form for the ``Login failed`` task. Add the following message: ``Login failed``.
 
-    ![The ``user action`` form](bpmn/bonita_radio_buttons_web.png)
+    ![The ``user action`` form](sysint/bpmn/bonita_radio_buttons_web.png)
 
 1. From the ``Login failed`` and the ``Logout`` tasks draw a transition to the _end event_.
 
-    ![The final process](bpmn/bonita_final_workflow.png)
+    ![The final process](sysint/bpmn/bonita_final_workflow.png)
 
 Tips
 ----

@@ -3,7 +3,7 @@ Installation
 
 Apache Cassandra (<http://cassandra.apache.org/>) is an open source NoSQL database management system based on the column family data model.
 
-![The logo of Apache Cassandra](cassandra/cassandra-logo.png)
+![The logo of Apache Cassandra](sysint/cassandra/cassandra-logo.png)
 
 Linux
 -----
@@ -159,7 +159,7 @@ Database design
 
 1. CQL3 supports collections -- let's use them for storing the number of cogs:
 
-    ![Drivetrain. Source: <http://commons.wikimedia.org/wiki/File:Derailleur_Bicycle_Drivetrain.svg>](cassandra/drivetrain.png)
+    ![Drivetrain. Source: <http://commons.wikimedia.org/wiki/File:Derailleur_Bicycle_Drivetrain.svg>](sysint/cassandra/drivetrain.png)
     
     ```sql
     ALTER TABLE bicycles ADD front_cogs list<int>;
