@@ -4,7 +4,7 @@ During this laboratory course, the students get familiar with practical applicat
 
 ### Reactive Programming
 
-Reactive programming is a trending programming paradigm. In contrast to most traditional programming paradigms, reactive programming is based around data flows and the propagation of change [4]. To gain insight to reactive programming, please read the Reactive Manifesto [3], a short document discussing the ideas behind reactive programming.
+Reactive programming is a trending programming paradigm. In contrast to most traditional programming paradigms, reactive programming is based around data flows and the propagation of change [4]. To gain insight to reactive programming, **please read the Reactive Manifesto** [3], a short document discussing the ideas behind reactive programming.
 
 #### Motivation
 
