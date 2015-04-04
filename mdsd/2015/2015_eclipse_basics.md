@@ -6,7 +6,7 @@ Introduction
 
 The following chapter serves as an introduction to the Eclipse Development Environment. Eclipse is used in  both the Model Driven Software Development and Service Integration courses.
 
-![](mdsd/2015/eclipse_basics/eclipse_splashscreen.png)
+![](2015/eclipse_basics/eclipse_splashscreen.png)
 
 Eclipse is a free, open-source software development environment and a platform for plug-in development. Members of the Eclipse Foundation include Cisco, IBM, Intel, Google, SAP, Siemens, etc. A list of Eclipse Foundation Members is available here: <http://www.eclipse.org/membership/showAllMembers.php>.
 
