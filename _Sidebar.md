@@ -1,7 +1,7 @@
 ## Lectures
 
-* [Lecture 1: Basics](mdsd/lectures/lecture-01) 
-* [Lecture 2: Principles – Languages and Models](mdsd/lectures/lecture-02)
+* [Lecture 1: Basics](lecture-01) 
+* [Lecture 2: Principles – Languages and Models](lecture-02)
 
 ## Technology
 
