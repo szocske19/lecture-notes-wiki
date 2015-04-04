@@ -7,7 +7,7 @@
 
 ### System integration 2015
 
-* [Akka](akka)
+* [Akka](Akka)
 
 ### MDSD 2015
 
