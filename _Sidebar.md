@@ -1,7 +1,7 @@
 ## Lectures
 
-* [Lecture 1: Basics](https://github.com/FTSRG/MDSD/wiki/Lecture-01) 
-* [Lecture 2: Principles – Languages and Models](https://github.com/FTSRG/MDSD/wiki/Lecture-02) 
+* [Lecture 1: Basics](Lecture-01) 
+* [Lecture 2: Principles – Languages and Models](Lecture-02) 
 
 ## Technology
 
@@ -11,24 +11,24 @@
 
 ### MDSD 2015
 
-* [Eclipse basics](https://github.com/FTSRG/MDSD/wiki/2015_eclipse_basics) 
-* [EGit](https://github.com/FTSRG/MDSD/wiki/git) 
-* [EMF](https://github.com/FTSRG/MDSD/wiki/2015_emf)
-* [IncQuery](https://github.com/FTSRG/MDSD/wiki/2015_incquery)
-* [Xtext](https://github.com/FTSRG/MDSD/wiki/2015_xtext)
+* [Eclipse basics](2015_eclipse_basics) 
+* [EGit](git) 
+* [EMF](2015_emf)
+* [IncQuery](2015_incquery)
+* [Xtext](2015_xtext)
 
 ### MDSD 2014
 
-* [EMF](https://github.com/FTSRG/MDSD/wiki/emf) ([PDF](http://ftsrg.github.io/mdsd/2014/emf.pdf))
-* [Code generation](https://github.com/FTSRG/MDSD/wiki/code_generation) ([PDF](http://ftsrg.github.io/mdsd/2014/code_generation.pdf))
-* [IncQuery](https://github.com/FTSRG/MDSD/wiki/incquery) ([PDF](http://ftsrg.github.io/mdsd/2014/incquery.pdf))
-* [Yakindu](https://github.com/FTSRG/MDSD/wiki/yakindu) ([PDF](http://ftsrg.github.io/mdsd/2014/yakindu.pdf))
+* [EMF](emf) ([PDF](http://ftsrg.github.io/mdsd/2014/emf.pdf))
+* [Code generation](code_generation) ([PDF](http://ftsrg.github.io/mdsd/2014/code_generation.pdf))
+* [IncQuery](incquery) ([PDF](http://ftsrg.github.io/mdsd/2014/incquery.pdf))
+* [Yakindu](yakindu) ([PDF](http://ftsrg.github.io/mdsd/2014/yakindu.pdf))
 
 ### System Integration 2014
 
-* [Eclipse basics](https://github.com/FTSRG/MDSD/wiki/eclipse_basics) ([PDF](http://ftsrg.github.io/mdsd/2014/eclipse_basics.pdf))
-* [Bonita connector](https://github.com/FTSRG/MDSD/wiki/bonita_connector) ([PDF](http://ftsrg.github.io/mdsd/2014/bonita_connector.pdf))
-* [BPMN](https://github.com/FTSRG/MDSD/wiki/bpmn) ([PDF](http://ftsrg.github.io/mdsd/2014/bpmn.pdf))
-* [Cassandra](https://github.com/FTSRG/MDSD/wiki/cassandra) ([PDF](http://ftsrg.github.io/mdsd/2014/cassandra.pdf))
-* [NoSQL](https://github.com/FTSRG/MDSD/wiki/nosql) ([PDF](http://ftsrg.github.io/mdsd/2014/nosql.pdf))
-* [Web services](https://github.com/FTSRG/MDSD/wiki/web_services) ([PDF](http://ftsrg.github.io/mdsd/2014/web_services.pdf))
+* [Eclipse basics](eclipse_basics) ([PDF](http://ftsrg.github.io/mdsd/2014/eclipse_basics.pdf))
+* [Bonita connector](bonita_connector) ([PDF](http://ftsrg.github.io/mdsd/2014/bonita_connector.pdf))
+* [BPMN](bpmn) ([PDF](http://ftsrg.github.io/mdsd/2014/bpmn.pdf))
+* [Cassandra](cassandra) ([PDF](http://ftsrg.github.io/mdsd/2014/cassandra.pdf))
+* [NoSQL](nosql) ([PDF](http://ftsrg.github.io/mdsd/2014/nosql.pdf))
+* [Web services](web_services) ([PDF](http://ftsrg.github.io/mdsd/2014/web_services.pdf))
