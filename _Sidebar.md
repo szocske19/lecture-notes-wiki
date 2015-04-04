@@ -5,6 +5,10 @@
 
 ## Technology
 
+### System integration 2015
+
+* [Akka](akka)
+
 ### MDSD 2015
 
 * [Eclipse basics](https://github.com/FTSRG/MDSD/wiki/2015_eclipse_basics) 
