@@ -11,18 +11,18 @@
 
 ### MDSD 2015
 
-* [Eclipse basics](mdsd/2015/eclipse_basics) 
-* [EGit](mdsd/2015/git) 
-* [EMF](mdsd/2015/emf)
-* [IncQuery](mdsd/2015/incquery)
-* [Xtext](mdsd/2015/xtext)
+* [Eclipse basics](2015_eclipse_basics) 
+* [EGit](2015_git) 
+* [EMF](2015_emf)
+* [IncQuery](2015_incquery)
+* [Xtext](2015_xtext)
 
 ### MDSD 2014
 
-* [EMF](mdsd/2014/emf)
-* [Code generation](mdsd/2014/code_generation)
-* [IncQuery](mdsd/2014/incquery)
-* [Yakindu](mdsd/2014/yakindu)
+* [EMF](2014_emf)
+* [Code generation](2014_code_generation)
+* [IncQuery](2014_incquery)
+* [Yakindu](2014_yakindu)
 
 ### System Integration 2014
 
