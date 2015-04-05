@@ -8,7 +8,7 @@ Reactive programming is a trending programming paradigm. In contrast to most tra
 
 #### Motivation
 
-The main motivation behind for using novel programming paradigms (or often rediscovering existing ones) is the fact that while Moore's law still holds true, the single-core speed of current microprocossers has come to a plateau. To overcome this limitation, they provide more processing cores (Figure 1).
+The main motivation behind for using novel programming paradigms (or often rediscovering existing ones) is the fact that while Moore's law still holds true, the single-core speed of current microprocessors has come to a plateau. To overcome this limitation, they provide more processing cores (Figure 1).
 
 #### The Actor Model
 
@@ -41,7 +41,7 @@ Like Java, Scala (from *scalable* and *language*) is a strongly object-oriented 
 
 #### Akka API
 
-Akka provides and API for both Scala- and Java-based applications [2]. For this laboratory, we recommend the Java API of Akka 2.3.1.
+Akka provides an API for both Scala- and Java-based applications [2]. For this laboratory, we recommend the Java API of Akka 2.3.9.
 
 ### Questions
 
