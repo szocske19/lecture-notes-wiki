@@ -61,5 +61,5 @@ On this laboratory, all questions will be selected from the list below. Answers 
 * [3] The Reactive Manifesto. <http://www.reactivemanifesto.org/>
 * [4] Wikipedia: Reactive programming. <http://en.wikipedia.org/wiki/Reactive_programming>
 * [5] Herb Sutter. The Free Lunch Is Over -- A Fundamental Turn Toward Concurrency in Software. <http://www.gotw.ca/publications/concurrency-ddj.htm>, March 2005.
-* [6] Carl Hewitt, Peter Bishop, and Richard Steiger. A universal modular actor formalism for artificial intelligence. In Proceedings of the 3rd International Joint Conference on Artificial Intelligence, IJCAI'73, pages 235--245, San Francisco, CA, USA, 1973. Morgan Kaufmann Publishers Inc.
+* [6] Carl Hewitt, Peter Bishop, and Richard Steiger. A universal modular actor formalism for artificial intelligence. *In Proceedings of the 3rd International Joint Conference on Artificial Intelligence,* IJCAI'73, pages 235--245, San Francisco, CA, USA, 1973. Morgan Kaufmann Publishers Inc.
 * [7] Venkat Subramaniam. Programming Concurrency on the JVM. <http://ljcbookclub.wordpress.com/2012/02/15/programming-concurrency-on-the-jvm/>, February 2012.
