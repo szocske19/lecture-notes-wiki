@@ -1,3 +1,5 @@
+Author: Gábor Szárnyas
+
 ### Introduction
 
 During this laboratory course, the students get familiar with practical applications and tools associated with system integration and supervision. The course presents the major implementation steps and supervision methods of a distributed application, using industrial middleware technologies and supervision technologies. Each laboratory is built around a certain technology.
