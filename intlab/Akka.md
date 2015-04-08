@@ -12,6 +12,10 @@ Reactive programming is a trending programming paradigm. In contrast to most tra
 
 The main motivation behind for using novel programming paradigms (or often rediscovering existing ones) is the fact that while Moore's law still holds true, the single-core speed of current microprocessors has come to a plateau. To overcome this limitation, they provide more processing cores (Figure 1).
 
+![](intlab/akka/transistor-count.png)
+
+Figure 1: Intel CPU introductions (graph updated August 2009) [5].
+
 #### The Actor Model
 
 The Actor model originally appeared in 1973 [6]. The main idea of the actor model is to process information using separate actors, each with its own state. The actors communicate with immutable messages.
@@ -20,40 +24,35 @@ The Actor model originally appeared in 1973 [6]. The main idea of the actor mode
 
 Akka is a toolkit and runtime for building highly concurrent, distributed, and fault-tolerant event-driven applications on the JVM [1].
 
-![](intlab/akka/transistor-count.png)
-
-Figure 1: Intel CPU introductions (graph updated August 2009) [5].
-
 ![](intlab/akka/actor-model.png)
 
 Figure 2: The Actor Model [7].
+
+#### The Scala Language
+
+Like Java, Scala (from *scalable* and *language*) is a strongly object-oriented and statically typed language. However, Scala also uses elements from functional programming. Scala natively supports building concurrent applications. The logo of the Scala language is shown on Figure 3.
 
 ![](intlab/akka/scala-logo.png)
 
 Figure 3: The Logo of the Scala Programming Language.
 
-![](intlab/akka/akka-logo.png)
-
-Figure 4: The Logo of the Akka toolkit
-
-
-#### The Scala Language
-
-Like Java, Scala (from *scalable* and *language*) is a strongly object-oriented and statically typed language. However, Scala also uses elements from functional programming. Scala natively supports building concurrent applications. The logo of the Scala language is shown on Figure
-
 #### Akka API
 
 Akka provides an API for both Scala- and Java-based applications [2]. For this laboratory, we recommend the Java API of Akka 2.3.9.
+
+![](intlab/akka/akka-logo.png)
+
+Figure 4: The Logo of the Akka toolkit
 
 ### Questions
 
 On this laboratory, all questions will be selected from the list below. Answers are accepted in both English and Hungarian. The answers to the questions are provided in the Akka documentation.
 
-1. What is the difference between concurrency and parallelism?
+1. What is the difference between *concurrency* and *parallelism/?
 2. What is the main idea behind the actor model?
-3. What is the difference between a typed and an untyped actor?
-4. Describe the semantics of the tell and ask methods for sending messages.
-5. What is the role of futures?
+3. What is the difference between a *typed* and an *untyped* actor?
+4. Describe the semantics of the `tell` and `ask` methods for sending messages.
+5. What is the role of *futures*?
 
 ### References
 
