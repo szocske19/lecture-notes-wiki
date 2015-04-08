@@ -48,7 +48,7 @@ Figure 4: The Logo of the Akka toolkit
 
 On this laboratory, all questions will be selected from the list below. Answers are accepted in both English and Hungarian. The answers to the questions are provided in the Akka documentation.
 
-1. What is the difference between *concurrency* and *parallelism/?
+1. What is the difference between *concurrency* and *parallelism*?
 2. What is the main idea behind the actor model?
 3. What is the difference between a *typed* and an *untyped* actor?
 4. Describe the semantics of the `tell` and `ask` methods for sending messages.
