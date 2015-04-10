@@ -1,7 +1,5 @@
 # Xtext
 
-## Creating a textual language
-
 ![The logo of Xtext](mdsd/2015/xtext/logo.jpg)
 
 homesite: https://eclipse.org/Xtext/
