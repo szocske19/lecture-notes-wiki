@@ -26,7 +26,7 @@ This will produce a simple ```Hello``` language with greetings messages. It is w
 
 1. Declare our language
 
-	```java
+	```
 	grammar hu.bme.mit.mdsd.erdiagram.text.ERDiagramDSL with org.eclipse.xtext.common.Terminals
 	
 	generate eRDiagramDSL "http://www.bme.hu/mit/mdsd/erdiagram/text/ERDiagramDSL"
@@ -40,7 +40,7 @@ This will produce a simple ```Hello``` language with greetings messages. It is w
 
 	Each Xtext language is built up from rules. The entry (or main) rule is the first defined rule which will be the ```ERDiagram``` in our case:
 	
-	```java
+	```
 	ERDiagram:
 		attributeTypes+=AttributeType*
 		entities+=Entity+
@@ -67,7 +67,7 @@ This will produce a simple ```Hello``` language with greetings messages. It is w
 
 	Definition of _AttributeType_ rule:
 	
-	```java
+	```
 	AttributeType:
 		'type' name=ID ';'?	
 	;
@@ -79,7 +79,7 @@ This will produce a simple ```Hello``` language with greetings messages. It is w
 	
 	Definition of _Entity_ and _Attribute_ rules:
 	
-	```java
+	```
 	Entity:
 		'entity' name=ID ('isA' isA=[Entity])?
 		'{'
@@ -100,7 +100,7 @@ This will produce a simple ```Hello``` language with greetings messages. It is w
 
 1. Enumeration, grouping expressions, unordered expressions, boolean expression
 
-	```java
+	```
 	Relation:
 		'relation'
 		leftEnding=RelationEnding
@@ -131,7 +131,7 @@ This will produce a simple ```Hello``` language with greetings messages. It is w
  
 1. The full Xtext code
 
-	```java
+	```
 	grammar hu.bme.mit.mdsd.erdiagram.text.ERDiagramDSL with org.eclipse.xtext.common.Terminals
 	generate eRDiagramDSL "http://www.bme.hu/mit/mdsd/erdiagram/text/ERDiagramDSL"
 	
@@ -217,7 +217,7 @@ Check out the generated AST
 
 1. Create an example file with 'er' extension and fill it with the following content:
 
-	```java
+	```
 	type String
 	type Int
 	
@@ -250,12 +250,12 @@ Create an Xtext language with existing AST metamodel
 1. Switch the AST line
 
 	From (this line implies to generate AST metamodel):	
-	```java
+	```
 	generate eRDiagramDSL "http://www.bme.hu/mit/mdsd/erdiagram/text/ERDiagramDSL"
 	```
 	
 	To (this line imports our metamodel):
-	```java
+	```
 	import "platform:/resource/hu.bme.mit.mdsd.erdiagram/model/erdiagram.ecore" as er
 	```
 	
@@ -263,7 +263,7 @@ Create an Xtext language with existing AST metamodel
 	
 1. Change return values of rules and correct the reference and attribute names:
 
-	```java
+	```
 	grammar hu.bme.mit.mdsd.erdiagram.text.ERDiagramDSL 
 	with org.eclipse.xtext.common.Terminals
 	
@@ -352,7 +352,7 @@ Static analysis is always required for any language. In this example, we want to
 	
 1. Create the following method with ```@Check``` annotation
 
-	```
+	```java
 	class ERDiagramDSLValidator extends AbstractERDiagramDSLValidator {
 	
 		public static val CYCLE = "CYCLE";
