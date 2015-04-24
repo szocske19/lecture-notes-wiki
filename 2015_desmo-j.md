@@ -90,27 +90,27 @@ It is also important to clarify the parameters of the simulation model. In this 
 
 1\. Firstly, create the entities, starting with the CustomerGroupEntity class and extend it from the (desmoj.core.simulator.)Entity class. Generate its constructor with quick fix and add a private integer field named __size__ with a getter method.
 
-    ```java
-    package hu.bme.mit.mdsd.simulation.entities;
-    
-    import desmoj.core.simulator.Entity;
-    import desmoj.core.simulator.Model;
-    
-    public class CustomerGroupEntity extends Entity {
-    
-        private final int size;
-    
-        public CustomerGroupEntity(int size, Model owner, String name, boolean showInTrace) {
-            super(owner, name, showInTrace);
-            this.size = size;
-        }
-    
-        public int getSize() {
-            return ;
-        }
-    
+```java
+package hu.bme.mit.mdsd.simulation.entities;
+
+import desmoj.core.simulator.Entity;
+import desmoj.core.simulator.Model;
+
+public class CustomerGroupEntity extends Entity {
+
+    private final int size;
+
+    public CustomerGroupEntity(int size, Model owner, String name, boolean showInTrace) {
+        super(owner, name, showInTrace);
+        this.size = size;
     }
-    ```
+
+    public int getSize() {
+        return ;
+    }
+
+}
+```
 
 Do the same with the TableEntity and WaitressEntity class (without the size field).
 
