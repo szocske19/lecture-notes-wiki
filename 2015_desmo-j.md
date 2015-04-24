@@ -51,13 +51,13 @@ Right click the project, select Build Path and select Configure Build Path... Th
 
 If you would like to browse the source code from Eclipse attach the source (.zip) from the libs folder by editing the source attachment node on the previously added jar dependency as shown on the next figure:
 
-![Adding a source attachment to a jar file](mdsd/2015/desmo-j/3-add/source.png)
+![Adding a source attachment to a jar file](mdsd/2015/desmo-j/3-add-source.png)
  
 ## Modeling
 
 For a discrete-event simulation problem one should model the entities and events of the system. Entities will represent the state of the model, while events will represent the dynamics of the system. The model usually also contains waiting queues and random number generators of certain distribution (if the simulation has stochastic elements).
 
-Our example will be a pastry shop, where customers comes in groups, they buy some sweets and sit to a free table ->
+Our example will be a pastry shop, where customers comes in groups, they buy some sweets and sit to a free table.
 
 Entities with attributes:
 * CustomerGroupEntity
@@ -88,7 +88,7 @@ It is also important to clarify the parameters of the simulation model. In this 
 
 ### Code
 
-1. Firstly, create the entities, starting with the CustomerGroupEntity class and extend it from the (desmoj.core.simulator.)Entity class. Generate its constructor with quick fix and add a private integer field named __size__ with a getter method.
+1\. Firstly, create the entities, starting with the CustomerGroupEntity class and extend it from the (desmoj.core.simulator.)Entity class. Generate its constructor with quick fix and add a private integer field named __size__ with a getter method.
 
     ```java
     package hu.bme.mit.mdsd.simulation.entities;
@@ -105,7 +105,7 @@ It is also important to clarify the parameters of the simulation model. In this 
             this.size = size;
         }
     
-        public int getSize() {`
+        public int getSize() {
             return ;
         }
     
@@ -114,7 +114,7 @@ It is also important to clarify the parameters of the simulation model. In this 
 
 Do the same with the TableEntity and WaitressEntity class (without the size field).
 
-2. Create the boilerplate code of the events. Events can be either external or have 1,2 or 3 entity as a parameter. (There cannot be 4 or more entity, its a limitation of the framework, but probably three is more than enough. If 4 or more is required try to model the event with a sequence of different events.)
+2\. Create the boilerplate code of the events. Events can be either external or have 1,2 or 3 entity as a parameter. (There cannot be 4 or more entity, its a limitation of the framework, but probably three is more than enough. If 4 or more is required try to model the event with a sequence of different events.)
 
 All four events will be extended from a specific class as listed below. Also generate its constructor and unimplemented methods with quick fix.
 
@@ -166,7 +166,7 @@ public class BuyEvent extends EventOf2Entities<CustomerGroupEntity,WaitressEntit
 
 The eventRoutine methods will be implemented later.
 
-3. The DESMO-J framework requires a simulation model which will contain the queues, random number generators and the initialization code.
+3\. The DESMO-J framework requires a simulation model which will contain the queues, random number generators and the initialization code.
 
 Create a class named PastryShopSimulationModel and extend it from the (desmoj.core.simulator.)Model class. Add some description to it.
 
@@ -200,67 +200,67 @@ public class PastryShopSimulationModel extends Model {
 }
 ```
 
-4. Add the following fields to the Model:
+4\. Add the following fields to the Model:
 
 ```java
-    private static final int WAITRESSES = 1;
-    private static final int TABLES = 3;
+private static final int WAITRESSES = 1;
+private static final int TABLES = 3;
 
-	public Queue<CustomerGroupEntity> buyersQueue;
-	public Queue<CustomerGroupEntity> eatersQueue;
-	public Queue<WaitressEntity> idleWaitressQueue;
-	public Queue<TableEntity> idleTableQueue;
+public Queue<CustomerGroupEntity> buyersQueue;
+public Queue<CustomerGroupEntity> eatersQueue;
+public Queue<WaitressEntity> idleWaitressQueue;
+public Queue<TableEntity> idleTableQueue;
 
-	// Here we only specify that it is a discrete or continuous distribution
-	private DiscreteDist<?> customerGroupSize;
-	private ContDist customerArrivalTime;
-	private ContDist buyTime;
-	private ContDist eatTime;
+// Here we only specify that it is a discrete or continuous distribution
+private DiscreteDist<?> customerGroupSize;
+private ContDist customerArrivalTime;
+private ContDist buyTime;
+private ContDist eatTime;
 ```
 
 In this tutorial the simulation parameters are final private fields but in a real case they should be settable from outside.
 
-5. The init() method will be used to initialize the above fields. Don't use inline initialization! Add the following code to the init() method:
+5\. The init() method will be used to initialize the above fields. Don't use inline initialization! Add the following code to the init() method:
 
 ```java
-        @Override
-	public void init() {
+@Override
+public void init() {
+
+	// Init queues
+	buyersQueue = new Queue<CustomerGroupEntity>(this, "Buyers Queue", true, false);
+	eatersQueue = new Queue<CustomerGroupEntity>(this, "Eaters Queue", true, false);
+	idleWaitressQueue = new Queue<WaitressEntity>(this, "Idle Waitresses Queue", true, false);
+	idleTableQueue = new Queue<TableEntity>(this, "Idle Tables Queue", true, false);
 	
-		// Init queues
-		buyersQueue = new Queue<CustomerGroupEntity>(this, "Buyers Queue", true, false);
-		eatersQueue = new Queue<CustomerGroupEntity>(this, "Eaters Queue", true, false);
-		idleWaitressQueue = new Queue<WaitressEntity>(this, "Idle Waitresses Queue", true, false);
-		idleTableQueue = new Queue<TableEntity>(this, "Idle Tables Queue", true, false);
-	
-		// Init random number generators
-		customerGroupSize = new DiscreteDistPoisson(this, "Customer group size", 2, true, false);
-		customerArrivalTime = new ContDistNormal(this, "Customer arrival time", 4*60, 1*60, true, false);
-		buyTime = new ContDistUniform(this, "Buying time", 1*60, 3*60, true, false);
-		eatTime = new ContDistUniform(this, "Eating time", 5*60, 20*60, true, false);
+	// Init random number generators
+	customerGroupSize = new DiscreteDistPoisson(this, "Customer group size", 2, true, false);
+	customerArrivalTime = new ContDistNormal(this, "Customer arrival time", 4*60, 1*60, true, false);
+	buyTime = new ContDistUniform(this, "Buying time", 1*60, 3*60, true, false);
+	eatTime = new ContDistUniform(this, "Eating time", 5*60, 20*60, true, false);
 		
-		for (int i = 0; i < WAITRESSES; i++){
-			idleWaitressQueue.insert(new WaitressEntity(this, "Waitress", false));
-		}
-		
-		for (int i = 0; i < TABLES; i++){
-			idleTableQueue.insert(new TableEntity(this, "Table", false));
-		}
+	for (int i = 0; i < WAITRESSES; i++){
+		idleWaitressQueue.insert(new WaitressEntity(this, "Waitress", false));
 	}
+		
+	for (int i = 0; i < TABLES; i++){
+		idleTableQueue.insert(new TableEntity(this, "Table", false));
+	}
+}
 ```
 
-6. The doInitialSchedules() is for scheduling the first events. Now, it will be only an ArrivalEvent:
+6\. The doInitialSchedules() is for scheduling the first events. Now, it will be only an ArrivalEvent:
 
 ```java
-    @Override
-    public void doInitialSchedules() {
-	ArrivalEvent arrivalEvent = new ArrivalEvent(this, "Arrival event", true);
-	arrivalEvent.schedule(new TimeInstant(0));
-    }
+@Override
+public void doInitialSchedules() {
+    ArrivalEvent arrivalEvent = new ArrivalEvent(this, "Arrival event", true);
+    arrivalEvent.schedule(new TimeInstant(0));
+}
 ```
 
 Note, that TimeInstant represents an absolute point in the time line, while TimeSpan is relative to the current time.
 	
-7. Before moving on to the events, create a few helper methods for the random number generators:
+7\. Before moving on to the events, create a few helper methods for the random number generators:
 
 ```java
 	public int getCustomerGroupSize(){
@@ -282,7 +282,7 @@ Note, that TimeInstant represents an absolute point in the time line, while Time
 	}
 ```
 
-8. Now that we created the simulation model, we can access it from the event classes. Do the following for all the three events:
+8\. Now that we created the simulation model, we can access it from the event classes. Do the following for all the three events:
 
 ```java
 	private PastryShopSimulationModel model;
@@ -295,105 +295,102 @@ Note, that TimeInstant represents an absolute point in the time line, while Time
 
 You can also get the model with getModel() method.
 
-9. Write the following eventRoutine() methods:
+9\. Write the following eventRoutine() methods:
 
 ```java
-	//ArrivalEvent
-	@Override
-	public void eventRoutine() {
-		int size = model.getCustomerGroupSize();
+//ArrivalEvent
+@Override
+public void eventRoutine() {
+	int size = model.getCustomerGroupSize();
 
-		CustomerGroupEntity customerGroup = new CustomerGroupEntity(size, getModel(), "Customer group", true);
-		
-		if (model.getIdleWaitressQueue().isEmpty()) {
-			model.getBuyersQueue().insert(customerGroup);
-		} else {
-			WaitressEntity waitress = model.getIdleWaitressQueue().removeFirst();
-			BuyEndedEvent event = new BuyEndedEvent(getModel(), "Buy event", true);
-			event.schedule(customerGroup, waitress, new TimeSpan(model.getBuyingTime(size), TimeUnit.SECONDS));
-		}
-		
-		schedule(new TimeSpan(model.getCustomerArrivalTime(), TimeUnit.SECONDS));
-		
+	CustomerGroupEntity customerGroup = new CustomerGroupEntity(size, getModel(), "Customer group", true);
+
+	if (model.getIdleWaitressQueue().isEmpty()) {
+		model.getBuyersQueue().insert(customerGroup);
+	} else {
+		WaitressEntity waitress = model.getIdleWaitressQueue().removeFirst();
+		BuyEndedEvent event = new BuyEndedEvent(getModel(), "Buy event", true);
+		event.schedule(customerGroup, waitress, new TimeSpan(model.getBuyingTime(size), TimeUnit.SECONDS));
 	}
+
+	schedule(new TimeSpan(model.getCustomerArrivalTime(), TimeUnit.SECONDS));
+
+}
 ```
 
 ```java
-	// BuyEndedEvent
-	@Override
-	public void eventRoutine(CustomerGroupEntity who1, WaitressEntity who2) {
-		
-		if (model.buyersQueue.isEmpty()) {
-			model.idleWaitressQueue.insert(who2);
-		}
-		else {
-			CustomerGroupEntity customerGroup = model.buyersQueue.removeFirst();
-			BuyEndedEvent event = new BuyEndedEvent(model, "Buy ended event", true);
-			event.schedule(customerGroup, who2, new TimeSpan(model.getBuyTime()));
-		}
-		
-		if (model.idleTableQueue.isEmpty()) {
-			model.eatersQueue.insert(who1);
-		}
-		else {
-			TableEntity table = model.idleTableQueue.removeFirst();
-			DepartureEvent event = new DepartureEvent(model, "Departure event", true);
-			event.schedule(who1, table, new TimeSpan(model.getEatTime()));
-		}
-		
+// BuyEndedEvent
+@Override
+public void eventRoutine(CustomerGroupEntity who1, WaitressEntity who2) {
+
+	if (model.buyersQueue.isEmpty()) {
+		model.idleWaitressQueue.insert(who2);
 	}
+	else {
+		CustomerGroupEntity customerGroup = model.buyersQueue.removeFirst();
+		BuyEndedEvent event = new BuyEndedEvent(model, "Buy ended event", true);
+		event.schedule(customerGroup, who2, new TimeSpan(model.getBuyTime()));
+	}
+
+	if (model.idleTableQueue.isEmpty()) {
+		model.eatersQueue.insert(who1);
+	}
+	else {
+		TableEntity table = model.idleTableQueue.removeFirst();
+		DepartureEvent event = new DepartureEvent(model, "Departure event", true);
+		event.schedule(who1, table, new TimeSpan(model.getEatTime()));
+	}
+
+}
 ```
 
 
 ```java
-	//DepartureEvent
-	@Override
-	public void eventRoutine(CustomerGroupEntity who1, TableEntity who2) {
-		if (model.eatersQueue.isEmpty()) {
-			model.idleTableQueue.insert(who2);
-		}
-		else {
-			CustomerGroupEntity customerGroup = model.eatersQueue.removeFirst();
-			DepartureEvent event = new DepartureEvent(model, "Departure event", true);
-			event.schedule(customerGroup, who2, new TimeSpan(model.getEatTime()));
-		}
+//DepartureEvent
+@Override
+public void eventRoutine(CustomerGroupEntity who1, TableEntity who2) {
+	if (model.eatersQueue.isEmpty()) {
+		model.idleTableQueue.insert(who2);
 	}
+	else {
+		CustomerGroupEntity customerGroup = model.eatersQueue.removeFirst();
+		DepartureEvent event = new DepartureEvent(model, "Departure event", true);
+		event.schedule(customerGroup, who2, new TimeSpan(model.getEatTime()));
+	}
+}
 ```
-
-
-
 
 
 ## Starting a simulation, trace and statistics
 
 To start the simulation, create a new class with a main method, instantiate the simulation model and an Experiment object, than configure the experiment:
 
-```
-	public class SimulationRunner {
+```java
+public class SimulationRunner {
 
-		public static void main(String[] args) {
-			
-			PastryShopSimulationModel model = new PastryShopSimulationModel(null, "PastryShopSimulationModel", true, false);
-			
-			Experiment experiment = new Experiment("Experiment", TimeUnit.SECONDS, TimeUnit.SECONDS, null);
-			
-			model.connectToExperiment(experiment);
-			
-			// Turn on the simulation trace from the start to the end
-			experiment.traceOn(new TimeInstant(0));
-			
-			// Set when to stop the simulation
-			experiment.stop(new TimeInstant(8, TimeUnit.HOURS));
-			
-			experiment.start();
-			
-			// Create the report files
-			experiment.report();
-			
-			experiment.finish();
-			
-		}
+	public static void main(String[] args) {
+
+		PastryShopSimulationModel model = new PastryShopSimulationModel(null, "PastryShopSimulationModel", true, false);
+
+		Experiment experiment = new Experiment("Experiment", TimeUnit.SECONDS, TimeUnit.SECONDS, null);
+
+		model.connectToExperiment(experiment);
+
+		// Turn on the simulation trace from the start to the end
+		experiment.traceOn(new TimeInstant(0));
+
+		// Set when to stop the simulation
+		experiment.stop(new TimeInstant(8, TimeUnit.HOURS));
+
+		experiment.start();
+
+		// Create the report files
+		experiment.report();
+
+		experiment.finish();
+
 	}
+}
 ```
 
 
