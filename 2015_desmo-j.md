@@ -122,7 +122,8 @@ All four events will be extended from a specific class as listed below. Also gen
 * BuyEndedEvent extends EventOf2Entities<CustomerGroupEntity,WaitressEntity>
 * DepartureEvent extends EventOf2Entities<CustomerGroupEntity,TableEntity>
 
-`package hu.bme.mit.mdsd.simulation.events;
+```java
+package hu.bme.mit.mdsd.simulation.events;
 
 import desmoj.core.simulator.ExternalEvent;
 import desmoj.core.simulator.Model;
@@ -138,9 +139,11 @@ public class ArrivalEvent extends ExternalEvent{
 		// TODO
 	}
 
-}`
+}
+```
 
-`package hu.bme.mit.mdsd.simulation.events;
+```java
+package hu.bme.mit.mdsd.simulation.events;
 
 import hu.bme.mit.mdsd.simulation.entities.CustomerGroupEntity;
 import hu.bme.mit.mdsd.simulation.entities.WaitressEntity;
@@ -158,7 +161,8 @@ public class BuyEvent extends EventOf2Entities<CustomerGroupEntity,WaitressEntit
 		// TODO
 	}
 
-}`
+}
+```
 
 The eventRoutine methods will be implemented later.
 
@@ -166,7 +170,8 @@ The eventRoutine methods will be implemented later.
 
 Create a class named PastryShopSimulationModel and extend it from the (desmoj.core.simulator.)Model class. Add some description to it.
 
-`package hu.bme.mit.mdsd.simulation;
+```java
+package hu.bme.mit.mdsd.simulation;
 
 import desmoj.core.simulator.Model;
 
@@ -192,11 +197,13 @@ public class PastryShopSimulationModel extends Model {
 		
 	}
 
-}`
+}
+```
 
 4. Add the following fields to the Model:
 
-`	private static final int WAITRESSES = 1;
+```java
+    private static final int WAITRESSES = 1;
     private static final int TABLES = 3;
 
 	public Queue<CustomerGroupEntity> buyersQueue;
@@ -209,12 +216,14 @@ public class PastryShopSimulationModel extends Model {
 	private ContDist customerArrivalTime;
 	private ContDist buyTime;
 	private ContDist eatTime;
+```
 
 In this tutorial the simulation parameters are final private fields but in a real case they should be settable from outside.
 
 5. The init() method will be used to initialize the above fields. Don't use inline initialization! Add the following code to the init() method:
 
-`@Override
+```java
+        @Override
 	public void init() {
 	
 		// Init queues
@@ -236,21 +245,24 @@ In this tutorial the simulation parameters are final private fields but in a rea
 		for (int i = 0; i < TABLES; i++){
 			idleTableQueue.insert(new TableEntity(this, "Table", false));
 		}
-	}`
+	}
+```
 
 6. The doInitialSchedules() is for scheduling the first events. Now, it will be only an ArrivalEvent:
 
-`@Override
-	public void doInitialSchedules() {
-		ArrivalEvent arrivalEvent = new ArrivalEvent(this, "Arrival event", true);
-		arrivalEvent.schedule(new TimeInstant(0));
-	}`
+```java
+    @Override
+    public void doInitialSchedules() {
+	ArrivalEvent arrivalEvent = new ArrivalEvent(this, "Arrival event", true);
+	arrivalEvent.schedule(new TimeInstant(0));
+    }
+```
 
 Note, that TimeInstant represents an absolute point in the time line, while TimeSpan is relative to the current time.
 	
 7. Before moving on to the events, create a few helper methods for the random number generators:
 
-`
+```java
 	public int getCustomerGroupSize(){
 		int value = customerGroupSize.sample().intValue();
 		return value == 0 ? 1 : value;
@@ -268,24 +280,24 @@ Note, that TimeInstant represents an absolute point in the time line, while Time
 	public int getEatTime(){
 		return eatTime.sample().intValue();
 	}
-`
+```
 
 8. Now that we created the simulation model, we can access it from the event classes. Do the following for all the three events:
 
-`
+```java
 	private PastryShopSimulationModel model;
 	
 	public ArrivalEvent(Model owner, String name, boolean showInTrace) {
 		super(owner, name, showInTrace);
 		model = (PastryShopSimulationModel) owner;
 	}
-`
+```
 
 You can also get the model with getModel() method.
 
 9. Write the following eventRoutine() methods:
 
-`
+```java
 	//ArrivalEvent
 	@Override
 	public void eventRoutine() {
@@ -304,9 +316,9 @@ You can also get the model with getModel() method.
 		schedule(new TimeSpan(model.getCustomerArrivalTime(), TimeUnit.SECONDS));
 		
 	}
-`
+```
 
-`
+```java
 	// BuyEndedEvent
 	@Override
 	public void eventRoutine(CustomerGroupEntity who1, WaitressEntity who2) {
@@ -330,10 +342,10 @@ You can also get the model with getModel() method.
 		}
 		
 	}
-`
+```
 
 
-`
+```java
 	//DepartureEvent
 	@Override
 	public void eventRoutine(CustomerGroupEntity who1, TableEntity who2) {
@@ -346,7 +358,7 @@ You can also get the model with getModel() method.
 			event.schedule(customerGroup, who2, new TimeSpan(model.getEatTime()));
 		}
 	}
-`
+```
 
 
 
@@ -356,7 +368,7 @@ You can also get the model with getModel() method.
 
 To start the simulation, create a new class with a main method, instantiate the simulation model and an Experiment object, than configure the experiment:
 
-`
+```
 	public class SimulationRunner {
 
 		public static void main(String[] args) {
@@ -382,7 +394,7 @@ To start the simulation, create a new class with a main method, instantiate the 
 			
 		}
 	}
-`
+```
 
 
 Run it as a Java application.
@@ -413,15 +425,15 @@ To report additional statistics about the simulation to the report file, you can
 Let's create a Tally which reports average time spent by the customers in the pastry shop.
 
 Add the following field to the PastryShopSimulationModel:
-
+```java
 public Tally timeSpentByCustomer;
-
+```
 And initialize it in the init() method:
-
+```java
 timeSpentByCustomer = new Tally(this, "Time spent by customer", true, false);
-
+```
 Save the arrival time of the CustomerGroupEntity:
-
+```java
 public class CustomerGroupEntity extends Entity{
 
 	int size;
@@ -438,11 +450,11 @@ public class CustomerGroupEntity extends Entity{
 	}
 
 }
-
+```
 Update the tally in the DepartureEvent:
-
+```java
 model.timeSpentByCustomer.update(presentTime().getTimeAsDouble() - who1.getArrivalTime().getTimeAsDouble());
-
+```
 Run the simulation and see the results:
 
 ![Tally](mdsd/2015/desmo-j/7-tally.png)
@@ -452,17 +464,17 @@ Run the simulation and see the results:
 Let's create a Histogram which visualize the distribution of the customer group sizes.
 
 Add the following field to the PastryShopSimulationModel:
-
+```java
 public Histogram customerGroupSizeHistogram;
-
+```
 And initialize it in the init() method:
-
+```java
 customerGroupSizeHistogram = new Histogram(this, "Histogram", 1, 10, 9, true, false);
-
+```
 Update the histogram in the ArrivalEvent:
-
+```java
 model.customerGroupSizeHistogram.update(size);
-
+```
 Run the simulation and see the results:
 
 ![Tally](mdsd/2015/desmo-j/8-histogram.png)
