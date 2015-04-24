@@ -479,3 +479,5 @@ Run the simulation and see the results:
 ## Other references
 
 Official tutorial (it also includes the agent-based approach): http://desmoj.sourceforge.net/tutorial/overview/0.html
+
+[The final project can be downloaded from here.](projects/pastry-shop-simulation.zip)
