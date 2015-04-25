@@ -9,11 +9,11 @@ Install Sirius
 
 Install from eclipse market place: search for Sirius -> Click _Install_ -> etc.
 
-![Eclipse Marketplace... inside Help menu](install_marketplace_module.png)
+![Eclipse Marketplace... inside Help menu](mdsd/2015/sirius/install_marketplace_module.png)
 
 Output of the laboratory
 ------------------------
 
-* Modified metamodel can be downloaded from [here](sirius/hu.bme.mit.mdsd.erdiagram.zip)
-* Created design project can be downloaded from [here](sirius/hu.bme.mit.mdsd.erdiagram.design.zip)
+* Modified metamodel can be downloaded from [here](mdsd/2015/sirius/hu.bme.mit.mdsd.erdiagram.zip)
+* Created design project can be downloaded from [here](mdsd/2015/sirius/hu.bme.mit.mdsd.erdiagram.design.zip)
 
