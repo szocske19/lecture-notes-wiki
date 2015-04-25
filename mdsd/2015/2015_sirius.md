@@ -102,4 +102,30 @@ Under the default layer:
    
    ![Element Based Edge added](mdsd/2015/sirius/element_based.png)
    
+Creating Objects
+----------------
+
+Under the **Section** (create one, if you don't have: right click on the layer -> New Tool -> Section)
+
+1. Create Entities
+   1. Add a _Node Creation_ (right click on Section -> New Element Creation -> Node Creation)
+   1. Under the green arrow with the begin label, we can define an operation sequence to be executed.
+      1. Create a new instance operation (right click on Begin -> New Operation -> Create Instance)
+      1. Set its reference name to _"entities"_
+         _Note: without any prefix, only the reference name_
+         _Note: field is related to the domain class of the diagram (or the container node) where we add the new instance
+      1. Set its type name to Entity, as we want to create a new Entity
+      1. Set its variable name to _"instance"_
+         _Note: we won't use this feature, but with its name, you can refer to this object later (var:<variable name>)
+   1. Under the new instance operation, create a Set operation (right click on Create Instance Entity -> New Operation -> Set)
+      1. Set its feature name to _"name"_
+      1. Set its value to _"undefined"_
+      _Note: this will set the name attribute of the new object to "undefined" by default_        
+
+   ![Create Entity](mdsd/2015/sirius/create_entity.png)
+
+Creating Edges
+----------------
+
+Under the **Section** (create one, if you don't have: right click on the layer -> New Tool -> Section)
    
