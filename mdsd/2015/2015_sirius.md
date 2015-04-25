@@ -238,3 +238,23 @@ Under the **Section** (create one, if you don't have: right click on the layer -
 		
 		![Extension points](mdsd/2015/sirius/extensionpoint.png)
       
+Validation
+----------
+
+1. Create new validation for our diagram (right click on diagram element -> New Validation -> Validation)
+1. Create a new Semantic validation (right click on validation element -> New -> Semantic Validation)
+   1. Set its level to "Information"
+   1. Target class: "Attribute"
+   1. Message: "Hi! I'm an Address."
+   _Note: this describes what will happen when our model has a problem_
+   
+   1. Create an Audit under the semantic validation (right click semantic validation -> new -> audit)
+      * Set its audit expression to _"[self.name <> 'address'/]"_
+	  _Note: this describes whether our model is correct or not. If the expression returns false, the element is incorrect._
+   1. Create an Quick Fix under the semantic validation (right click semantic validation -> new -> quick fix)
+      * Create a Set operation under the Begin element
+      _Note: this is also an operation sequence to be executed when someone click on the quick fix
+        * feature: _"name"_, value: _"addresss"_
+
+   ![Extension points](mdsd/2015/sirius/validation.png)
+          
