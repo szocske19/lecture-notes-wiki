@@ -16,6 +16,7 @@
 * [EMF](2015_emf)
 * [IncQuery](2015_incquery)
 * [Xtext](2015_xtext)
+* [DESMO-J](2015_desmo-j)
 
 ### MDSD 2014
 
