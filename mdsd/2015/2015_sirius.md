@@ -14,8 +14,8 @@ Install from eclipse market place: search for Sirius -> Click _Install_ -> etc.
 Output of the laboratory
 ------------------------
 
-* Modified metamodel can be downloaded from [here](project/sirius_metamodel.zip)
-* Created design project can be downloaded from [here](project/sirius_design.zip)
+* Modified metamodel can be downloaded from [here](projects/sirius_metamodel.zip)
+* Created design project can be downloaded from [here](projects/sirius_design.zip)
 
 Setup the laboratory
 --------------------
