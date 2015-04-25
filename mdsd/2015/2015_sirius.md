@@ -26,7 +26,7 @@ Setup the laboratory
 1. Import the project from [here](projects/incquery-example.zip) to the runtime Eclipse and check the instance model.
 1. We will work in **Runtime Eclipse**
 
-Viewpoint specficiation
+Viewpoint specificiation
 --------------------------------------------------------
 
 In the **Runtime Eclipse**
@@ -41,7 +41,31 @@ In the **Runtime Eclipse**
    ![Viewpoint added](mdsd/2015/sirius/viewpoint.png)
    
 1. Under the viewpoint, create a diagram representation (right click on the viewpoint -> New Representation -> New Diagram Representation) and set its domain class to our root metamodel class: EntityRelationDiagram.
-   ![Viewpoint added](mdsd/2015/sirius/diagram.png)
+   ![Diagram added](mdsd/2015/sirius/diagram.png)
    
 1. Create a default layer under the diagram representation (right click on the representation -> New Diagram Element -> Default Layer).
-   ![Viewpoint added](mdsd/2015/sirius/layer.png)
+   ![Layer added](mdsd/2015/sirius/layer.png)
+
+Visualizing objects
+-------------------
+
+Under the default layer:
+
+1. Create a Node typed diagram element (right click on the layer -> New Diagram Element -> Node) and set its domain class to **Entity** and its semantic candidates expression to **feature:entities**.
+   _Note: the Semantic Candidate Expression describes the navigation path from the parent domain class to the selected ones. In this the parent is **EntityRelationDiagram** and we select all the object on its **entities** reference._
+   _Note: the **feature:** selects a structural feature (attribute or reference) from a domain class
+
+1. Define a style for the Node (right click on the Node -> New Style -> Square). You can change its properties if you want.
+   ![Entity + Style added](mdsd/2015/sirius/style.png)
+   
+1. Create a Node typed diagram element and set its domain class to **Attribute** and set its semantic candidate expression to _[self.entities.attributes->addAll(self.temporary->filter(Attribute))/]_
+   _Note: inside the squre brackets you can acceleo expressions - [acceleo](http://www.acceleo.org/doc/obeo/en/acceleo-2.6-reference.pdf)
+   
+1. Create styles and conditional styles for attributes based on the _isKey_ properties. The condition will be the following: _[self.isKey]_
+   _Note: A default style is alway required.
+   _Note: Create Conditional Style - right click on the Node -> New Conditional Style -> Conditional Style and then you can create a new style under the conditional style element.
+   _Note: Do not forget to fill the predicate expression in the conditional style
+   _Note: If the predicate expression is true the conditional style will be applied.
+
+   ![Entity + Style added](mdsd/2015/sirius/conditional_style.png)
+   
