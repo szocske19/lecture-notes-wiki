@@ -154,4 +154,20 @@ Creating Edges
 ----------------
 
 Under the **Section** (create one, if you don't have: right click on the layer -> New Tool -> Section)
+
+1. Create edge between Entity and Attribute
+   1. Add a _Edge Creation_ (right click on Section -> New Element Creation -> Edge Creation)
+   1. Set its edge mapping to _"entity_attribute"_
+   _Note: this is the edge element that we defined previous (Visualizing objects/3rd step)_
+   1. Set its connection start precondition to [self->selectByType(Attribute)/]
+   _Note: this acceleo expression will select all attribute typed objects
+   1. Set its connection end precondition to [self->selectByType(Entity)/]
+   _Note: these two precondition will restrict the editor to disable undesirable edges_
+   1. Add a Set operation under the Begin element
+      1. Feature name: _"attributes"_
+      _Note: related to the source object_
+      1. Value expression: _"target"_
+      _Note: this is a variable created automatically and refers to the selected target object_
+
+   ![Create Edge between Attibute and Entity](mdsd/2015/sirius/attribute_edge_create.png)
    
