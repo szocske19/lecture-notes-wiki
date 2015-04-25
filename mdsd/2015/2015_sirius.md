@@ -124,6 +124,32 @@ Under the **Section** (create one, if you don't have: right click on the layer -
 
    ![Create Entity](mdsd/2015/sirius/create_entity.png)
 
+1. Create Attributes
+   1. Add a _Node Creation_ (right click on Section -> New Element Creation -> Node Creation)
+   1. Under the green arrow with the begin label, define the operation sequence.
+      1. Create a new instance operation (right click on Begin -> New Operation -> Create Instance)
+      1. Despite the fact, that our **EntityRelationDiagram** class cannot contain Attribute typed objects in any of its features, we have to extend the metamodel.
+         1. Stop the **RuntimeEclipse**.
+         1. Open the _erdiagram.ecore_ file.
+         1. Add a new reference to **EntityRelationDiagram**
+         	* Name: temporary
+         	* Type: Attribute
+         	* Multiplicity: many (0..*)
+         1. Save the metamodel
+         1. Reload it in the genmodel.
+         1. Regenerate the model, edit and editor code from the genmodel
+         1. Start the **Runtime Eclipse** again.         
+		    ![Modified metamodel](mdsd/2015/sirius/metamodel.png)
+		 
+      1. Set its reference name to _"temporary"_
+      1. Set its type name to Attribute
+      1. Set its variable name to _"instance"_
+   1. Under the new instance operation, create a Set operation (right click on Create Instance Entity -> New Operation -> Set)
+      1. Set its feature name to _"name"_
+      1. Set its value to _"undefined"_
+
+   ![Create Attibute](mdsd/2015/sirius/create_attribute.png)
+
 Creating Edges
 ----------------
 
