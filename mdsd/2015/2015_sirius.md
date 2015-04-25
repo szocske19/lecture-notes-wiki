@@ -158,7 +158,7 @@ Under the **Section** (create one, if you don't have: right click on the layer -
 1. Create edge between Entity and Attribute
    1. Add a _Edge Creation_ (right click on Section -> New Element Creation -> Edge Creation)
    1. Set its edge mapping to _"entity_attribute"_
-   _Note: this is the edge element that we defined previous (Visualizing objects/3rd step)_
+   _Note: this is the edge element that we defined previous (Visualizing edges/1st step)_
    1. Set its connection start precondition to [self->selectByType(Attribute)/]
    _Note: this acceleo expression will select all attribute typed objects
    1. Set its connection end precondition to [self->selectByType(Entity)/]
@@ -171,3 +171,70 @@ Under the **Section** (create one, if you don't have: right click on the layer -
 
    ![Create Edge between Attibute and Entity](mdsd/2015/sirius/attribute_edge_create.png)
    
+ 1. Create edge between Entities (using Java Code)
+   1. Add a _Edge Creation_ (right click on Section -> New Element Creation -> Edge Creation)
+   1. Set its edge mapping to _"Relation"_
+   _Note: this is the edge element that we defined previous (Visualizing edges/2nd step)_
+   1. Set its connection start precondition to [self->selectByType(Entity)/]
+   1. Set its connection end precondition to [self->selectByType(Entity)/]
+   1. Add an External Java Action operation under the Begin element (right click on the Begin element -> New Extension -> External Java Action)
+      1. Set its Java Action Id to _"CreateRelation"_
+      1. Add parameters: source, target, container (right click on the External Java Action -> New -> External Java Action Parameter)
+         * Set their properties:
+            * name: _source_, value _var:source_
+            * name: _target_, value _var:target_
+            * name: _container_, value _var:container_
+            
+      ![Create Relation between Entities](mdsd/2015/sirius/relation_edge_create.png)
+      
+      1. Open the plugin.xml of the project
+      1. Switch to the extensions tab
+      1. Add a new extension: org.eclipse.sirius.externalJavaAction
+      1. Add a new java action under the extension
+      1. Set its id to _"CreateRelation"_ (same as Java Action Id!)
+      1. Create an action class: CreateRelationOperation
+   
+		 '''java
+		 public class CreateRelationOperation implements IExternalJavaAction {
+		
+			@Override
+			public void execute(Collection<? extends EObject> selections,
+					Map<String, Object> parameters) {
+				
+				Entity source = (Entity) parameters.get("source");
+				Entity target = (Entity) parameters.get("target");
+				EntityRelationDiagram diagram = (EntityRelationDiagram) parameters.get("container");
+				
+				Relation relation = ERDiagramFactory.eINSTANCE.createRelation();
+				
+				RelationEnding leftRelationEnding = ERDiagramFactory.eINSTANCE.createRelationEnding();
+				RelationEnding rightRelationEnding = ERDiagramFactory.eINSTANCE.createRelationEnding();
+				
+				relation.setLeftEnding(leftRelationEnding);
+				relation.setRightEnding(rightRelationEnding);
+				
+				leftRelationEnding.setTarget(source);
+				rightRelationEnding.setTarget(target);
+				
+				leftRelationEnding.setName("undefined");
+				rightRelationEnding.setName("undefined");
+				
+				diagram.getRelations().add(relation);
+			}
+		
+			@Override
+			public boolean canExecute(Collection<? extends EObject> selections) {
+				for (EObject eObject : selections) {
+					if(!(eObject instanceof Entity)) {				
+						return false;
+					}
+				}
+				return true;
+			}
+		
+		}
+		'''
+		_Note: the added parameters can be reached in the "parameters" map_
+		
+		![Extension points](mdsd/2015/sirius/extensionpoint.png)
+      
