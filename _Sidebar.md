@@ -18,6 +18,7 @@
 * [Xtext](2015_xtext)
 * [Sirius](2015_sirius)
 * [DESMO-J](2015_desmo-j)
+* [Xtend](2015_xtend)
 
 ### MDSD 2014
 
