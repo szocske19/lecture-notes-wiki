@@ -132,7 +132,7 @@ Learning about Xtend:
 12\. Finally add the required package declaration and imports:
 
 ```java
-val packageName = "hu.bme.mit.mdsd.codegen.enerated"
+val packageName = "hu.bme.mit.mdsd.codegen.generated"
 
 def createClassFromEntity(Entity entity)'''
 package «packageName»;
@@ -152,7 +152,7 @@ Learning about Xtend:
 * Use the ``@Accessors`` annotation on a field or class to generate getter and setter methods automatically. You can also set their visibility by passing parameters to the annotation.
 
 ```java
-@Accessors String packageName = "hu.bme.mit.mdsd.codegen.enerated"
+@Accessors String packageName = "hu.bme.mit.mdsd.codegen.generated"
 ```
 
 
