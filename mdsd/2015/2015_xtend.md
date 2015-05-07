@@ -14,12 +14,12 @@
 
 ## Entities code generator
 
-1/. Import the [ERDiagram metamodel](projects/incquery-metamodel.zip) and the [example model](mdsd/2015/xtend/example.erdiagram).
-2/. Create a new plug-in project with the name hu.bme.mit.mdsd.codegen
-3/. Add the next dependencies to the MANIFEST file: ``org.eclipse.xtend.lib``, ``hu.bme.mit.mdsd.erdiagram``
-4/. Create a new Xtend class with the name EntitiesGenerator
+1\. Import the [ERDiagram metamodel](projects/incquery-metamodel.zip) and the [example model](mdsd/2015/xtend/example.erdiagram).
+2\. Create a new plug-in project with the name hu.bme.mit.mdsd.codegen
+3\. Add the next dependencies to the MANIFEST file: ``org.eclipse.xtend.lib``, ``hu.bme.mit.mdsd.erdiagram``
+4\. Create a new Xtend class with the name EntitiesGenerator
 
-5/. Create a constructor which needs an ``EntityRelationDiagram`` as a parameter and save it to a field:
+5\. Create a constructor which needs an ``EntityRelationDiagram`` as a parameter and save it to a field:
 
 ```java
 EntityRelationDiagram model
