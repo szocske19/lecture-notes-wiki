@@ -84,12 +84,12 @@ Under the default layer:
    
    ![Relation Based Edge added](mdsd/2015/sirius/relation_based.png)
    
- 1. Display connections between entities based on the relation objects
-   1. Create a Relation Based Edge typed diagram element (right click on the layer -> New Diagram Element -> Relation Based Edge).
+1. Display connections between entities based on the relation objects
+   1. Create an Element Based Edge typed diagram element (right click on the layer -> New Diagram Element -> Element Based Edge).
    1. Set its domain class to Relation
    1. Set its source mapping to Entity (defined previous)
    1. Set its source finder expression to _"[self.leftEnding.target/]"_
-   1. Set its target mapping to Attribute (defined also previous)
+   1. Set its target mapping to Entity (defined also previous)
    1. Set its source finder expression to _"[self.rightEnding.target/]"_
    1. We left the semantic candidates expression empty, but we should fill it with "feature:relations"
       _Note: for the proper functioning, this is not required but recommended_
