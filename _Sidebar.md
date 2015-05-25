@@ -1,7 +1,14 @@
 ## Lectures
 
-* [Lecture 1: Basics](lecture-01) 
-* [Lecture 2: Principles – Languages and Models](lecture-02)
+* [Lecture 1: Basics](Lecture-01) 
+* [Lecture 2: Principles – Languages and Models](Lecture-02)
+* [Lecture 3](Lecture-03)
+* [Lecture 4](Lecture-04)
+* [Lecture 5](Lecture-05)
+* [Lecture 6](Lecture-06)
+* [Lecture 7](Lecture-07)
+* [Lecture 8](Lecture-08)
+* [Lecture 13](Lecture-13)
 
 ## Technology
 
