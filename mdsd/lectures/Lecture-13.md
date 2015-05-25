@@ -1,5 +1,4 @@
-Lecture 13.
-#Model Management (2015. 05. 06. )
+# Model Management (2015. 05. 06.)
  
 Motivation: ![motivation](https://lh3.googleusercontent.com/-EOaTdYWO9K8/VVpPZhgOGeI/AAAAAAAAAQ0/jyXfCpXHp2Y/s0/motivation.png "motivation.png")
  
