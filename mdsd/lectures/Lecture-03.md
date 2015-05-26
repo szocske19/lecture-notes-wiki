@@ -6,72 +6,93 @@ Lecture 3.
  - calculated from others
  - used as helpers, they don't need to be persisted
  - automatically updated/calculated
- - derived attributes (e.g.. : age/birth year)
- - derived references (e.g.. :dogs = ... pets ->Dogs)
- - derived objects (e.g.. : Gangs)
+ - common derived features:
+	 - derived attributes - e.g.: age/birth year (you don't need to have two different attributes for age and birth date as the former can be derived from the latter)
+	 - derived references - e.g.:dogs = pets ->Dog (an owner's dogs can be derived from their pets - by choosing the ones whose type are Dog)
+	 - derived objects - e.g.: Gangs (if you know who knows who, you can derive so called "gangs" - a group of people where everyone knows everyone)
 
  
 ##Enumeration 
-fixed set of symbolic values.  
-Use them instead of hard-coded strings. (so only a fixed set of things are used)  
+Fixed set of symbolic values.  
+Use them instead of hard-coded strings. (So only a fixed set of things are used.)  
 
 ##Build-in classes  
-user defined classes (e.g..: ints)  
+- NOT user defined classes. 
+- (e.g..: ints)  
 
 ##When to avoid Generalization?  
 
- 1. then the object lifecycle requires to change the type of the object: maybe an attribute could express the same.
- 2. bad smell - when  you suspect that something is incorrect - you
-    don't know for sure - but it looks suspicious.
- 3. anti-patterns:  (e.g.: attribute name should represent the multiplicity, references should be verbs,  don't extract explicit lists from reference multiplicity ) (????)
+ - When the object lifecycle requires to change the type of the object -> maybe an attribute could express the same.
+ - Bad smell - when  you suspect that something is incorrect - you don't know for sure, but it looks suspicious (antipatterns).
+ - Advices:
+	- attribute name should represent the multiplicity
+	- references should be verbs
+	- don't extract explicit lists from reference multiplicity (that is, in the domain model it shouldn't be given explicitly what kind of collection should be used - avoid "xxxList" as attribute type)
 
 #EMF (Eclipse Modelling Framework)  
-The goal of domain specific modelling is to present (offer) a dedicated notation for every aspect of the designing, see slide example.  
+The goal of domain specific modelling is to present (offer) a dedicated notation for every "stakeholder" (for every aspect of the designing), see slide example.  
 EMF is a modelling core, that is the base of several technologies.  
 
-## Domain SP.M.L. 
-checklist creating a …....(UML?) 
--Abstract sytax 
--semantics -static/behavioral 
--concrete syntax -visual presentation 
-(Example image / UML modell) 
+## Domain Specific Modeling Language 
+checklist creating a dsml:
+
+ - Abstract sytax 
+ - semantics -static/behavioral 
+ - concrete syntax -visual presentation 
+
+[Example image / UML model]
 ##Concrete Syntax
 
- (ide begépeltem táblázatban az elemeket, azt képként elküldtem az e-mailben) 
+
+|  +\ - |graphical notation | textual notation |
+|---:|:---------------------- |:--------------------|
+|pros | the human mind could process in a parallel way | after a given size reading is easier|
+||enforced syntactically correct model |writing is easier (no drag-'n-drop) |
+|cons | has to be arranged |sequential|
+
+ 
+The main difference between graphical and textual notation: graphical is easier to read, but textual is easier to write.
+
 ###Multiplicity of Notations 
-abstract -> may textual and visual not 
-1 a -> may concrete forms in 1 syntax 
-e.g.: code with tabs/spaces (syntactic sugars)  
+1 abstract syntax -> many textual and visual notations
+1 abstract model -> many concrete forms in 1 syntax  (e.g.: code with tabs/spaces - syntactic sugars)
+1 semantic interpretation -> many abstract models   
+
 #EMF 
-meta-metamodel -Ecore model 
-metamodel -Ecore model (Epackage)  
-inst. model - … 
+meta-metamodel - Ecore
+metamodel - Ecore model (Epackage)  
+instance model - Application Data (Resource)
+
 ## Semantics 
 Meaning of concepts in a language.  
-static - what does the model mean?  
-dynamic - how does the model change/evolve 
+
+ - static - what does the model mean?  
+ - dynamic - how does the model change/evolve 
 ###Static Semantics 
-interpolation of metamodel elements  
-mathematical statements …. the interpretation 
-meaning 
+ - interpolation of metamodel elements  
+ - mathematical statements …. the interpretation 
+ - meaning 
  
-We would like to have every type as instantiate … restrictions.  
+We would like to have every type as instance without restrictions.  
 MM, WCF |= M  (specification |= implementation)  
 If you could instantiate the metamodel and it refills the well-formed constraint, the metamodel is consistent.  
 It is enough to show one consistent example to prove that the specification is consistent.  
 ###Dynamic Semantics  
-Operational e.g.: how the finite automates may change state at runtime 
-interpreted 
-how the object/model evolves through time 
-Denotational (translational) : translating concepts in own language to another one 
-e.g. : state machines as a Petri-net 
+- Operational (e.g.: how the finite automates may change state at runtime)
+	- interpreted 
+	- how the object/model evolves through time 
+ - Denotational (translational) : translating concepts in own language to another one 
+(e.g. : state machines as a Petri-net)
+ 
 EMF provides:  
--model manipulation APF : automatic getters, setters + logical( e.g.: collection methods) 
--editing support (notification, undo … ) :  
-observer pattern: when an event occurs, it may create a chain of reactions 
-a stack of operation are recorded, so undo-redo could be executed 
-serialization: generic exporting, solution for, every metamodel 
-reflective API : you could change the program programmatically  
+
+ - model manipulation API : automatic getters, setters + logical( e.g.: collection methods) 
+ - editing support (notification, undo … ) 
+	- observer pattern: when an event occurs, it may create a chain of reactions 
+	- a stack of operation are recorded, so undo-redo could be executed 
+	- serialization: generic exporting, solution for, every metamodel 
+	- reflective API : you could change the program programmatically  
+ 
 ## Containment hierarchy 
 along refernces  
 only the contained objects are serialized 
@@ -114,9 +135,11 @@ Sources:
 -----
 
 ## EMF Waterfall 
-(kép a slide-ról) 
-generator model - mapping the MM to the implementation parameters for the code generator  
-model: manipulating the model 
-edit: displaying, commands, undo/redo  
-editor: treeview editor 
-all of them are generated.  
+[kép a slide-ról]
+generator model - mapping the MM to the implementation -> parameters for the code generator  
+
+ - model: manipulating the model 
+ - edit: displaying, commands, undo/redo  
+ - editor: treeview editor 
+
+All of them are generated.   
