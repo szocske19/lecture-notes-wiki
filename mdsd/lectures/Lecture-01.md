@@ -1,13 +1,13 @@
 # Lecture 1
 
-varro[]mit.bme.hu
+Lecturer: Prof. Dániel Varró, DSc, Habil. PhD
 
-##Tárgy követelmények
+## Requirements to finish the subject
 
- - 3HF (3 fős csapatokban),
- - szóbeli vizsga (hf. 50%-ban beleszámít),
- - csoportokról email: febr. 12-ig
- - Felhasznált platformok: Git+Basecamp
+ - One homework during the semester, in 3 milestones, in teams with 2-3 members.
+ - Grade: 50% oral exam at end of the semester,  50% homework
+ - Form teams and send email until the end of the second week
+ - Used platforms: Git+Basecamp
 
 Mindig vasárnap este a feltöltési határidő, de a beadás más időpontban van, ezen mindenkinek meg kell jelennie. Munkanaplót kell majd vezetni, és a házi feladat során oda kell figyelni az egyenlő terhelésre.
 
@@ -15,7 +15,7 @@ Mindig vasárnap este a feltöltési határidő, de a beadás más időpontban v
 
 ##3 milestones
 
- 1. week 6: module, constraints
+ 1. week 6: domain model, instance model, well-formedness constraints
  2. week 10: graphical and textual modelling lang.
  3. week 14: code generator for simulation
 
@@ -25,16 +25,15 @@ Mindig vasárnap este a feltöltési határidő, de a beadás más időpontban v
 
 - **abstraction**
 	- separating the problem into smaller more abstracted problem
-	- may finish sooner with this approach
+	- may finish sooner with this approach if the problem is big
 	- \+ portability
-
 - **automated code generation**
-	*button --> nice, fancy code instead of maintaining the software, you maintain the model*
-	(You don't need unit testing, but have to test in other ways.)
+	- *button --> nice, fancy code instead of maintaining the software, you maintain the model*
+	- (You don't need unit testing, but have to test in other ways.)
 - **quality** is a key driver
-	*example: Airbus a380s have been developed with model-driven technologies.*
-	certification process might be required
-	software tool qualification
+	- *example: Airbus a380s have been developed with model-driven technologies.*
+	- certification process might be required
+	- software tool qualification
 	- simultaneously increase productivity and quality 
 
 -----
