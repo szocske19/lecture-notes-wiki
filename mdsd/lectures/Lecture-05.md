@@ -1,4 +1,4 @@
-# Behavioural Modeling Languages
+# Behavioral Modeling Languages
 categorized in different ways
 
  - properties

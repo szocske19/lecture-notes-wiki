@@ -1,5 +1,3 @@
-Lecture 3. 
-
 #Advanced Concepts and Best Practices  
 ##Derived Features  
 
@@ -11,13 +9,13 @@ Lecture 3.
 	 - derived references - e.g.:dogs = pets ->Dog (an owner's dogs can be derived from their pets - by choosing the ones whose type are Dog)
 	 - derived objects - e.g.: Gangs (if you know who knows who, you can derive so called "gangs" - a group of people where everyone knows everyone)
 
- 
-##Enumeration 
+
+##Enumeration
 Fixed set of symbolic values.  
 Use them instead of hard-coded strings. (So only a fixed set of things are used.)  
 
 ##Build-in classes  
-- NOT user defined classes. 
+- NOT user defined classes.
 - (e.g..: ints)  
 
 ##When to avoid Generalization?  
@@ -33,12 +31,12 @@ Use them instead of hard-coded strings. (So only a fixed set of things are used.
 The goal of domain specific modelling is to present (offer) a dedicated notation for every "stakeholder" (for every aspect of the designing), see slide example.  
 EMF is a modelling core, that is the base of several technologies.  
 
-## Domain Specific Modeling Language 
+## Domain Specific Modeling Language
 checklist creating a dsml:
 
- - Abstract sytax 
- - semantics -static/behavioral 
- - concrete syntax -visual presentation 
+ - Abstract sytax
+ - semantics -static/behavioral
+ - concrete syntax -visual presentation
 
 [Example image / UML model]
 ##Concrete Syntax
@@ -50,58 +48,58 @@ checklist creating a dsml:
 ||enforced syntactically correct model |writing is easier (no drag-'n-drop) |
 |cons | has to be arranged |sequential|
 
- 
+
 The main difference between graphical and textual notation: graphical is easier to read, but textual is easier to write.
 
-###Multiplicity of Notations 
+###Multiplicity of Notations
 1 abstract syntax -> many textual and visual notations
 1 abstract model -> many concrete forms in 1 syntax  (e.g.: code with tabs/spaces - syntactic sugars)
-1 semantic interpretation -> many abstract models   
+1 semantic interpretation -> many abstract models
 
-#EMF 
+#EMF
 meta-metamodel - Ecore
 metamodel - Ecore model (Epackage)  
 instance model - Application Data (Resource)
 
-## Semantics 
+## Semantics
 Meaning of concepts in a language.  
 
  - static - what does the model mean?  
- - dynamic - how does the model change/evolve 
-###Static Semantics 
+ - dynamic - how does the model change/evolve
+###Static Semantics
  - interpolation of metamodel elements  
- - mathematical statements …. the interpretation 
- - meaning 
- 
+ - mathematical statements …. the interpretation
+ - meaning
+
 We would like to have every type as instance without restrictions.  
 MM, WCF |= M  (specification |= implementation)  
 If you could instantiate the metamodel and it refills the well-formed constraint, the metamodel is consistent.  
 It is enough to show one consistent example to prove that the specification is consistent.  
 ###Dynamic Semantics  
 - Operational (e.g.: how the finite automates may change state at runtime)
-	- interpreted 
-	- how the object/model evolves through time 
- - Denotational (translational) : translating concepts in own language to another one 
+	- interpreted
+	- how the object/model evolves through time
+ - Denotational (translational) : translating concepts in own language to another one
 (e.g. : state machines as a Petri-net)
- 
+
 EMF provides:  
 
- - model manipulation API : automatic getters, setters + logical( e.g.: collection methods) 
- - editing support (notification, undo … ) 
-	- observer pattern: when an event occurs, it may create a chain of reactions 
-	- a stack of operation are recorded, so undo-redo could be executed 
-	- serialization: generic exporting, solution for, every metamodel 
+ - model manipulation API : automatic getters, setters + logical( e.g.: collection methods)
+ - editing support (notification, undo … )
+	- observer pattern: when an event occurs, it may create a chain of reactions
+	- a stack of operation are recorded, so undo-redo could be executed
+	- serialization: generic exporting, solution for, every metamodel
 	- reflective API : you could change the program programmatically  
- 
-## Containment hierarchy 
+
+## Containment hierarchy
 along refernces  
-only the contained objects are serialized 
-##Ecore Metamodel 
+only the contained objects are serialized
+##Ecore Metamodel
 
 -----
 
 Eclipse is a free, open-source software development environment and a platform
-with extensible plug-in system for customization. Eclipse comes with its own modeling tools, with the core framework called Eclipse Modeling Framework (EMF). 
+with extensible plug-in system for customization. Eclipse comes with its own modeling tools, with the core framework called Eclipse Modeling Framework (EMF).
 
 The EMF project is a modeling framework and code generation facility for building tools and other applications based on a structured data model. From a model specification described in XMI, EMF provides tools and runtime support to produce a set of Java classes for the model, along with a set of adapter classes that enable viewing and command-based editing of the model, and a basic editor. EMF (core) is a common standard for data models, many technologies and frameworks are based on. [The Eclipse Project. Eclipse Modeling Framework.](http://www.eclipse.org/emf)
 
@@ -129,17 +127,17 @@ An Ecore model has a root object, representing the whole model. The children of 
 More detailed illustrations of the metamodel can be found in the [EMF Documentation](http://download.eclipse.org/modeling/emf/emf/javadoc/2.9.0/org/eclipse/emf/ecore/package-summary.html#details).
 
 Sources:
-* Text from Dániel Stein. Incremental Static Analysis of Large Source Code Repositories. Bachelor's thesis,Budapest University of Technology and Economics, Budapest, 12/2014 2014. 
+* Text from Dániel Stein. Incremental Static Analysis of Large Source Code Repositories. Bachelor's thesis,Budapest University of Technology and Economics, Budapest, 12/2014 2014.
 * [scm] Gábor Szárnyas. Superscalable modeling. Master's thesis, Budapest University of Technology and Economics, Budapest, 12/2013 2013.
 
 -----
 
-## EMF Waterfall 
+## EMF Waterfall
 [kép a slide-ról]
 generator model - mapping the MM to the implementation -> parameters for the code generator  
 
- - model: manipulating the model 
+ - model: manipulating the model
  - edit: displaying, commands, undo/redo  
- - editor: treeview editor 
+ - editor: treeview editor
 
-All of them are generated.   
+All of them are generated.

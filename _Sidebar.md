@@ -1,14 +1,15 @@
 ## Lectures
 
-* [Lecture 1: Basics](Lecture-01) 
+* [Lecture 1: Basics](Lecture-01)
 * [Lecture 2: Principles – Languages and Models](Lecture-02)
-* [Lecture 3](Lecture-03)
-* [Lecture 4](Lecture-04)
-* [Lecture 5](Lecture-05)
-* [Lecture 6](Lecture-06)
-* [Lecture 7](Lecture-07)
-* [Lecture 8](Lecture-08)
-* [Lecture 13](Lecture-13)
+* [Lecture 3: Advanced Concepts and Best Practices  ](Lecture-03)
+* [Lecture 4: EMF IncQuery ](Lecture-04)
+* [Lecture 5: Behavioral Modeling Languages](Lecture-05)
+* [Lecture 6: Statecharts](Lecture-06)
+* [Lecture 7: Graphical Concrete Syntax Design for DSLs](Lecture-07)
+* [Lecture 8: Code Generation](Lecture-08)
+* [Lecture 9, 10: Foundations of Model Transformation](Lecture-09)
+* [Lecture 13: Model Management](Lecture-13)
 
 ## Technology
 
@@ -18,8 +19,8 @@
 
 ### MDSD 2015
 
-* [Eclipse basics](2015_eclipse_basics) 
-* [EGit](2015_git) 
+* [Eclipse basics](2015_eclipse_basics)
+* [EGit](2015_git)
 * [EMF](2015_emf)
 * [IncQuery](2015_incquery)
 * [Xtext](2015_xtext)
