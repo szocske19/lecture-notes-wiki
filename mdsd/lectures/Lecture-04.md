@@ -72,7 +72,9 @@ Motivation for incremental graph pattern match
  1. More space less time
  2. cache all matches  
  3. instantly retrieves match (if valid)  
+
  ---
+
 2 types:  
  
  1. _Batch query_: designer select on demand, 1 or all
