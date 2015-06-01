@@ -75,6 +75,7 @@
 ##Code formatting
 _Where to put it?_ 
 Model/template/AST _OR_ it should be a separate process by a third-party solution
+
 ##Technologies
  - mix of control input and direct target output
 	 - JET
