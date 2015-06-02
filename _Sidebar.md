@@ -8,7 +8,7 @@
 * [Lecture 6: Statecharts](Lecture-06)
 * [Lecture 7: Graphical Concrete Syntax Design for DSLs](Lecture-07)
 * [Lecture 8: Code Generation](Lecture-08)
-* [Lecture 9, 10: Foundations of Model Transformation](Lecture-09)
+* [Lecture 9, 10: Foundations of Model Transformation](Lecture-09-10)
 * [Lecture 13: Model Management](Lecture-13)
 
 ## Technology
