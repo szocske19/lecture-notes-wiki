@@ -75,9 +75,9 @@ Pattern Language
     //-------------------------------
     ```
 
-Every pattern goes to one of those categories. The ```entityWithName``` goes to Support. 
+    Every pattern goes to one of those categories. The ```entityWithName``` goes to Support. 
 
-As you can see, every pattern have a unique name and several parameters. Inside the body of the patterns, there different constraints. Our first example describes a feature constraint. It states that ```entity``` variable is of eClass ```Entity``` and its ```name``` attribute is the value of ```name``` variable.
+    As you can see, every pattern have a unique name and several parameters. Inside the body of the patterns, there different constraints. Our first example describes a feature constraint. It states that ```entity``` variable is of eClass ```Entity``` and its ```name``` attribute is the value of ```name``` variable.
 
 1. Create a query to the **Validate** that checks if the name of a ``NamedElement`` is only an empty string:
 
