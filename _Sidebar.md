@@ -11,11 +11,7 @@
 * [Lecture 9, 10: Foundations of Model Transformation](Lecture-09-10)
 * [Lecture 13: Model Management](Lecture-13)
 
-## Technology
-
-### System Integration 2015
-
-* [Akka](Akka)
+## Technologies
 
 ### MDSD 2015
 
