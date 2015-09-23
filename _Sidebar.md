@@ -18,7 +18,7 @@
 * [Eclipse basics](2015_eclipse_basics)
 * [EGit](2015_git)
 * [EMF](2015_emf)
-* [IncQuery](2015_incquery)
+* [EMF-IncQuery](2015_incquery)
 * [Xtext](2015_xtext)
 * [Sirius](2015_sirius)
 * [DESMO-J](2015_desmo-j)
@@ -28,7 +28,7 @@
 
 * [EMF](2014_emf)
 * [Code generation](2014_code_generation)
-* [IncQuery](2014_incquery)
+* [EMF-IncQuery](2014_incquery)
 * [Yakindu](2014_yakindu)
 
 ### System Integration 2014
