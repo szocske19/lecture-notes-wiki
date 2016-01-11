@@ -3,7 +3,7 @@
 * [Lecture 1: Basics](Lecture-01)
 * [Lecture 2: Principles – Languages and Models](Lecture-02)
 * [Lecture 3: Advanced Concepts and Best Practices  ](Lecture-03)
-* [Lecture 4: EMF IncQuery ](Lecture-04)
+* [Lecture 4: EMF-IncQuery ](Lecture-04)
 * [Lecture 5: Behavioral Modeling Languages](Lecture-05)
 * [Lecture 6: Statecharts](Lecture-06)
 * [Lecture 7: Graphical Concrete Syntax Design for DSLs](Lecture-07)
