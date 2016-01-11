@@ -1,4 +1,4 @@
-#EMF - IncQuery 
+#EMF-IncQuery 
 Incremental Evaluation of Model queries 
 
  - Motivation: early validation of design rules 
