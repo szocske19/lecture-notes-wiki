@@ -1,7 +1,7 @@
 EMF-IncQuery (Pattern Language)
 ===============================
 
-![The logo of EMF-IncQuery](mdsd/2015/incquery/logo.png)
+![The logo of EMF-IncQuery](mdsd/2016/incquery/logo.png)
 
 homesite: https://www.eclipse.org/incquery/
 
@@ -16,12 +16,12 @@ http://download.eclipse.org/incquery/updates/release
 
 Switch back to your Eclipse instance and select the _Help/Install New Software..._
 
-![Select _Help/Install New Software..._](mdsd/2015/incquery/install.png)
+![Select _Help/Install New Software..._](mdsd/2016/incquery/install.png)
 
 Paste the copied URL to the _Work with_ field, than press _Enter_. When the view is updated, select the _EMF-IncQuery SDK_. Tick the _Contact all update sites during install..._ field. Press _Next_, then _Next_ and finally _Finish_.
 After the install process, you should restart Eclipse.
 
-![Install window](mdsd/2015/incquery/install2.png)
+![Install window](mdsd/2016/incquery/install2.png)
 
 For a faster installation, advanced users can untick out the _Contact all update sites during install..._ field, but they have to install _Xtend_ and _Xtext_ technologies manually.
 
@@ -40,7 +40,7 @@ Setup the Laboratory
 	import "hu.bme.mit.mdsd.erdiagram"
 
 	pattern entityWithName(entity, name) {
-		Entity.Name(entity,name);
+		Entity.name(entity,name);
 	}
 	```
 
@@ -54,7 +54,7 @@ Query Explorer
 1.  Open our example instance model (_example.erdiagram_)
 1.  then press the green arrow button on the view.
 
-![Query Explorer](mdsd/2015/incquery/query_explorer.png)
+![Query Explorer](mdsd/2016/incquery/query_explorer.png)
 
 Pattern Language
 ----------------
@@ -92,8 +92,8 @@ Pattern Language
 
     ```java
 	pattern sameNamedEntities(entity1, entity2, commonName) {
-		Entity.Name(entity1, commonName);
-		Entity.Name(entity2, commonName);
+		Entity.name(entity1, commonName);
+		Entity.name(entity2, commonName);
 		entity1!=entity2;
 	}
 	```
@@ -104,7 +104,7 @@ Pattern Language
 
     ```java
 	pattern entityStartsWithSmallCase(entity) {
-		Entity.Name(entity,name);
+		Entity.name(entity,name);
 		check (
 			!name.matches("^[A-Z].+")
 		);
@@ -133,10 +133,10 @@ Pattern Language
 	pattern badEntity(entity, name) {
 		find sameNamedEntities(entity, _other, name);
 	} or {
-		Entity.Name(entity, name);
+		Entity.name(entity, name);
 		find emptyNamedElement(entity);
 	} or {
-		Entity.Name(entity, name);
+		Entity.name(entity, name);
 		find entityStartsWithSmallCase(entity);
 	}
 	```
@@ -147,7 +147,7 @@ Pattern Language
 
     ```java
 	pattern goodEntity(entity, name) {
-		Entity.Name(entity, name);
+		Entity.name(entity, name);
 		neg find badEntity(entity,_);
 	}
 	```
@@ -183,7 +183,7 @@ Annotation parameters:
  
 To find a specific editor id, we can use the _Plug-in Selection Spy_ tool with a _SHIFT + ALT + F1_ shortcut.
 
-![Plug-in Selection Spy](mdsd/2015/incquery/spy.png)
+![Plug-in Selection Spy](mdsd/2016/incquery/spy.png)
 
 For example:
 
@@ -193,8 +193,8 @@ For example:
 				message = "The name is not unique",
 				location = entity1)
 	pattern sameNamedEntities(entity1, entity2, commonName) {
-		Entity.Name(entity1, commonName);
-		Entity.Name(entity2, commonName);
+		Entity.name(entity1, commonName);
+		Entity.name(entity2, commonName);
 		entity1!=entity2;
 	}
 	```
@@ -223,7 +223,7 @@ For example:
 
 Extend our ER Diagram metamodel with following _other_ reference of the ```RelationEnding``` eClass and set the required properties.
 
-![Derived Feature](mdsd/2015/incquery/new_reference.png)
+![Derived Feature](mdsd/2016/incquery/new_reference.png)
 
 	```java
 	@QueryBasedFeature
@@ -277,8 +277,8 @@ Advanced Queries
 
     ```java
 	pattern order(a, b) {
-		Entity.Name(a, name1);
-		Entity.Name(b, name2);
+		Entity.name(a, name1);
+		Entity.name(b, name2);
 		check(
 			name1.compareTo(name2) < 0
 		);
