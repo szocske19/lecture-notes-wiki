@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<erdiagram:EntityRelationDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:erdiagram="erdiagram" name="">
+  <entities name="Room" referredBy="//@relations.0/@leftEnding //@relations.6/@leftEnding">
+    <attributes name="name" type="//@attributetypes.2"/>
+  </entities>
+  <entities name="DanceHall" isA="//@entities.5 //@entities.2"/>
+  <entities name="Building" isA="//@entities.7" referredBy="//@relations.0/@rightEnding"/>
+  <entities name="House" isA="//@entities.2 //@entities.8"/>
+  <entities name="Pub"/>
+  <entities name="Recreation">
+    <attributes name="name" type="//@attributetypes.2"/>
+  </entities>
+  <entities name="Koncert" isA="//@entities.7 //@entities.5">
+    <attributes name="name" type="//@attributetypes.2"/>
+    <attributes name="time" isKey="true" type="//@attributetypes.3"/>
+  </entities>
+  <entities name="Place">
+    <attributes name="address" type="//@attributetypes.2"/>
+  </entities>
+  <entities name="Habitation" isA="//@entities.7" referredBy="//@relations.1/@rightEnding"/>
+  <entities name="ScheduleItem" referredBy="//@relations.5/@rightEnding //@relations.6/@rightEnding">
+    <attributes name="when" type="//@attributetypes.3"/>
+  </entities>
+  <entities name="Dorm">
+    <attributes name="name" type="//@attributetypes.2"/>
+  </entities>
+  <entities name="Student" isA="//@entities.13" referredBy="//@relations.1/@leftEnding //@relations.4/@leftEnding"/>
+  <entities name="Course" referredBy="//@relations.3/@rightEnding //@relations.4/@rightEnding //@relations.5/@leftEnding">
+    <attributes name="courseName" isKey="true" type="//@attributetypes.2"/>
+  </entities>
+  <entities name="Person">
+    <attributes name="name" type="//@attributetypes.2"/>
+    <attributes name="id" isKey="true" type="//@attributetypes.4"/>
+  </entities>
+  <entities name="Lecture" referredBy="//@relations.2/@rightEnding //@relations.3/@leftEnding">
+    <attributes name="code" type="//@attributetypes.2"/>
+  </entities>
+  <entities name="Teacher" isA="//@entities.13" referredBy="//@relations.2/@leftEnding"/>
+  <relations>
+    <leftEnding name="rooms" nullable="true" multiplicity="Many" target="//@entities.0"/>
+    <rightEnding name="building" target="//@entities.2"/>
+  </relations>
+  <relations>
+    <leftEnding name="resident" nullable="true" multiplicity="Many" target="//@entities.11"/>
+    <rightEnding name="residence" target="//@entities.8"/>
+  </relations>
+  <relations>
+    <leftEnding name="teacher" multiplicity="Many" target="//@entities.15"/>
+    <rightEnding name="teaches" nullable="true" multiplicity="Many" target="//@entities.14"/>
+  </relations>
+  <relations>
+    <leftEnding name="lecture" target="//@entities.14"/>
+    <rightEnding name="courses" multiplicity="Many" target="//@entities.12"/>
+  </relations>
+  <relations>
+    <leftEnding name="students" nullable="true" multiplicity="Many" target="//@entities.11"/>
+    <rightEnding name="study" nullable="true" multiplicity="Many" target="//@entities.12"/>
+  </relations>
+  <relations>
+    <leftEnding name="scheduleOf" target="//@entities.12"/>
+    <rightEnding name="scheduled" nullable="true" multiplicity="Many" target="//@entities.9"/>
+  </relations>
+  <relations>
+    <leftEnding name="room" target="//@entities.0"/>
+    <rightEnding name="reserved" nullable="true" multiplicity="Many" target="//@entities.9"/>
+  </relations>
+  <attributetypes name="Neptun"/>
+  <attributetypes name="Integer"/>
+  <attributetypes name="String"/>
+  <attributetypes name="java.util.Date"/>
+  <attributetypes name="int"/>
+</erdiagram:EntityRelationDiagram>
