@@ -6,7 +6,7 @@ Introduction
 
 The following chapter serves as an introduction to the Eclipse Development Environment. Eclipse is used in  both the Model Driven Software Development and Service Integration courses.
 
-![](mdsd/2015/eclipse_basics/eclipse_splashscreen.png)
+![](mdsd/2016/eclipse_basics/eclipse_splashscreen.png)
 
 Eclipse is a free, open-source software development environment and a platform for plug-in development. Members of the Eclipse Foundation include Cisco, IBM, Intel, Google, SAP, Siemens, etc. A list of Eclipse Foundation Members is available here: <http://www.eclipse.org/membership/showAllMembers.php>.
 
@@ -46,7 +46,7 @@ Further reading: <http://help.eclipse.org/kepler/index.jsp?topic=/org.eclipse.pl
 
 ### Package Explorer and Project Explorer ###
 
-![The Package Explorer and the Project Explorer in the same workspace](mdsd/2015/eclipse_basics/package_vs_project_explorer.png)
+![The Package Explorer and the Project Explorer in the same workspace](mdsd/2016/eclipse_basics/package_vs_project_explorer.png)
 
 You may want to show the ``.project`` file in the **Package Explorer**. In order to do so, click the downward pointing triangle in the upper right corner, pick **Filters...** and untick the **.* resources** checkbox.
 
@@ -78,7 +78,7 @@ User interface
 
 Upon launching, after you choose the workspace location, the workbench window is shown. A workbench window offers _perspectives_. A perspective contains editors, such as the Java Editor and views, such as the Project Explorer.
 
-![An empty workbench without any opened views](mdsd/2015/eclipse_basics/workbench.png)
+![An empty workbench without any opened views](mdsd/2016/eclipse_basics/workbench.png)
 
 ### Editors ###
 
@@ -96,7 +96,7 @@ The **Problems view** shows the warnings and errors in the workspace's projects.
 
 The **Error Log** shows the errors occured in Eclipse. It shows the error message, the date and the plug-in that produced the error.
 
-![Show error and warning on selection](mdsd/2015/eclipse_basics/problems.png)
+![Show error and warning on selection](mdsd/2016/eclipse_basics/problems.png)
 
 Further reading:
 
@@ -116,13 +116,13 @@ Java applications typically use AWT (Abstract Window Toolkit) or the Swing toolk
 
 SWT (Standard Widget Toolkit) is a GUI framework that was developed for the Eclipse project by IBM. It uses native components and offers good performance. Today, SWT is maintained by the Eclipse Foundation. Since the SWT implementation is different for each platform, a platform-specific SWT library (JAR file) must be distributed with each application. A number of SWT widgets are available at <http://eclipse.org/swt/widgets/>.
 
-![SWT widgets on different platforms](mdsd/2015/eclipse_basics/swt.png)
+![SWT widgets on different platforms](mdsd/2016/eclipse_basics/swt.png)
 
 ### Search ###
 
 * Search in files: press ``Ctrl``+``H`` to display the **Search** window and choose the **File Search** tab. If the window has many tabs, the **File Search** tab may be hidden. The solution is to resize the **Search** window or use the arrows in the upper right corner to show the rest of the tabs.
 
-![The **File Search** tab may does not appear at first: resize the window or use the arrows](mdsd/2015/eclipse_basics/search.png)
+![The **File Search** tab may does not appear at first: resize the window or use the arrows](mdsd/2016/eclipse_basics/search.png)
 
 Configuration
 -------------
@@ -211,7 +211,7 @@ You can access the content assist by pressing ``Ctrl``+``Space``. Press ``Enter`
 
 Pay attention to the package names. For example, the ``List`` class is available both in ``java.awt`` and ``java.util``.
 
-![Some classes are available in more packages](mdsd/2015/eclipse_basics/content_assist.png)
+![Some classes are available in more packages](mdsd/2016/eclipse_basics/content_assist.png)
 
 You can use the content assist by only typing the abbreviation of the desired item. For example, if you have ``java.io.InputStreamReader`` imported, you can type ``ISR`` and the content assist will propose ``InputStreamReader``.
 
