@@ -59,7 +59,7 @@ Query Explorer
 Pattern Language
 ----------------
 
-1. Structure your source code to 4 blocks like this:
+1. Structure your source code to 3 blocks like this:
 
     ```java
     //-------------------------------
