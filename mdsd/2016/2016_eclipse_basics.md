@@ -18,6 +18,14 @@ The Eclipse SDK includes JDT (Java Development Tools) which features a full-blow
 
 Project homepage: <http://www.eclipse.org/jdt/>
 
+Useful links for using Eclipse effectively.
+<http://www.vogella.com/tutorials/Eclipse/article.html>
+<http://www.vogella.com/tutorials/EclipseShortcuts/article.html>
+<http://www.vogella.com/tutorials/EclipseDebugging/article.html>
+<http://help.eclipse.org/mars/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Ftips%2Fplatform_tips.html>
+<http://help.eclipse.org/mars/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Ftips%2Fplatform_tips.html>
+
+
 Project management
 ------------------
 
