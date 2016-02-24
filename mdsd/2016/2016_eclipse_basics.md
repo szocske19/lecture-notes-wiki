@@ -4,7 +4,7 @@ An overview of the Eclipse development environment
 Introduction
 ------------
 
-The following chapter serves as an introduction to the Eclipse Development Environment. Eclipse is used in  both the Model Driven Software Development and Service Integration courses.
+The following chapter serves as an introduction to the Eclipse Development Environment.
 
 ![](mdsd/2016/eclipse_basics/eclipse_splashscreen.png)
 
