@@ -17,7 +17,7 @@
 
 * [Eclipse basics](2016_eclipse_basics)
 * [EGit](2016_git)
-* ([EMF](2016_emf))
+* [EMF](2016_emf)
 * ([EMF-IncQuery](2016_incquery))
 * ([Xtext](2016_xtext))
 * ([Sirius](2016_sirius))
