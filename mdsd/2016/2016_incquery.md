@@ -1,6 +1,10 @@
 EMF-IncQuery (Pattern Language)
 ===============================
 
+The latest and last release of EMF-IncQuery is v1.1. Since March 1st, EMF-IncQuery is merged into the VIATRA project and it's new name is VIATRA Queries. You can read this [blog post](http://viatra.net/news/2016/2/say-goodbye-to-emf-incquery-say-hello-to-viatra-query) for more details.
+
+In this course, we will use EMF-IncQuery v1.1 but you are free to use VIATRA Queries v1.2 in your homework by using the integration or CI updatesites. Milestone build will available at the end of April according to the plans.
+
 ![The logo of EMF-IncQuery](mdsd/2016/incquery/logo.png)
 
 homesite: https://www.eclipse.org/incquery/
@@ -8,11 +12,11 @@ homesite: https://www.eclipse.org/incquery/
 Install EMF-IncQuery
 --------------------
 
-Navigate to the homesite of IncQuery and search for update sites at the download page:
-https://www.eclipse.org/incquery/download.php
+Navigate to the homesite of VIATRA and search for update sites at the download page:
+https://eclipse.org/viatra/downloads.php
 
-Copy the URL of _Release builds_ update site:
-http://download.eclipse.org/incquery/updates/release
+Find the old EMF-IncQuery _release_ update site and copy it to your clipboard (don't leave white space):
+http://download.eclipse.org/viatra/incquery/updates/release
 
 Switch back to your Eclipse instance and select the _Help/Install New Software..._
 
@@ -28,11 +32,24 @@ For a faster installation, advanced users can untick out the _Contact all update
 Setup the Laboratory
 --------------------
 
-1. Import the projects from [here](projects/incquery-metamodel.zip).
+1. Clone and import the following projects from this git repository: https://github.com/FTSRG/mdsd-examples
+
+``
+hu.bme.mit.mdsd.erdiagram
+hu.bme.mit.mdsd.erdiagram.edit
+hu.bme.mit.mdsd.erdiagram.editor
+``
+
 1. Run as **Eclipse Application**.
-1. Import the project from [here](projects/incquery-example.zip) to the runtime Eclipse and check the instance model.
+1. Import the following project to the runtime Eclipse and check the instance model.
+
+``
+hu.bme.mit.mdsd.erdiagram.examplediagrams
+hu.bme.mit.mdsd.erdiagram.example
+``
+
 1. Create a new IncQuery project in the host Eclipse and name it to ```hu.bme.mit.mdsd.erdiagram.queries```.
-1. Create a new query definition in a package named ```hu.bme.mit.mdsd.erdiagram``` and a file named ```queries.eiq```. In the wizard create an empty query. Fill the first query:
+1. Create a new query definition in a package named ```hu.bme.mit.mdsd.erdiagram.queries``` and a file named ```queries.eiq```. In the wizard create an empty query. Fill the first query:
     
 	```java
 	package hu.bme.mit.mdsd.erdiagram
@@ -51,7 +68,7 @@ Query Explorer
 
 **Query Explorer** is the primary debug tool for debugging IncQuery patterns runtime. To open the view: _Window/Show View/Others/EMF-IncQuery/Query Explorer_ or you can simply press the _CTRL + 3_ shortcut and start to type the name of the view. On the left side of the view, there will be patterns inherited from the host eclipse. The middle part will show you the matches of the patterns. To achive this, we have to load a model into the view:
 
-1.  Open our example instance model (_example.erdiagram_)
+1.  Open our example instance model (_My.erdiagram_)
 1.  then press the green arrow button on the view.
 
 ![Query Explorer](mdsd/2016/incquery/query_explorer.png)
