@@ -34,19 +34,19 @@ Setup the Laboratory
 
 1. Clone and import the following projects from this git repository: https://github.com/FTSRG/mdsd-examples
 
-``
+```
 hu.bme.mit.mdsd.erdiagram
 hu.bme.mit.mdsd.erdiagram.edit
 hu.bme.mit.mdsd.erdiagram.editor
-``
+```
 
 1. Run as **Eclipse Application**.
 1. Import the following project to the runtime Eclipse and check the instance model.
 
-``
+```
 hu.bme.mit.mdsd.erdiagram.examplediagrams
 hu.bme.mit.mdsd.erdiagram.example
-``
+```
 
 1. Create a new IncQuery project in the host Eclipse and name it to ```hu.bme.mit.mdsd.erdiagram.queries```.
 1. Create a new query definition in a package named ```hu.bme.mit.mdsd.erdiagram.queries``` and a file named ```queries.eiq```. In the wizard create an empty query. Fill the first query:
