@@ -34,76 +34,65 @@ Setup the Laboratory
 
 1. Clone and import the following projects from this git repository: https://github.com/FTSRG/mdsd-examples
 
-```
-hu.bme.mit.mdsd.erdiagram
-hu.bme.mit.mdsd.erdiagram.edit
-hu.bme.mit.mdsd.erdiagram.editor
-```
+	```
+	hu.bme.mit.mdsd.erdiagram
+	hu.bme.mit.mdsd.erdiagram.edit
+	hu.bme.mit.mdsd.erdiagram.editor
+	```
 
-1. Run as **Eclipse Application**.
+1. Run as **Eclipse Application**. (Normally, this is not required to develop queries, but we will use the Query Explorer, which needs our erdiagram ecore model installed)
 1. Import the following project to the runtime Eclipse and check the instance model.
 
-```
-hu.bme.mit.mdsd.erdiagram.examplediagrams
-hu.bme.mit.mdsd.erdiagram.example
-```
+	```
+	hu.bme.mit.mdsd.erdiagram.examplediagrams
+	hu.bme.mit.mdsd.erdiagram.example
+	```
 
 1. Create a new IncQuery project in the host Eclipse and name it to ```hu.bme.mit.mdsd.erdiagram.queries```.
-1. Create a new query definition in a package named ```hu.bme.mit.mdsd.erdiagram.queries``` and a file named ```queries.eiq```. In the wizard create an empty query. Fill the first query:
+1. Create a new query definition in a package named ```hu.bme.mit.mdsd.erdiagram.queries``` and a file named ```queries.eiq```. Also add two simple queries (and don't forget to save and build):
     
 	```java
-	package hu.bme.mit.mdsd.erdiagram
+	package hu.bme.mit.mdsd.erdiagram.queries
 	
+	// The following imports the ecore model,
+	// you can use auto-completion by hitting ctrl+space after the quotation mark
 	import "hu.bme.mit.mdsd.erdiagram"
 
-	pattern entityWithName(entity, name) {
-		Entity.name(entity,name);
+	pattern entity(e){
+		Entity(e);
+	}
+
+	pattern entityName(entity, name) {
+		Entity.name(entity, name);
 	}
 	```
 
-1. Load the query and the instance model to the **Query Explorer**.
+As you can see, every pattern have a unique name and several parameters. Inside the body of the patterns, there are different _constraints_. Our first example describes a type constraint and the second one a feature constraint. It states that ``entity`` variable is of eClass ``Entity`` and its ``name`` attribute is the value of ``name`` variable.
 
 Query Explorer
 --------------
 
-**Query Explorer** is the primary debug tool for debugging IncQuery patterns runtime. To open the view: _Window/Show View/Others/EMF-IncQuery/Query Explorer_ or you can simply press the _CTRL + 3_ shortcut and start to type the name of the view. On the left side of the view, there will be patterns inherited from the host eclipse. The middle part will show you the matches of the patterns. To achive this, we have to load a model into the view:
+**Query Explorer** is the primary debug tool for debugging IncQuery patterns at runtime. To open the view: _Window/Show View/Others/EMF-IncQuery/Query Explorer_ or you can simply press the _CTRL + 3_ shortcut and start to type the name of the view. On the left side of the view, there will be patterns inherited from the host eclipse. The middle part will show you the matches of the patterns. To achieve this, we have to load a model into the view:
 
-1.  Open our example instance model (_My.erdiagram_)
-1.  then press the green arrow button on the view.
+1. Make sure to save and leave the focus on opened the queries.eiq file.
+1. Press the green arrow button on the view.
+1. Open our example instance model (_My.erdiagram_).
+1. Press the green arrow button on the view.
 
 ![Query Explorer](mdsd/2016/incquery/query_explorer.png)
 
 Pattern Language
 ----------------
 
-1. Structure your source code to 3 blocks like this:
+1. To get familiar with the language let's write a few validation queries, ill-formedness constraints and well-formedness constraints. Firstly, create a query to checks if the name of a ``NamedElement`` is only an empty string:
 
-    ```java
-    //-------------------------------
-    // Support
-    //-------------------------------
-    
-    //-------------------------------
-    // Validate
-    //-------------------------------
-    
-    //-------------------------------
-    // Derived
-    //-------------------------------
-    ```
-
-    Every pattern goes to one of those categories. The ```entityWithName``` goes to Support. 
-
-    As you can see, every pattern have a unique name and several parameters. Inside the body of the patterns, there different constraints. Our first example describes a feature constraint. It states that ```entity``` variable is of eClass ```Entity``` and its ```name``` attribute is the value of ```name``` variable.
-
-1. Create a query to the **Validate** that checks if the name of a ``NamedElement`` is only an empty string:
-
-    ```java
+	```java
 	pattern emptyNamedElement(element: NamedElement) {
 		NamedElement.Name(element, "");
 	}
 	```
-   This pattern shows, that the parameters can be typed immediately in the parameters list.	
+
+	This pattern shows, that the parameters can be typed immediately in the parameters list.	
 
 1. Create a query to the **Validate** that checks if two entity has the same name:
 
