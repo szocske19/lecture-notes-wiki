@@ -100,7 +100,7 @@ Pattern Language
 
 1. Create a query to check if two entity has the same name:
 
-    ```java
+	```java
 	pattern sameNamedEntities(entity1, entity2, commonName) {
 		Entity.name(entity1, commonName);
 		Entity.name(entity2, commonName);
@@ -112,9 +112,9 @@ Pattern Language
 
 1. Create a query to check if the name starts with a noncapital letter:
 
-    ```java
+	```java
 	pattern entityStartsWithSmallCase(entity) {
-		Entity.name(entity,name);
+		Entity.name(entity, name);
 		check (!name.matches("^[A-Z].+"));
 	}
 	```
@@ -123,23 +123,92 @@ Pattern Language
 
 1. The previous queries were ill-formedness constraints. Now let's create a well-formedness constraint, which checks if an entity is well-formed. For that, we will need a helper query which introduces the ``find`` and the ``or`` keyword.
 
-     ```java
+	```java
 	pattern badEntity(entity) {
 		find emptyNamedElement(entity);
 	} or {
 		find entityStartsWithSmallCase(entity);
 	} or {
-		find sameNamedEntities(entity,_,_);
+		find sameNamedEntities(entity, _, _);
 	}
 	```
 
 	A well-formed constraint ensures that there are no ill-formed structures, hence there are no matches of the ``badEntity``. For that, we can use the ``neg`` key word. 
 
+	```java
 	pattern wellFormedEntites() {
 		neg find badEntity(_);
 	}
+	```
 
-1. Create a query to the **Derived** that gets the other endign of a relation ending:
+1. Next, create a well-formedness constraint for ``Relation``s, checking if it has both ``RelationEnding``s. This will need several helper patterns too.
+
+	```java
+	pattern relationWithLeftEnding(r, rle) {
+		Relation.leftEnding(r, rle);
+	}
+	pattern relationWithRightEnding(r, rre) {
+		Relation.rightEnding(r, rre);
+	}
+	// It is required to have at least one positive constraint on a variable:
+	pattern relationWithoutEnding(r : Relation) {
+		neg find relationWithLeftEnding(r, _);
+	} or {
+		neg find relationWithRightEnding(r, _);
+	}
+	pattern wellFormedRelation() {
+		N == count find relationWithoutEnding(_);
+		N == 0;
+	}
+	```
+
+	Notice, that using ``neg find`` is equal to using the ``count`` keyword and ensure it "returns" zero.
+
+
+1. We can also get the number of attributes of an entity:
+
+	```java
+	pattern entityAttribute(e, attr) {
+		Entity.attributes(e, attr);
+	}
+
+	pattern attributeCount(e, N) {
+		Entity(e);
+		N == count find entityAttribute(e, _);
+	}
+	```
+
+1. Let's find the entity that is first in the alphabet: 
+
+	```java
+	pattern hasBiggerName(e1, e2) {
+		Entity.name(e1, name1);
+		Entity.name(e2, name2);
+		check(name1 > name2);
+	}
+	
+	pattern firtEntity(e : Entity) {
+		neg find hasBiggerName(e, _);
+	}
+	```
+
+1. Let's find all the super entities of an entity by using transitive closure.
+
+	```java
+	pattern superEntity(e,superEntity){
+		Entity.isA(e,superEntity);
+	}
+	
+	pattern allSuperEntity(e,superEntity) {
+		find superEntity+(e, superEntity);
+	}
+	```
+
+
+
+
+
+1. Create a query to the **Derived** that gets the other ending of a relation ending:
     
 	```java
 	pattern other(ending:RelationEnding, other) {
