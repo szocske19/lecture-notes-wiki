@@ -123,9 +123,9 @@ Pattern Language
 
 1. The previous queries were ill-formedness constraints. Now let's create a well-formedness constraint, which checks if an entity is well-formed. 
 
-This pattern shows how to reuse previously defined patterns as sub patterns. To do this, we use the ```find``` keyword then write the id of the sub pattern and finally add the variables. (Variables starting with ```_``` define _don't care_ variables, hence you cannot use them in other lines of the pattern). 
+	This pattern shows how to reuse previously defined patterns as sub patterns. To do this, we use the ```find``` keyword then write the id of the sub pattern and finally add the variables. (Variables starting with ```_``` define _don't care_ variables, hence you cannot use them in other lines of the pattern). 
 
-This pattern also shows how to connect independent bodies in a pattern. To do this, we use the ```or``` keyword that states the pattern has a match if the first _or_ the second _or_ the third _or_ etc body has a match.
+	This pattern also shows how to connect independent bodies in a pattern. To do this, we use the ```or``` keyword that states the pattern has a match if the first _or_ the second _or_ the third _or_ etc body has a match.
 
 	```java
 	pattern badEntity(entity) {
