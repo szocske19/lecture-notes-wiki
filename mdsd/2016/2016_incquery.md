@@ -74,12 +74,16 @@ Query Explorer
 
 **Query Explorer** is the primary debug tool for debugging IncQuery patterns at runtime. To open the view: _Window/Show View/Others/EMF-IncQuery/Query Explorer_ or you can simply press the _CTRL + 3_ shortcut and start to type the name of the view. On the left side of the view, there will be patterns inherited from the host eclipse. The middle part will show you the matches of the patterns. To achieve this, we have to load a model into the view:
 
-1. Make sure to save and leave the focus on opened the queries.eiq file.
+1. Make sure to save and leave the focus on the opened queries.eiq file.
 1. Press the green arrow button on the view.
 1. Open our example instance model (_My.erdiagram_).
 1. Press the green arrow button on the view.
 
 ![Query Explorer](mdsd/2016/incquery/query_explorer.png)
+
+You can also filter the match set by using the panel at the right side of the query explorer.
+
+![Query Explorer](mdsd/2016/incquery/filter.png)
 
 Pattern Language
 ----------------
@@ -88,13 +92,13 @@ Pattern Language
 
 	```java
 	pattern emptyNamedElement(element: NamedElement) {
-		NamedElement.Name(element, "");
+		NamedElement.name(element, "");
 	}
 	```
 
 	This pattern shows, that the parameters can be typed immediately in the parameters list.	
 
-1. Create a query to the **Validate** that checks if two entity has the same name:
+1. Create a query to check if two entity has the same name:
 
     ```java
 	pattern sameNamedEntities(entity1, entity2, commonName) {
@@ -104,21 +108,37 @@ Pattern Language
 	}
 	```
 	
-	This pattern shows the ```!=``` (_not equal_) operator to select two different entites from the instance model. (Use the ```==``` operator to equality)
+	This pattern shows the ``!=`` (_not equal_) operator to select two different entites from the instance model. (Use the ``==`` operator to equality)
 
-1. Create a query to the **Validate** that checks if the name starts with a noncapital letter:
+1. Create a query to check if the name starts with a noncapital letter:
 
     ```java
 	pattern entityStartsWithSmallCase(entity) {
 		Entity.name(entity,name);
-		check (
-			!name.matches("^[A-Z].+")
-		);
+		check (!name.matches("^[A-Z].+"));
 	}
 	```
 	
-	This pattern shows the ```check``` block where you can write a wide range of _Xbase_ expressions (similar to Java). In this case, we define a regular expression.
-	
+	This pattern shows the ``check`` block where you can write a wide range of _Xbase_ expressions (similar to Java). In this case, we define a regular expression.
+
+1. The previous queries were ill-formedness constraints. Now let's create a well-formedness constraint, which checks if an entity is well-formed. For that, we will need a helper query which introduces the ``find`` and the ``or`` keyword.
+
+     ```java
+	pattern badEntity(entity) {
+		find emptyNamedElement(entity);
+	} or {
+		find entityStartsWithSmallCase(entity);
+	} or {
+		find sameNamedEntities(entity,_,_);
+	}
+	```
+
+	A well-formed constraint ensures that there are no ill-formed structures, hence there are no matches of the ``badEntity``. For that, we can use the ``neg`` key word. 
+
+	pattern wellFormedEntites() {
+		neg find badEntity(_);
+	}
+
 1. Create a query to the **Derived** that gets the other endign of a relation ending:
     
 	```java
