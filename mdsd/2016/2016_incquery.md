@@ -121,7 +121,11 @@ Pattern Language
 	
 	This pattern shows the ``check`` block where you can write a wide range of _Xbase_ expressions (similar to Java). In this case, we define a regular expression.
 
-1. The previous queries were ill-formedness constraints. Now let's create a well-formedness constraint, which checks if an entity is well-formed. For that, we will need a helper query which introduces the ``find`` and the ``or`` keyword.
+1. The previous queries were ill-formedness constraints. Now let's create a well-formedness constraint, which checks if an entity is well-formed. 
+
+This pattern shows how to reuse previously defined patterns as sub patterns. To do this, we use the ```find``` keyword then write the id of the sub pattern and finally add the variables. (Variables starting with ```_``` define _don't care_ variables, hence you cannot use them in other lines of the pattern). 
+
+This pattern also shows how to connect independent bodies in a pattern. To do this, we use the ```or``` keyword that states the pattern has a match if the first _or_ the second _or_ the third _or_ etc body has a match.
 
 	```java
 	pattern badEntity(entity) {
@@ -219,49 +223,7 @@ Pattern Language
 		Relation.leftEnding(relation, other);
 	}
 	```
-	
-	This pattern shows how to connect independent bodies in a pattern. To do this, we use the ```or``` keyword that states the pattern has a match if the first _or_ the second _or_ the third _or_ etc body has a match.
-	
-1. Create a query to the **Support** that summarizes this three validation condition:
 
-    ```java
-	pattern badEntity(entity, name) {
-		find sameNamedEntities(entity, _other, name);
-	} or {
-		Entity.name(entity, name);
-		find emptyNamedElement(entity);
-	} or {
-		Entity.name(entity, name);
-		find entityStartsWithSmallCase(entity);
-	}
-	```
-	
-	This pattern shows how to reuse previously defined patterns as sub patterns. To do this, we use the ```find``` keyword then write the id of the sub pattern and finally add the variables. (Variables starting with ```_``` define _don't care_ variables, hence you cannot use them in other lines of the pattern)
-
-1. Create a query to the **Support** that matches to the well-named entities:
-
-    ```java
-	pattern goodEntity(entity, name) {
-		Entity.name(entity, name);
-		neg find badEntity(entity,_);
-	}
-	```
-	
-	This pattern shows ```neg find``` expression to express negation. Those actual parameters of the negative pattern call that are not used elsewhere in the calling body will be quantified; this means that the calling pattern only matches if no substitution of these calling variables could be found.
-	
-1. Create a query to the **Support** that counts the number of attributes of an entity:  
-
-   ```java
-   pattern attribute(entity, attr) {
-        Entity.attributes(entity, attr);
-   }
-
-   pattern countAttribute(entity : Entity, M) {
-	    M == count find attribute(entity, _);
-   }
-   ```
-   
-   This pattern shows ```count find``` expression that aggregates multiple matches of a called pattern into a single value.
    
 Validation
 ----------
@@ -333,20 +295,6 @@ Extend our ER Diagram metamodel with following _other_ reference of the ```Relat
 
 Advanced Queries
 ----------------
-
-1. Create **Support** patterns for the inheritance:
-
-    ```java
-	//@QueryExplorer(display = false)
-	pattern superEnitities(entity, superEntity) {
-		Entity.isA(entity, superEntity);
-	}
-
-	//@QueryExplorer(display = false)
-	pattern allSuperEntities(entity, superEntity) {
-		find superEnitities+(entity, superEntity);
-	}
-	```
 
 1. Create a pattern that detects a circle in the type hierarchy:
 
