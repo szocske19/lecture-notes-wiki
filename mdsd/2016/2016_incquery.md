@@ -212,17 +212,7 @@ Pattern Language
 
 
 
-1. Create a query to the **Derived** that gets the other ending of a relation ending:
-    
-	```java
-	pattern other(ending:RelationEnding, other) {
-		Relation.leftEnding(relation, ending);
-		Relation.rightEnding(relation, other);
-	} or {
-		Relation.rightEnding(relation, ending);
-		Relation.leftEnding(relation, other);
-	}
-	```
+
 
    
 Validation
@@ -259,32 +249,34 @@ pattern sameNamedEntities(entity1, entity2, commonName) {
 Derived features
 ----------------
 
-To define a derived feature in your EMF metamodel, you have set the following attributes of the feature:
+Let's create a derived feature between the ``RelationEnding``s, which returns the other ``RelationEnding`` of their parent ``Relation``. For that the following three steps are required:
+
+1. Define a one way relation between ``RelationEnding``s with multiplicity of [0..1] and name it ``otherEnding``. Then set the following attributes of the feature:
  * derived = true (to indicate that the value of the feature is computed from the model)
  * changeable = false (to remove setter methods)
  * transient = true (to avoid persisting the value into file)
  * volatile = true (to remove the field declaration in the object)
 
-EMF-IncQuery supports the definition of efficient, incrementally maintained, well-behaving derived features in EMF by using advanced model queries and incremental evaluation for calculating the value of derived features and providing automated code generation for integrating into existing applications.
+ ![Derived Feature](mdsd/2016/incquery/derivedFeature.png)
 
-The **@QueryBasedFeature** annotation can be used to mark a pattern as a derived feature realization. If the framework can find out the feature from the signature of the pattern (_patter name_, _first paramter type_, _second paramter type_), the annotation parameters can be empty.
+ Don't forget to save the model and regenerate the model code!
 
-Annotation parameters:
+1. EMF-IncQuery supports the definition of efficient, incrementally maintained, well-behaving derived features in EMF by using advanced model queries and incremental evaluation for calculating the value of derived features and providing automated code generation for integrating into existing applications.
+
+ The **@QueryBasedFeature** annotation can be used to mark a pattern as a derived feature realization. If the framework can find out the feature from the signature of the pattern (_patter name_, _first paramter type_, _second paramter type_), the annotation parameters can be empty.
+
+ Annotation parameters:
  * feature ="featureName" (default: pattern name) - indicates which derived feature is defined by the pattern
  * source ="Src" (default: first parameter) - indicates which query parameter (using its name) is the source EObject, the inferred type of this parameter indicates which EClass generated code has to be modified
  * target ="Trg" (default: second parameter) - indicates which query parameter (using its name) is the target of the derived feature
  * kind ="single/many/counter/sum/iteration" (default: feature.isMany?many:single) - indicates what kind of calculation should be done on the query results to map them to derived feature values
  * keepCache ="true/false" (default: true) - indicates whether a separate cache should be kept with the current value. Single and Many kind derived features can work without keeping an additional cache, as the EMF-IncQuery RETE network already keeps a cache of the current values.
- 
-For example:
 
-Extend our ER Diagram metamodel with following _other_ reference of the ```RelationEnding``` eClass and set the required properties.
-
-![Derived Feature](mdsd/2016/incquery/new_reference.png)
+ Let's create the pattern, which finds the other ending and annotate it with ``QueryBasedFeature``:
 
 	```java
 	@QueryBasedFeature
-	pattern other(ending:RelationEnding, other) {
+	pattern otherEnding(ending : RelationEnding, other : RelationEnding) {
 		Relation.leftEnding(relation, ending);
 		Relation.rightEnding(relation, other);
 	} or {
@@ -292,6 +284,11 @@ Extend our ER Diagram metamodel with following _other_ reference of the ```Relat
 		Relation.leftEnding(relation, other);
 	}
 	```
+ Save and build. IncQuery will modify the Ecore model with an annotation.
+
+ ![Generated Ecore Annotation](mdsd/2016/incquery/ecore-annotation.png)
+
+1. Reload the ecore model for the genmodel and regenerate the model code. Now if you use the ``relation.getOtherEnding()`` on the model, it will return the correct ``RelationEnding``. Note that you will need additional initialization code for IncQuery, or run it as a JUnit Plug-In test.
 
 Advanced Queries
 ----------------
