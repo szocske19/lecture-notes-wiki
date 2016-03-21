@@ -244,17 +244,17 @@ To find a specific editor id, we can use the _Plug-in Selection Spy_ tool with a
 
 For example:
 
-	```java
-	@Constraint(targetEditorId = "ERDiagram.presentation.ERDiagramEditorID",
-				severity = "error", 
-				message = "The name is not unique",
-				location = entity1)
-	pattern sameNamedEntities(entity1, entity2, commonName) {
-		Entity.name(entity1, commonName);
-		Entity.name(entity2, commonName);
-		entity1!=entity2;
-	}
-	```
+```java
+@Constraint(targetEditorId = "ERDiagram.presentation.ERDiagramEditorID",
+			severity = "error", 
+			message = "The name is not unique",
+			location = entity1)
+pattern sameNamedEntities(entity1, entity2, commonName) {
+	Entity.name(entity1, commonName);
+	Entity.name(entity2, commonName);
+	entity1!=entity2;
+}
+```
 
 Derived features
 ----------------
