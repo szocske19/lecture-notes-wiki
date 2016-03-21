@@ -288,7 +288,7 @@ Let's create a derived feature between the ``RelationEnding``s, which returns th
 
  ![Generated Ecore Annotation](mdsd/2016/incquery/ecore-annotation.png)
 
-1. Reload the ecore model for the genmodel and regenerate the model code. Now if you use the ``relation.getOtherEnding()`` on the model, it will return the correct ``RelationEnding``. Note that you will need additional initialization code for IncQuery, or run it as a JUnit Plug-In test.
+1. Reload the ecore model for the genmodel and regenerate the model code. Now if you use the ``relationEnding.getOtherEnding()`` on the model, it will return the correct ``RelationEnding``. Note that you will need additional initialization code for IncQuery, or run it as a JUnit Plug-In test.
 
 Advanced Queries
 ----------------
