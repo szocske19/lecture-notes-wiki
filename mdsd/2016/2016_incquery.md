@@ -214,7 +214,7 @@ Validation
 
 EMF-IncQuery provides facilities to create validation rules based on the pattern language of the framework. These rules can be evaluated on various EMF instance models and upon violations of constraints, markers are automatically created in the Eclipse Problems View.
 
-The **@Constraint** annotation can be used to mark a pattern as a validation rule. If the framework finds at least one pattern with such annotation.
+The **@Constraint** annotation can be used to mark a pattern as a validation rule. If the framework finds at least one pattern with such annotation, a `.validation` project will be generated.
 
 Annotation parameters:
  * _key:_ The parameters, which the constraint violation needs to be attached to.
@@ -244,11 +244,11 @@ pattern sameNamedEntities(entity1, entity2, commonName) {
 
 After build a `.validation` plugin project will be generated. Let's start a runtime Eclipse to install the validation plugin. After opening the model, select **EMF-IncQuery Validation | Initialize EMF-IncQuery Validators on Editor**. May be you have to do that twice.
 
-![Plug-in Selection Spy](mdsd/2016/incquery/validation.png)
+![Context menu](mdsd/2016/incquery/validation.png)
 
 The following errors should appear (if you double click on the error, it will select the problematic EClasses):
 
-![Plug-in Selection Spy](mdsd/2016/incquery/validation2.png)
+![Validation](mdsd/2016/incquery/validation2.png)
 
 The two errors mark the same error. To solve this, add the following parameter to the constraint annotation:
 
@@ -256,7 +256,7 @@ The two errors mark the same error. To solve this, add the following parameter t
 
 After that, it will work as intended:
 
-![Plug-in Selection Spy](mdsd/2016/incquery/validation3.png)
+![Validation without duplicates](mdsd/2016/incquery/validation3.png)
 
 Derived features
 ----------------
