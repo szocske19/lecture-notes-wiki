@@ -302,68 +302,36 @@ Let's create a derived feature between the ``RelationEnding``s, which returns th
 
 1. Reload the ecore model for the genmodel and regenerate the model code. Now if you use the ``relationEnding.getOtherEnding()`` on the model, it will return the correct ``RelationEnding``. Note that you will need additional initialization code for IncQuery, or run it as a JUnit Plug-In test.
 
-Advanced Queries
+A Few More Queries
 ----------------
 
 1. Create a pattern that detects a circle in the type hierarchy:
 
     ```java
 	pattern circleInTypeHierarchy(entity) {
-		find allSuperEntities(entity, entity);
+		find allSuperEntity(entity, entity);
 	}
 	```
 
-1. Create a pattern that detects a (transitive) diamond in the type type hierarchy:
+1. Create a pattern that detects a (transitive) diamond in the type hierarchy. Also make sure that it doesn't have more than one matches representing the same diamond:
 
 	```java
 	pattern diamondInTypeHierarchy(entity1, entity2, entity3, entity4) {
-		find allSuperEntities(entity1,entity2);
-		find allSuperEntities(entity1,entity3);
-		entity2 != entity3;
-		find allSuperEntities(entity2,entity4);
-		find allSuperEntities(entity3,entity4);
+		find allSuperEntity(entity1,entity2);
+		find allSuperEntity(entity1,entity3);
+		find hasBiggerName(entity2, entity3); //entity2 != entity3;
+		find allSuperEntity(entity2,entity4);
+		find allSuperEntity(entity3,entity4);
 	}
 	```
 
-1. Every diamond has matched at least two times. This should be prevented if we make the pattern assimetric by defining somehow that ``entity2 < entity3``. Let us define an ordering relation between the entities:
-
-    ```java
-	pattern order(a, b) {
-		Entity.name(a, name1);
-		Entity.name(b, name2);
-		check(
-			name1.compareTo(name2) < 0
-		);
-	}
-	```
-	
-	And change the diamond code:
-	
-	```java
-	pattern diamondInTypeHierarchy(entity1, entity2, entity3, entity4) {
-		find allSuperEntities(entity1,entity2);
-		find allSuperEntities(entity1,entity3);
-		//entity2 != entity3;
-		find order(entity2, entity3);
-		find allSuperEntities(entity2,entity4);
-		find allSuperEntities(entity3,entity4);
-	}
-	```
-
-1. By the way, calculate the infimum of the order:
-    
-	```java
-	pattern FirstInOrder(first: Entity) {
-		neg find order(_, first);
-	}
-	```
 1. Extend the patterns to get the inherited relations and attributes too:
 
     ```java
 	pattern attribute(entity, attribute) {
 		Entity.attributes(entity,attribute);
 	} or {
-		find allSuperEntities(entity, superEntity);
+		find allSuperEntity(entity, superEntity);
 		find attribute(superEntity, attribute);
 	}
 	```
