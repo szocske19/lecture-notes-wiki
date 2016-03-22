@@ -379,7 +379,9 @@ Advanced Queries
 		find relation(superEntity, entity2);
 	}
 	```
-	
+
+You can find the final state of the projects in [this repository](https://github.com/FTSRG/mdsd-examples) by checking out the ``IncQuery`` branch.
+
 References
 ----------
 
