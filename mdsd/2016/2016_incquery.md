@@ -208,12 +208,6 @@ Pattern Language
 	}
 	```
 
-
-
-
-
-
-
    
 Validation
 ----------
@@ -223,28 +217,46 @@ EMF-IncQuery provides facilities to create validation rules based on the pattern
 The **@Constraint** annotation can be used to mark a pattern as a validation rule. If the framework finds at least one pattern with such annotation.
 
 Annotation parameters:
- * _location:_ The location of constraint represents the pattern parameter (the object) the constraint violation needs to be attached to.
+ * _key:_ The parameters, which the constraint violation needs to be attached to.
  * _message:_ The message to display when the constraint violation is found. The message may refer the parameter variables between $ symbols, or their EMF features, such as in $Param1.name$.
  * _severity:_ "warning" or "error"
  * _targetEditorId:_ An Eclipse editor ID where the validation framework should register itself to the context menu. Use "*" as a wildcard if the constraint should be used always when validation is started.
  
-To find a specific editor id, we can use the _Plug-in Selection Spy_ tool with a _SHIFT + ALT + F1_ shortcut.
+To find a specific editor id, we can use the _Plug-in Selection Spy_ tool with a _SHIFT + ALT + F1_ shortcut. Or you can just check plugin.xml in ``hu.bme.mit.mdsd.erdiagram.editor`` project.
 
 ![Plug-in Selection Spy](mdsd/2016/incquery/spy.png)
 
-For example:
+Create a constraint, using the sameNamedEntities pattern:
 
 ```java
-@Constraint(targetEditorId = "ERDiagram.presentation.ERDiagramEditorID",
-			severity = "error", 
-			message = "The name is not unique",
-			location = entity1)
+@Constraint(
+	key = {"entity1", "entity2"},
+	severity = "error",
+	message = "Two entities has the same name $commonName$",
+	targetEditorId = "hu.bme.mit.mdsd.erdiagram.presentation.ErdiagramEditorID"
+)
 pattern sameNamedEntities(entity1, entity2, commonName) {
 	Entity.name(entity1, commonName);
 	Entity.name(entity2, commonName);
-	entity1!=entity2;
+	entity1 != entity2;
 }
 ```
+
+After build a `.validation` plugin project will be generated. Let's start a runtime Eclipse to install the validation plugin. After opening the model, select **EMF-IncQuery Validation | Initialize EMF-IncQuery Validators on Editor**. May be you have to do that twice.
+
+![Plug-in Selection Spy](mdsd/2016/incquery/validation.png)
+
+The following errors should appear (if you double click on the error, it will select the problematic EClasses):
+
+![Plug-in Selection Spy](mdsd/2016/incquery/validation2.png)
+
+The two errors mark the same error. To solve this, add the following parameter to the constraint annotation:
+
+`symmetric = {"entity1", "entity2"}`
+
+After that, it will work as intended:
+
+![Plug-in Selection Spy](mdsd/2016/incquery/validation3.png)
 
 Derived features
 ----------------
