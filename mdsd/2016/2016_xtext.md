@@ -116,8 +116,8 @@ You can hit finish, or on the next page you can disable the "Testing support" as
 
 	```
 	Relation:
-		'relation'
 		leftEnding=RelationEnding
+		'is related with'		
 		rightEnding=RelationEnding
 	;
 	
@@ -170,8 +170,8 @@ You can hit finish, or on the next page you can disable the "Testing support" as
 	;
 
 	Relation:
-		'relation'
 		leftEnding=RelationEnding
+		'is related with'
 		rightEnding=RelationEnding
 	;
 
@@ -216,7 +216,7 @@ Try our new language
 
 	Right click on project -> Configuration -> Add Xtext nature
 
-1. Now, you have a working language, with auto completion.
+1. Now, you can try out the language. Notice that you can use auto completion and quick fixes as well.
 
 Check out the generated AST
 ---------------------------
@@ -237,7 +237,7 @@ Check out the generated AST
 		numberPlate : string key
 	}
 	
-	relation one person nullable many car
+	one person is related with nullable many car
 	```
 
 1. Open with Simple Ecore Model Editor
@@ -249,6 +249,80 @@ Check out the generated AST
 	This will show you the AST built from the text.
 	
 	![AST of the text](mdsd/2016/xtext/tree-editor.png)
+
+
+	
+Scoping
+-------
+
+Scoping defines which elements are referable by a given reference. For instance, we don't want to enable self inheritance.
+
+1. Open our scope provider
+
+	![Scope Provider](mdsd/2016/xtext/scoping.png)
+
+1. Create the following method:
+
+	```java
+	class ERDiagramDslScopeProvider extends AbstractERDiagramDslScopeProvider {
+
+		override IScope getScope(EObject context, EReference reference) {
+			if (context instanceof Entity) {
+				return Scopes.scopeFor(
+					(context.eContainer as ERDiagram)
+					.entities.filter[x | x != context]
+				)
+			}
+			return super.getScope(context, reference)
+		}
+
+	}
+	```
+	
+	This scope restrict the available objects for the _isA_ reference of all the _Entity_ EClass. The ```Scopes``` class contains static methods to create scope descriptions from a list of EObjects.
+	
+	_Note: This is an Xtend file, simple Java code is generated under the xtend-gen folder (further description about the language can be found here: http://eclipse.org/xtend/)_
+
+1. Check out in our example (Runtime Eclipse, example.er file).
+
+Validation
+----------
+
+Static analysis is always required for any language. In this example, we want to raise an error if a cycle occurs in the inheritance graph.
+
+1. Open the validator Xtend file (ERDiagramDslValidator.xtend).
+	
+1. A validation method for given type requires the following things: `@Check` annotation, one parameter with the correct type, using the `error`, `warning` or `info` methods to create markers on the editor.
+
+	```java
+	class ERDiagramDslValidator extends AbstractERDiagramDslValidator {
+
+		Set<Entity> entitiesAlreadyChecked = new HashSet
+
+		@Check
+		def checkCyclicInheritance(Entity entity) {
+			checkCyclicInheritance2(entity)
+			entitiesAlreadyChecked.clear
+		}
+	
+		def checkCyclicInheritance2(Entity entity) {
+			entitiesAlreadyChecked += entity
+			for (parent : entity.isA) {
+				if (entitiesAlreadyChecked.contains(parent)) {
+					error("Cyclic inheritance is not allowed.", 						
+						ERDiagramDslPackage.Literals.ENTITY__IS_A)
+					return;
+				}
+				checkCyclicInheritance2(parent)
+			}
+		}
+	
+	}
+	```
+	
+	_Note: in a real project much more validation would be needed._
+
+1. Check out in our example (Runtime Eclipse, example.er file)
 
 Create an Xtext language with existing AST metamodel
 ----------------------------------------------------
@@ -320,71 +394,6 @@ Create an Xtext language with existing AST metamodel
 1. Do not forget to delete the exported packages in the MANIFEST.MF and to rebuild the infrastructure
 1. Finished
 	From now, the language uses our metamodel to build AST
-	
-Scoping
--------
-
-Scoping defines which elements are referable by a given reference. For instance, we don't want to enable self inheritance.
-
-1. Open our scope provider
-
-	![Scope Provider](mdsd/2015/xtext/scoping.png)
-
-1. Create the following method:
-
-	```java
-	class ERDiagramDSLScopeProvider extends AbstractDeclarativeScopeProvider {
-
-		def scope_Entity_isA(Entity ctx, EReference ref){
-			Scopes::scopeFor((ctx.eContainer as EntityRelationDiagram).entities.filter[x | x != ctx]);
-		}
-	
-	}
-	```
-	
-	A scope method follows the ```scope_[EClass]_[EStructuralFeature](EClass param1, EReference ref)``` syntax. This scope restrict the available objects for the _isA_ reference of all the _Entity_ EClass. The ```Scopes``` class contains static methods to create scope descriptions from a list of EObjects.
-	
-	_Note: This is an Xtend file (further description: http://eclipse.org/xtend/)_
-
-1. Check out in our example (Runtime Eclipse, example.er file)
-
-Validation
-----------
-
-Static analysis is always required for any language. In this example, we want to raise an error if a cycle occurs in the inheritance graph.
-
-1. Open our validator
-
-	![Validator](mdsd/2015/xtext/validation.png)
-	
-1. Create the following method with ```@Check``` annotation
-
-	```java
-	class ERDiagramDSLValidator extends AbstractERDiagramDSLValidator {
-	
-		public static val CYCLE = "CYCLE";
-	
-		@Check
-		def checkCycleInInheritance(Entity ctx) {
-			checkCycleInInheritance(ctx, ctx.isA)
-		}
-	
-		def checkCycleInInheritance(Entity ctx, Collection<Entity> parents) {
-			if (parents.contains(ctx)) {
-				error("Cycle in the inheritance graph", ERDiagramPackage.Literals.ENTITY__IS_A,CYCLE);
-				return;
-			}
-			for (parent : parents) {
-				checkCycleInInheritance(ctx, ctx.isA);
-			}
-		}
-	
-	}
-	```
-	
-	_Note: not all cases are covered with this code, so don't use it a real project._
-
-1. Check out in our example (Runtime Eclipse, example.er file)
 
 References
 ==========
