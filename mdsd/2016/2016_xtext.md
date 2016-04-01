@@ -1,39 +1,41 @@
 # Xtext
 
-![The logo of Xtext](mdsd/2015/xtext/logo.jpg)
+![The logo of Xtext](mdsd/2016/xtext/logo.jpg)
 
 homesite: https://eclipse.org/Xtext/
 
 Install Xtext
 -------------
 
-Install from eclipse market place: search for Xtext -> Click _Install_ -> etc.
+Install Xtext 2.9 using the releases update site: http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/
 
-![Eclipse Marketplace... inside Help menu](mdsd/2015/xtext/market_place.png)
+(You can find the link here: https://eclipse.org/Xtext/download.html)
 
-![Install Xtext from Marketplace](mdsd/2015/xtext/install_xtext.png)
+Click Help > Install New Software and complete with next, next finish.
 
-_Note: This will also install the Xtend packages._
+![Install New Software](mdsd/2016/xtext/install.png)
+
+As you can see, we will need Xtend as well.
 
 Create an Xtext language without existing AST metamodel
 -------------------------------------------------------
 
-1. Create a new Xtext project with the following name: ```hu.bme.mit.mdsd.erdiagram.text```. Name of the language will be ```hu.bme.mit.mdsd.erdiagram.text.ERDiagramDSL```. It should conform to a fully qualified class name. Extension will be ```er```.
+1. Create a new Xtext project with the following name: ```hu.bme.mit.mdsd.erdiagram.text```. Name of the language will be ```hu.bme.mit.mdsd.erdiagram.text.ERDiagramDsl```. It should conform to a fully qualified class name. Extension will be ```er```.
 
-![Install Xtext from Marketplace](mdsd/2015/xtext/new-project.png)
+![New project](mdsd/2016/xtext/new-project.png)
 
-This will produce a simple ```Hello``` language with greetings messages. It is worth to check this language.
+You can hit finish, or on the next page you can disable the "Testing support" as we won't need that. This will produce a simple ```Hello``` language with greetings messages. It is worth to check this language.
 
 1. Declare our language
 
 	```
-	grammar hu.bme.mit.mdsd.erdiagram.text.ERDiagramDSL with org.eclipse.xtext.common.Terminals
+	grammar hu.bme.mit.mdsd.erdiagram.text.ERDiagramDsl with org.eclipse.xtext.common.Terminals
 	
-	generate eRDiagramDSL "http://www.bme.hu/mit/mdsd/erdiagram/text/ERDiagramDSL"
+	generate eRDiagramDSL "http://www.bme.hu/mit/mdsd/erdiagram/text/ERDiagramDsl"
 	```
 	
 	The ```grammar``` keyword declares the name of our language. The ```with``` keyword defines an inheritance from an other language. In this case, we are inherited from the _Terminals_ language which enables us to use the ```ID``` rule.
-	```generate``` keyword is responsible for generating AST metamodel from the language definition. Package name will be _eRDiagramDSL_ and _ns uri_ will be _http://www.bme.hu/mit/mdsd/erdiagram/text/ERDiagramDSL_. Name of the EClasses will be the same as the name of the rules.
+	```generate``` keyword is responsible for generating AST metamodel from the language definition. Package name will be _eRDiagramDsl_ and _ns uri_ will be _http://www.bme.hu/mit/mdsd/erdiagram/text/ERDiagramDsl_. Name of the EClasses will be the same as the name of the rules.
 
 
 1. Entry rule
@@ -42,7 +44,6 @@ This will produce a simple ```Hello``` language with greetings messages. It is w
 	
 	```
 	ERDiagram:
-		attributeTypes+=AttributeType*
 		entities+=Entity+
 		relations+=Relation*
 	;
@@ -50,55 +51,68 @@ This will produce a simple ```Hello``` language with greetings messages. It is w
 	
 	Syntax: _rule name_ ':' ... ';'
 	
-	This rule states that our language consists of zero or more ```AttributyType``` object, one or more ```Entity``` object and zero or more ```Relation``` object. The output of a rule can be stored in AST. To do this, we can define references for AST which will be: _attributeTypes_, _entities_, _relations_.
+	This rule states that our language consists of one or more ```Entity``` object and zero or more ```Relation``` objects (rules). The output of a rule can be stored in AST. To do this, we can define references for AST which will be _entities_ and _relations_ in this case.
 	
+	```
+	' ' -> exatly one
 	'*' -> zero, one or more
 	'+' -> one or more
 	'?' -> zero or one
 	
-	_reference_ ' =' _eclass_ -> zero or one reference
-	_reference_ += _eclass_ -> zero, one or more reference
+	_reference_  = _eclass_  -> zero or one reference
+	_reference_ += _eclass_  -> zero, one or more reference
 	_reference_ ?= _keyword_ -> boolean reference
+	```
 	
-	
-	_Note: in this case, 'eclass' equals with a rule name, because the generated AST uses rule names as type names._
+	_Note: in this case, 'eClass' equals with a rule name, because the generated AST uses rule names as type names (eClass names)._
+
+1. Attribute type as an enumeration:
+
+	```
+	enum AttributeType:
+		INT = 'int' | DOUBLE = 'double' | STRING = 'string' | BOOLEAN = 'boolean' | DATETIME = 'datetime'
+	;
+	```
+
+	We can define enumerable rules which is mapped to an EMF enumeration in the generated AST. It starts with ```enum``` keyword. The key-value pairs are separated by '|' character.
 
 1. 'ID' terminal.
 
-	Definition of _AttributeType_ rule:
+	First definition of _Entity_ rule:
 	
 	```
-	AttributeType:
-		'type' name=ID ';'?	
+	Entity:
+		'entity' name=ID ';'?	
 	;
 	```
 	
-	Between apostrophe characters, we can define terminals (or keywords) for our language. The 'ID' terminal comes from the _Terminals_ language, and defines a unique identifier rule. An ```AttributeType``` rule starts with the ```type``` keyword, than an identifies that is stored in a _name_ attribute, and finally an optional ';' character comes.
+	Between apostrophe characters, we can define terminals (or keywords) for our language. The 'ID' terminal comes from the _Terminals_ language, and defines a unique identifier rule. An ```Entity``` rule starts with the ```entity``` keyword, than a string comforming to the 'ID' terminal comes from the _Terminals_ language, whic is stored in a _name_ attribute, and finally an optional ';' character (keyword) comes.
 	
-	1. Reference an instance of a rule
+1. Reference an _instance_ of a rule with `[...]`. Group expressions.
 	
 	Definition of _Entity_ and _Attribute_ rules:
 	
 	```
 	Entity:
-		'entity' name=ID ('isA' isA=[Entity])?
-		'{'
-		((attributes+=Attribute) 
-		(',' attributes+=Attribute)*)?
-		'}'
+		'entity' name=ID ('isA' isA+=[Entity])*
+		('{'
+		(attributes+=Attribute) 
+		(',' attributes+=Attribute)*
+		'}')?
 	;
 	
 	Attribute:
-		name=ID ':' type=[AttributeType] (isKey?='key')?
+		name=ID ':' type=AttributeType (isKey?='key')?
 	;
 	```
 	
-	With the previous rules, we could declare variables, but these rules reference already declared variables. To achieve this, use the following syntax:
-	'[' _eclass_ ']'
+	If we omit the square brackets (`isA+=Entity` instead of `isA+=[Entity]`), then we would have to apply the rule again starting with `entity` keyword, when we would try to use the language. With the square brackets we declare that only a reference is needed to a rule instance: '[' _eclass_ ']'.
 	
 	_Note: in this case, 'eclass' equals with a rule name, because the generated AST uses rule names as type names._
 
-1. Enumeration, grouping expressions, unordered expressions, boolean expression
+	We can group expressions with brackets to add cardinality character to the complex grouped expression similarly to the body of the entity we defined: if an entity doesn't have any attribute, then the curly braces can be omitted. 
+
+1. Unordered expressions.
 
 	```
 	Relation:
@@ -108,7 +122,7 @@ This will produce a simple ```Hello``` language with greetings messages. It is w
 	;
 	
 	RelationEnding:
-		target=[Entity] '(' (multiplicity=Multiplicity & (nullable?='nullable')? ) ')'
+		(multiplicity=Multiplicity & (nullable?='nullable')?) target=[Entity]
 	;
 	
 	enum Multiplicity:
@@ -116,9 +130,8 @@ This will produce a simple ```Hello``` language with greetings messages. It is w
 	;
 	```
 	
-	We can define enumerable rules which is mapped to an EMF enumeration in the generated AST. It starts with ```enum``` keyword. The key-value pairs are separated by '|' character.
-	We can group expressions with brackets to add cardinality character to the complex grouped expression. The '&' character defines an unordered list of the rules.
-	In this case, the following solutions are applicable:
+	The '&' character defines an unordered list of the rules.
+	In this case, the following solutions are applicable before the entity reference:
 	
 	 * one nullable
 	 * nullable one
@@ -126,91 +139,84 @@ This will produce a simple ```Hello``` language with greetings messages. It is w
 	 * nullable many
 	 * one
 	 * many
-	 
-	The last two example is valid because of the (...)? expression around the 'nullable' case. 
  
 1. The full Xtext code
 
 	```
-	grammar hu.bme.mit.mdsd.erdiagram.text.ERDiagramDSL with org.eclipse.xtext.common.Terminals
-	generate eRDiagramDSL "http://www.bme.hu/mit/mdsd/erdiagram/text/ERDiagramDSL"
+	grammar hu.bme.mit.mdsd.erdiagram.text.ERDiagramDsl with org.eclipse.xtext.common.Terminals
+
+	generate eRDiagramDsl "http://www.bme.hu/mit/mdsd/erdiagram/text/ERDiagramDsl"
 	
 	//Entry rule
 	ERDiagram:
-		attributeTypes+=AttributeType*
-		entities+=Entity+
-		relations+=Relation*
+		entities+=Entity*
+		relation+=Relation*
 	;
-	
-	// Attribute type rule
-	AttributeType:
-		'type' name=ID ';'?	
-	;
-	
-	//Entity rules
+
 	Entity:
-		'entity' name=ID ('isA' isA=[Entity])?
-		'{'
-		((attributes+=Attribute) 
-		(',' attributes+=Attribute)*)?
-		'}'
+		'entity' name=ID ('isA' isA+=[Entity])*
+		('{'
+		attributes+=Attribute
+		(',' attributes+=Attribute)*
+		'}')?
 	;
-	
+
 	Attribute:
-		name=ID ':' type=[AttributeType] (isKey?='key')?
+		name=ID ':' type=AttributeType (isKey?='key')?
 	;
-	
-	//Relation rules
+
+	enum AttributeType:
+		INT = 'int' | DOUBLE = 'double' | STRING = 'string' | BOOLEAN = 'boolean' | DATETIME = 'datetime'
+	;
+
 	Relation:
 		'relation'
 		leftEnding=RelationEnding
 		rightEnding=RelationEnding
 	;
-	
+
 	RelationEnding:
-		target=[Entity] '(' (multiplicity=Multiplicity & (nullable?='nullable')? ) ')'
+		(multiplicity=MultiplicityType & (nullable?='nullable')?) target=[Entity]
 	;
-	
-	enum Multiplicity:
-		One = "one" | Many = "many"
+
+	enum MultiplicityType:
+		One = 'one' | Many = 'many'
 	;
 	```
 
 Building infrastructure
 -----------------------
 
-When you modifies your _xtext_ files, you have to build the infrastructure for your language. The following figure shows where click to generate.
+When you modify your _xtext_ files, you have to build the infrastructure for your language. The following figure shows where to click to generate.
 
-![Generate infrastructure](mdsd/2015/xtext/generate_infrastructure.png)
-
-The generation may fail due to a missing plug-in. To solve this problem, add the _org.eclipse.equinox.common_ plug-in to the _MANIFEST.MF_ file.
-
-![Add plug-in to MANIFEST.MF](mdsd/2015/xtext/add-equinox-common.png)
+![Generate infrastructure](mdsd/2016/xtext/generate_infrastructure.png)
 
 Try our new language
 --------------------
+
+1. Start a runtime Eclipse.
 
 1. Create a general project
 
 	_New->Project...->General->Project_ Name: hu.bme.mit.mdsd.erdiagram.text.example
 	
-	![General Project](mdsd/2015/xtext/general_project.png)
+	![General Project](mdsd/2016/xtext/general_project.png)
 
 1. Create a file with 'er' extension
 
 	_New->File_ Name: example.er 
 	
-	![General File with 'er' extension](mdsd/2015/xtext/general_file.png)
+	![General File with 'er' extension](mdsd/2016/xtext/general_file.png)
 	
 	Add xtex nature in the pop-up window.
 	
-	![Xtext nature pop-up](mdsd/2015/xtext/xtext_nature.png)
+	![Xtext nature pop-up](mdsd/2016/xtext/xtext_nature.png)
 
 1. (Optional, if you missed the pop-up window) Add Xtext nature
 
 	Right click on project -> Configuration -> Add Xtext nature
 
-1. Now, you have a working language.
+1. Now, you have a working language, with auto completion.
 
 Check out the generated AST
 ---------------------------
@@ -218,30 +224,31 @@ Check out the generated AST
 1. Create an example file with 'er' extension and fill it with the following content:
 
 	```
-	type String
-	type Int
-	
-	entity person isA car {
-		name : String,
-		id : String key
+	entity person {
+		name : string,
+		id : int key
+	}
+
+	entity driver isA person {
+		licence : string
 	}
 	
 	entity car {
-		numberPlate : String key
+		numberPlate : string key
 	}
 	
-	relation car (one) person (many nullable)
+	relation one person nullable many car
 	```
 
 1. Open with Simple Ecore Model Editor
 
 	Right click on the file -> Open -> Open with... -> Simple Ecore Model Editor
 	
-	![Open with Simple Ecore Model Editor](mdsd/2015/xtext/ecore_editor.png)
+	![Open with Simple Ecore Model Editor](mdsd/2016/xtext/ecore_editor.png)
 	
 	This will show you the AST built from the text.
 	
-	![AST of the text](mdsd/2015/xtext/tree-editor.png)
+	![AST of the text](mdsd/2016/xtext/tree-editor.png)
 
 Create an Xtext language with existing AST metamodel
 ----------------------------------------------------
