@@ -76,8 +76,8 @@ Visualizing edges
 ### Display connections between an entity and its attributes
   
 1. Create a Relation Based Edge typed diagram element (right click on the layer -> New Diagram Element -> Relation Based Edge).
-1. Set its source mapping to Entity (defined previous).
-1. Set its target mapping to Attribute (defined also previous).
+1. Set its source mapping to `Entity` (defined previous).
+1. Set its target mapping to `Attribute` (defined also previous).
 1. Set its target finder expression to `feature:attributes`
 
      _Note_: the target finder expression is related to the source mapped objects.
@@ -88,18 +88,18 @@ Visualizing edges
 ### Display connections between entities based on the relation objects
    
 1. Create an Element Based Edge typed diagram element (right click on the layer -> New Diagram Element -> Element Based Edge).
-1. Set its domain class to Relation
-1. Set its source mapping to Entity (defined previous)
+1. Set its domain class to `Relation`
+1. Set its source mapping to `Entity` (defined previous)
 1. Set its source finder expression to `[leftEnding.target/]`
-1. Set its target mapping to Entity (defined also previous)
+1. Set its target mapping to `Entity` (defined also previous)
 1. Set its source finder expression to `[rightEnding.target/]`
 1. We left the semantic candidates expression empty, but we should fill it with `feature:relations`
 
       _Note_: for the proper functioning, this is not required but recommended.
 1. By default, a simple style is provided for the edge, but define additional conditional styles based on the multiplicity of a relation:
-      * [leftRelationEnding.multiplicity.toString() = 'Many' and rightRelationEnding.multiplicity.toString() = 'One'/]
-      * [leftRelationEnding.multiplicity.toString() = 'One' and rightRelationEnding.multiplicity.toString() = 'Many'/]
-      * [leftRelationEnding.multiplicity.toString() = 'Many' and rightRelationEnding.multiplicity.toString() = 'Many'/]
+      * `[leftRelationEnding.multiplicity.toString() = 'Many' and rightRelationEnding.multiplicity.toString() = 'One'/]`
+      * `[leftRelationEnding.multiplicity.toString() = 'One' and rightRelationEnding.multiplicity.toString() = 'Many'/]`
+      * `[leftRelationEnding.multiplicity.toString() = 'Many' and rightRelationEnding.multiplicity.toString() = 'Many'/]`
 
 1. Change the ending of the edges based on the multiplicity (inside properties of an edge style, check the decorators tab)
    
