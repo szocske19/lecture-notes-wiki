@@ -37,7 +37,7 @@ In the **Runtime Eclipse**
 1. In _odesign_ editor, add a new view point: right click on the viewpoint (in the editor) -> New -> Viewpoint. Set its **Model File Extension** property to _"erdiagram"_.
    ![Viewpoint added](mdsd/2015/sirius/viewpoint.png)
    
-1. Under the viewpoint, create a diagram representation (right click on the viewpoint -> New Representation -> New Diagram Representation) and set its domain class to our root metamodel class: EntityRelationDiagram.
+1. Under the viewpoint, create a diagram representation (right click on the viewpoint -> New Representation -> New Diagram Representation) and set its domain class to our root metamodel class: `EntityRelationDiagram`.
    ![Diagram added](mdsd/2015/sirius/diagram.png)
    
     The default layer is automatically created under the diagram representation. Layers can be switch on and off while using the diagram editor. We will use only the default one.
@@ -50,56 +50,58 @@ Under the default layer:
 
 1. Create a Node typed diagram element (right click on the layer -> New Diagram Element -> Node) and set its domain class to `Entity` and its semantic candidates expression to `feature:entities`.
 
-   _Note: the Semantic Candidate Expression describes the navigation path from the parent domain class to the selected ones. In this the parent is `EntityRelationDiagram` and we select all the object on its **entities** reference._
+   _Note_: the Semantic Candidate Expression describes the navigation path from the parent domain class to the selected ones. In this the parent is `EntityRelationDiagram` and we select all the object on its **entities** reference.
 
-   _Note: the **feature:** selects a structural feature (attribute or reference) from a domain class_
+   _Note_: the `feature:` selects a structural feature (attribute or reference) from a domain class.
 
 1. Define a style for the Node (right click on the Node -> New Style -> Square). You can change its properties if you want (e.g.: light blue color, disable icon).
    ![Entity + Style added](mdsd/2015/sirius/style.png)
    
 1. Create a Node typed diagram element and set its domain class to `Attribute` and set its semantic candidate expression to `[entities.attributes->addAll(temporaralAttributes)/]`
-   _Note: inside the square brackets you can Acceleo expressions - [Acceleo](http://www.acceleo.org/doc/obeo/en/acceleo-2.6-reference.pdf)_
+   _Note_: inside the square brackets you can Acceleo expressions - [Acceleo](http://www.acceleo.org/doc/obeo/en/acceleo-2.6-reference.pdf)
    
-1. Create styles and conditional styles for attributes based on the `isKey` properties. The condition will be the following: `[isKey/]`
+1. Create styles and conditional styles for attributes based on the `isKey` properties. The condition will be the following: `[isKey/]`. Right click on the Node -> New Conditional Style -> Conditional Style and then you can create a new style under the conditional style element.
 
    _Note_: A default style is always required.
 
-1. Create Conditional Style - right click on the Node -> New Conditional Style -> Conditional Style and then you can create a new style under the conditional style element._
-   _Note: Do not forget to fill the predicate expression in the conditional style._
-   _Note: If the predicate expression is true the conditional style will be applied._
+   _Note_: Do not forget to fill the predicate expression in the conditional style.
+
+   _Note_: If the predicate expression is true the conditional style will be applied.
 
    ![Style + Conditional Style added](mdsd/2015/sirius/conditional_style.png)
    
 Visualizing edges
 -----------------
 
-Under the default layer:
+### Display connections between an entity and its attributes
+  
+1. Create a Relation Based Edge typed diagram element (right click on the layer -> New Diagram Element -> Relation Based Edge).
+1. Set its source mapping to Entity (defined previous).
+1. Set its target mapping to Attribute (defined also previous).
+1. Set its target finder expression to `feature:attributes`
 
-1. Display connections between an entity and its attributes
-   1. Create a Relation Based Edge typed diagram element (right click on the layer -> New Diagram Element -> Relation Based Edge).
-   1. Set its source mapping to Entity (defined previous)
-   1. Set its target mapping to Attribute (defined also previous)
-   1. Set its target finder expression to _"feature:attributes"_
-      _Note: the target finder expression is related to the source mapped objects_
-   1. By default, a simple edge style is create which is good for us now, but you can check its properties.
+     _Note_: the target finder expression is related to the source mapped objects.
+1. By default, a simple edge style is create which is good for us now, but you can check its properties.
    
    ![Relation Based Edge added](mdsd/2015/sirius/relation_based.png)
    
-1. Display connections between entities based on the relation objects
-   1. Create an Element Based Edge typed diagram element (right click on the layer -> New Diagram Element -> Element Based Edge).
-   1. Set its domain class to Relation
-   1. Set its source mapping to Entity (defined previous)
-   1. Set its source finder expression to _"[self.leftEnding.target/]"_
-   1. Set its target mapping to Entity (defined also previous)
-   1. Set its source finder expression to _"[self.rightEnding.target/]"_
-   1. We left the semantic candidates expression empty, but we should fill it with "feature:relations"
-      _Note: for the proper functioning, this is not required but recommended_
-   1. By default, a simple style is provided for the edge, but define additional conditional styles based on the multiplicity of a relation:
-      * [self.leftEnding.multiplicity.toString() = 'One' and self.leftEnding.multiplicity.toString() = 'One'/]
-      * [self.leftEnding.multiplicity.toString() = 'Many' and self.leftEnding.multiplicity.toString() = 'One'/]
-      * [self.leftEnding.multiplicity.toString() = 'One' and self.leftEnding.multiplicity.toString() = 'Many'/]
-      * [self.leftEnding.multiplicity.toString() = 'Many' and self.leftEnding.multiplicity.toString() = 'Many'/]
-   1. Change the ending of the edges alse based the multiplicity (inside properties of an edge style, check the decorators tab)
+### Display connections between entities based on the relation objects
+   
+1. Create an Element Based Edge typed diagram element (right click on the layer -> New Diagram Element -> Element Based Edge).
+1. Set its domain class to Relation
+1. Set its source mapping to Entity (defined previous)
+1. Set its source finder expression to `[leftEnding.target/]`
+1. Set its target mapping to Entity (defined also previous)
+1. Set its source finder expression to `[rightEnding.target/]`
+1. We left the semantic candidates expression empty, but we should fill it with `feature:relations`
+
+      _Note_: for the proper functioning, this is not required but recommended.
+1. By default, a simple style is provided for the edge, but define additional conditional styles based on the multiplicity of a relation:
+      * [leftRelationEnding.multiplicity.toString() = 'Many' and rightRelationEnding.multiplicity.toString() = 'One'/]
+      * [leftRelationEnding.multiplicity.toString() = 'One' and rightRelationEnding.multiplicity.toString() = 'Many'/]
+      * [leftRelationEnding.multiplicity.toString() = 'Many' and rightRelationEnding.multiplicity.toString() = 'Many'/]
+
+1. Change the ending of the edges based on the multiplicity (inside properties of an edge style, check the decorators tab)
    
    ![Element Based Edge added](mdsd/2015/sirius/element_based.png)
    
