@@ -217,39 +217,39 @@ Creating Edges
       1. Specify an action class: `hu.bme.mit.mdsd.erdiagram.design.CreateRelationOperation`. Clicking on the "actionClass*:" link will automatically create the class for you. Insert the following code snippet:
    
 '''java
-		public class CreateRelationOperation implements IExternalJavaAction {
-			@Override
-			public void execute(Collection<? extends EObject> selections, Map<String, Object> parameters) {
+public class CreateRelationOperation implements IExternalJavaAction {
 
-				Entity source = (Entity) parameters.get("source");
-				Entity target = (Entity) parameters.get("target");
+	@Override
+	public void execute(Collection<? extends EObject> selections, Map<String, Object> parameters) {
 
-				ErdiagramFactory factory = ErdiagramFactory.eINSTANCE;
+		Entity source = (Entity) parameters.get("source");
+		Entity target = (Entity) parameters.get("target");
 
-				Relation relation = factory.createRelation();
-				RelationEnding sourceEnding = factory.createRelationEnding();
-				RelationEnding targetEnding = factory.createRelationEnding();
-				relation.setName("newRelation");
-				relation.setLeftEnding(sourceEnding);
-				relation.setRightEnding(targetEnding);
-				sourceEnding.setTarget(source);
-				targetEnding.setTarget(target);
+		ErdiagramFactory factory = ErdiagramFactory.eINSTANCE;
 
-				EntityRelationDiagram root = (EntityRelationDiagram) source.eContainer();
-				root.getRelations().add(relation);
+		Relation relation = factory.createRelation();
+		RelationEnding sourceEnding = factory.createRelationEnding();
+		RelationEnding targetEnding = factory.createRelationEnding();
+		relation.setName("newRelation");
+		relation.setLeftEnding(sourceEnding);
+		relation.setRightEnding(targetEnding);
+		sourceEnding.setTarget(source);
+		targetEnding.setTarget(target);
 
-			}
+		EntityRelationDiagram root = (EntityRelationDiagram) source.eContainer();
+		root.getRelations().add(relation);
+	}
 
-			@Override
-			public boolean canExecute(Collection<? extends EObject> selections) {
-				for (EObject eObject : selections) {
-					if(!(eObject instanceof Entity)) {				
-						return false;
-					}
-				}
-				return true;
+	@Override
+	public boolean canExecute(Collection<? extends EObject> selections) {
+		for (EObject eObject : selections) {
+			if(!(eObject instanceof Entity)) {				
+				return false;
 			}
 		}
+		return true;
+	}
+}
 '''
 
 		_Note_: the added parameters can be reached in the `parameters` map.
