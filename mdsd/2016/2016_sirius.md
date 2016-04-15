@@ -49,7 +49,7 @@ Visualizing objects
 
 Under the default layer:
 
-1. Create a Node diagram element (right click on the layer -> New Diagram Element -> Node) and set its domain class to `Entity` and its semantic candidates expression to `feature:entities`. Id can be anything, e.g.: _EntityNode_.
+1. Create a Node diagram element (right click on the layer -> New Diagram Element -> Node) and set its domain class to `Entity` and its semantic candidates expression to `feature:entities`. Id can be anything, e.g.: `EntityNode` we will refer to it later.
 
    _Note_: the Semantic Candidate Expression describes the navigation path from the parent domain class to the selected ones. In this the parent is `EntityRelationDiagram` and we select all the object on its `entities` reference.
 
@@ -58,7 +58,7 @@ Under the default layer:
 1. Define a style for the Node (right click on the Node -> New Style -> Square). You can change its properties if you want (e.g.: light blue color, disable icon). Also note the label expression is `feature:name` by default.
    ![Entity + Style added](mdsd/2016/sirius/style.png)
    
-1. Create a Node diagram element and set its domain class to `Attribute` and set its semantic candidate expression to `[entities.attributes->addAll(temporaralAttributes)/]`. Id can be _AttributeNode_.
+1. Create a Node diagram element and set its domain class to `Attribute` and set its semantic candidate expression to `[entities.attributes->addAll(temporaralAttributes)/]`. Id can be `AttributeNode`.
    _Note_: inside the square brackets you can Acceleo expressions - [Acceleo](http://www.acceleo.org/doc/obeo/en/acceleo-2.6-reference.pdf).
 
     _Note_: the `EntityRelationDiagram` has a `temporaralAttributes` containment reference for attributes not belonging to entities. This will be required later on.
@@ -89,40 +89,55 @@ Visualizing edges
 
 ### Display connections between an entity and its attributes
   
-1. Create a Relation Based Edge typed diagram element (right click on the layer -> New Diagram Element -> Relation Based Edge).
-1. Set its source mapping to `Entity` (defined previous).
-1. Set its target mapping to `Attribute` (defined also previous).
-1. Set its target finder expression to `feature:attributes`
+1. Create a Relation Based Edge diagram element (right click on the layer -> New Diagram Element -> Relation Based Edge) with an id `EntityAttributeEdge`.
+1. Set its source mapping to `EntityNode` (defined previous).
+1. Set its target mapping to `AttributeNode` (defined also previous).
+1. Set its target finder expression to `feature:attributes` or just `[attributes/]`
 
      _Note_: the target finder expression is related to the source mapped objects.
-1. By default, a simple edge style is create which is good for us now, but you can check its properties.
+1. By default, a simple edge style is created. Change its decorator (edge ending) to `NoDecoration`. On the advanced tab set its _Folding Style_ to _Source_. This will allow to collapse an entity's attributes.
    
-   ![Relation Based Edge added](mdsd/2015/sirius/relation_based.png)
-   
+   ![Relation Based Edge added](mdsd/2016/sirius/relation_based.png)
+
+### Display inheritance relation
+
+Similarly you can define an `InheritanceEdge` between entities with an `isA` relation.
+
+![Inheritance Edge](mdsd/2016/sirius/inheritance-edge.png)
+
 ### Display connections between entities based on the relation objects
    
-1. Create an Element Based Edge typed diagram element (right click on the layer -> New Diagram Element -> Element Based Edge).
+1. Create an Element Based Edge diagram element (right click on the layer -> New Diagram Element -> Element Based Edge) and give an id `RelationEdge`.
 1. Set its domain class to `Relation`
-1. Set its source mapping to `Entity` (defined previous)
+1. Set its source mapping to `EntityNode` (defined previous)
 1. Set its source finder expression to `[leftEnding.target/]`
-1. Set its target mapping to `Entity` (defined also previous)
+1. Set its target mapping to `EntityNode` (defined also previous)
 1. Set its source finder expression to `[rightEnding.target/]`
 1. We left the semantic candidates expression empty, but we should fill it with `feature:relations`
 
       _Note_: for the proper functioning, this is not required but recommended.
+
+      ![RelationEdge](mdsd/2016/sirius/relation-edge.png)
+
 1. By default, a simple style is provided for the edge, but define additional conditional styles based on the multiplicity of a relation:
-      * `[leftRelationEnding.multiplicity.toString() = 'Many' and rightRelationEnding.multiplicity.toString() = 'One'/]`
       * `[leftRelationEnding.multiplicity.toString() = 'One' and rightRelationEnding.multiplicity.toString() = 'Many'/]`
+      * `[leftRelationEnding.multiplicity.toString() = 'Many' and rightRelationEnding.multiplicity.toString() = 'One'/]`
       * `[leftRelationEnding.multiplicity.toString() = 'Many' and rightRelationEnding.multiplicity.toString() = 'Many'/]`
 
 1. Change the ending of the edges based on the multiplicity (inside properties of an edge style, check the decorators tab)
    
-   ![Element Based Edge added](mdsd/2015/sirius/element_based.png)
-   
+   ![Element Based Edge added](mdsd/2016/sirius/element_based.png)
+
+At this point we have a fully featured view of our model (except, we can't see the name of the relation endings only the name of the relation:
+![An entity relation diagram](mdsd/2016/sirius/erdiagram.png)
+
+And we can fold entities, e.g. Person:
+![Person collasped](mdsd/2016/sirius/erdiagram-collapsed.png)
+
 Creating Objects
 ----------------
 
-Create a `section` under the layer, this will represent a section on the palette (right click on the layer -> New Tool -> Section)
+Create a `section` under the layer, this will represent a section on the **Palette** of the editor (right click on the layer -> New Tool -> Section)
 
 ### Create Entities
    
@@ -130,13 +145,8 @@ Create a `section` under the layer, this will represent a section on the palette
 1. Under the green arrow with the begin label, we can define an operation sequence to be executed.
 1. Create a new _change context_ and change the context to the container with the `var:container` expression.
 1. Create a new instance operation (right click on Begin -> New Operation -> Create Instance).
-1. Set its reference name to `entities`.
-
- _Note_: without any prefix, only the reference name.
-
- _Note_: field is related to the domain class of the diagram (or the container node) where we add the new instance.
-
-1. Set its type name to Entity, as we want to create a new Entity.
+1. Set its reference name to `entities`. This reference belongs to the EntityRelationDiagram root object, we will add the new entity here.
+1. Set its type name to `erdiagram.Entity`, as we want to create a new Entity.
 1. Set its variable name to `instance` (default).
 
  _Note_: you can refer to this object later (`var:<variable name>`).
@@ -145,17 +155,21 @@ Create a `section` under the layer, this will represent a section on the palette
 
 1. Under it, create a Set operation (right click on Create Instance Entity -> New Operation -> Set).
       1. Set its feature name to `name`.
-      1. Set its value to `newEntity`.
-
-      _Note_: this will set the _name_ attribute of the new object.
+      1. Set its value to `newEntity`. This will set the _name_ attribute of the new object.
 
    ![Create Entity](mdsd/2015/sirius/create_entity.png)
 
 ### Create Attributes
 
-It goes in the very same way as creating entities. The catch here is the attributes are contained by entities but now we can't connect a newly created attribute immediately to an entity. For this reason we will use the `temporalAttributes` containment reference on the `EntitiyRelationDiagram` element. 
+It goes in the very same way as creating entities. The catch here is the attributes are contained by entities but now we can't connect a newly created attribute immediately to an entity. For this reason, we will use the `temporalAttributes` containment reference on the `EntitiyRelationDiagram` element. 
 
-   ![Create Attibute](mdsd/2015/sirius/create_attribute.png)
+   ![Create Attibute](mdsd/2016/sirius/create_attribute.png)
+
+After saving, you can add new entities and attributes on the editor.
+
+_Note_: you can change the display name of the tool with the _Label_ property.
+
+_Note_: **removing** and element also works by default by pressing the _del_ button after selecting an element. You can override this behavior by creating a _Delete Element_ under the section.
 
 Creating Edges
 ----------------
