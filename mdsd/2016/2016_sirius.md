@@ -252,9 +252,9 @@ public class CreateRelationOperation implements IExternalJavaAction {
 }
 ```
 
-		_Note_: the added parameters can be reached in the `parameters` map.
+_Note_: the added parameters can be reached in the `parameters` map.
 		
-		![Extension points](mdsd/2016/sirius/extensionpoint.png)
+![Extension points](mdsd/2016/sirius/extensionpoint.png)
 
 To try it out close the runtime eclipse and import the `*.design` project from the runtime workspace into the host Eclipse. Then start the runtime Eclipse again. This will install the plugin to the runtime Eclipse and the Relation edge creating should work.
 
