@@ -29,6 +29,7 @@ Viewpoint specificiation
 In the **Runtime Eclipse**
 
 1. Switch to **Modeling** perspective
+
    _Note: Window -> Open perspective -> Other... -> Modeling_
 
 1. Create a new **Viewpoint Specification Project** and name it `hu.bme.mit.mdsd.erdiagram.design` while the _Viewpoint specification model_ would be called `erdiagram.odesign`.
@@ -48,17 +49,19 @@ Visualizing objects
 
 Under the default layer:
 
-1. Create a Node typed diagram element (right click on the layer -> New Diagram Element -> Node) and set its domain class to `Entity` and its semantic candidates expression to `feature:entities`.
+1. Create a Node diagram element (right click on the layer -> New Diagram Element -> Node) and set its domain class to `Entity` and its semantic candidates expression to `feature:entities`. Id can be anything, e.g.: _EntityNode_.
 
-   _Note_: the Semantic Candidate Expression describes the navigation path from the parent domain class to the selected ones. In this the parent is `EntityRelationDiagram` and we select all the object on its **entities** reference.
+   _Note_: the Semantic Candidate Expression describes the navigation path from the parent domain class to the selected ones. In this the parent is `EntityRelationDiagram` and we select all the object on its `entities` reference.
 
    _Note_: the `feature:` selects a structural feature (attribute or reference) from a domain class.
 
-1. Define a style for the Node (right click on the Node -> New Style -> Square). You can change its properties if you want (e.g.: light blue color, disable icon).
-   ![Entity + Style added](mdsd/2015/sirius/style.png)
+1. Define a style for the Node (right click on the Node -> New Style -> Square). You can change its properties if you want (e.g.: light blue color, disable icon). Also note the label expression is `feature:name` by default.
+   ![Entity + Style added](mdsd/2016/sirius/style.png)
    
-1. Create a Node typed diagram element and set its domain class to `Attribute` and set its semantic candidate expression to `[entities.attributes->addAll(temporaralAttributes)/]`
-   _Note_: inside the square brackets you can Acceleo expressions - [Acceleo](http://www.acceleo.org/doc/obeo/en/acceleo-2.6-reference.pdf)
+1. Create a Node diagram element and set its domain class to `Attribute` and set its semantic candidate expression to `[entities.attributes->addAll(temporaralAttributes)/]`. Id can be _AttributeNode_.
+   _Note_: inside the square brackets you can Acceleo expressions - [Acceleo](http://www.acceleo.org/doc/obeo/en/acceleo-2.6-reference.pdf).
+
+    _Note_: the `EntityRelationDiagram` has a `temporaralAttributes` containment reference for attributes not belonging to entities. This will be required later on.
    
 1. Create styles and conditional styles for attributes based on the `isKey` properties. The condition will be the following: `[isKey/]`. Right click on the Node -> New Conditional Style -> Conditional Style and then you can create a new style under the conditional style element.
 
@@ -68,8 +71,19 @@ Under the default layer:
 
    _Note_: If the predicate expression is true the conditional style will be applied.
 
-   ![Style + Conditional Style added](mdsd/2015/sirius/conditional_style.png)
-   
+   ![Style + Conditional Style added](mdsd/2016/sirius/conditional_style.png)
+
+Try it our
+----------
+
+1. To try it out, import our example `hu.bme.mit.mdsd.erdiagram.examplediagram` to the runtime Eclipse.
+1. Give the Modeling project nature to the imported project in the context menu -> Configure.
+1. In the context menu there will be a **Viewpoints Selection** item, click it and add the viewpoint specification we have just started to define.
+1. Create a new representation as shown on the next figure. Name it as you want and a new editor will open showing the entities and attributes as nodes.
+
+   ![New representation](mdsd/2016/sirius/create-representation.png)
+
+
 Visualizing edges
 -----------------
 
@@ -153,8 +167,8 @@ Creating Edges
   
    _Note_: this is the edge element that we defined previous (Visualizing edges/1st step).
 
-1. Set its connection start precondition to `[isOclType(Entity)/]`.
-1. Set its connection end precondition to `[isOclType(Attribute)/]`.
+1. Set its connection start precondition to `[preSource.oclIsTypeOf(Entity)/]`.
+1. Set its connection end precondition to `[preTarget.oclIsTypeOf(Attribute)/]`.
 
     _Note_: these two precondition will restrict the editor to disable undesirable edges.
 
@@ -167,16 +181,16 @@ Creating Edges
 
 ### Create inheritance edge
 
-Similar to the entity->attribute edge
+Similar to the entity->attribute edge.
 
 ### Create edge between Entities (using Java Code)
 
 1. Add a _Edge Creation_ (right click on Section -> New Element Creation -> Edge Creation)
-1. Set its edge mapping to _"Relation"_
+1. Set its edge mapping to `Relation`
 
-  _Note: this is the edge element that we defined previous (Visualizing edges/2nd step)_
-1. Set its connection start precondition to [self->selectByType(Entity)/]
-1. Set its connection end precondition to [self->selectByType(Entity)/]
+  _Note_: this is the edge element that we defined previous (Visualizing edges/2nd step).
+1. Set its connection start precondition to [preSource.oclIsTypeOf(Entity)/].
+1. Set its connection end precondition to [preTarget.oclIsTypeOf(Entity)/].
 1. Add an External Java Action operation under the Begin element (right click on the Begin element -> New Extension -> External Java Action)
       1. Set its Java Action Id to _"CreateRelation"_
       1. Add parameters: source, target, container (right click on the External Java Action -> New -> External Java Action Parameter)
