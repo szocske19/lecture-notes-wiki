@@ -108,79 +108,76 @@ Visualizing edges
 Creating Objects
 ----------------
 
-Under the **Section** (create one, if you don't have: right click on the layer -> New Tool -> Section)
+Create a `section` under the layer, this will represent a section on the palette (right click on the layer -> New Tool -> Section)
 
-1. Create Entities
-   1. Add a _Node Creation_ (right click on Section -> New Element Creation -> Node Creation)
-   1. Under the green arrow with the begin label, we can define an operation sequence to be executed.
-      1. Create a new instance operation (right click on Begin -> New Operation -> Create Instance)
-      1. Set its reference name to _"entities"_
-         _Note: without any prefix, only the reference name_
-         _Note: field is related to the domain class of the diagram (or the container node) where we add the new instance
-      1. Set its type name to Entity, as we want to create a new Entity
-      1. Set its variable name to _"instance"_
-         _Note: we won't use this feature, but with its name, you can refer to this object later (var:<variable name>)
-   1. Under the new instance operation, create a Set operation (right click on Create Instance Entity -> New Operation -> Set)
-      1. Set its feature name to _"name"_
-      1. Set its value to _"undefined"_
-      _Note: this will set the name attribute of the new object to "undefined" by default_        
+### Create Entities
+   
+1. Add a _Node Creation_ (right click on Section -> New Element Creation -> Node Creation).
+1. Under the green arrow with the begin label, we can define an operation sequence to be executed.
+1. Create a new _change context_ and change the context to the container with the `var:container` expression.
+1. Create a new instance operation (right click on Begin -> New Operation -> Create Instance).
+1. Set its reference name to `entities`.
+
+         _Note_: without any prefix, only the reference name.
+
+         _Note_: field is related to the domain class of the diagram (or the container node) where we add the new instance
+
+1. Set its type name to Entity, as we want to create a new Entity.
+1. Set its variable name to `instance` (default).
+
+         _Note_: you can refer to this object later (`var:<variable name>`).
+
+1. Create a new _change context_ and change the context to the newly created instance with the `var:instance` expression.
+
+1. Under it, create a Set operation (right click on Create Instance Entity -> New Operation -> Set).
+      1. Set its feature name to `name`.
+      1. Set its value to `newEntity`.
+
+      _Note_: this will set the _name_ attribute of the new object.
 
    ![Create Entity](mdsd/2015/sirius/create_entity.png)
 
-1. Create Attributes
-   1. Add a _Node Creation_ (right click on Section -> New Element Creation -> Node Creation)
-   1. Under the green arrow with the begin label, define the operation sequence.
-      1. Create a new instance operation (right click on Begin -> New Operation -> Create Instance)
-      1. Despite the fact, that our **EntityRelationDiagram** class cannot contain Attribute typed objects in any of its features, we have to extend the metamodel.
-         1. Stop the **RuntimeEclipse**.
-         1. Open the _erdiagram.ecore_ file.
-         1. Add a new reference to **EntityRelationDiagram**
-         	* Name: temporary
-         	* Type: Attribute
-         	* Multiplicity: many (0..*)
-         1. Save the metamodel
-         1. Reload it in the genmodel.
-         1. Regenerate the model, edit and editor code from the genmodel
-         1. Start the **Runtime Eclipse** again.         
-		    ![Modified metamodel](mdsd/2015/sirius/metamodel.png)
-		 
-      1. Set its reference name to _"temporary"_
-      1. Set its type name to Attribute
-      1. Set its variable name to _"instance"_
-   1. Under the new instance operation, create a Set operation (right click on Create Instance Entity -> New Operation -> Set)
-      1. Set its feature name to _"name"_
-      1. Set its value to _"undefined"_
+### Create Attributes
+
+It goes in the very same way as creating entities. The catch here is the attributes are contained by entities but now we can't connect a newly created attribute immediately to an entity. For this reason we will use the `temporalAttributes` containment reference on the `EntitiyRelationDiagram` element. 
 
    ![Create Attibute](mdsd/2015/sirius/create_attribute.png)
 
 Creating Edges
 ----------------
 
-Under the **Section** (create one, if you don't have: right click on the layer -> New Tool -> Section)
+### Create edge between Entity and Attribute
+   
+1. Add a _Edge Creation_ (right click on Section -> New Element Creation -> Edge Creation).
+1. Set its edge mapping to `entity_attribute`.
+  
+   _Note_: this is the edge element that we defined previous (Visualizing edges/1st step).
 
-1. Create edge between Entity and Attribute
-   1. Add a _Edge Creation_ (right click on Section -> New Element Creation -> Edge Creation)
-   1. Set its edge mapping to _"entity_attribute"_
-   _Note: this is the edge element that we defined previous (Visualizing edges/1st step)_
-   1. Set its connection start precondition to [self->selectByType(Attribute)/]
-   _Note: this acceleo expression will select all attribute typed objects
-   1. Set its connection end precondition to [self->selectByType(Entity)/]
-   _Note: these two precondition will restrict the editor to disable undesirable edges_
-   1. Add a Set operation under the Begin element
-      1. Feature name: _"attributes"_
-      _Note: related to the source object_
-      1. Value expression: _"target"_
-      _Note: this is a variable created automatically and refers to the selected target object_
+1. Set its connection start precondition to `[isOclType(Entity)/]`.
+1. Set its connection end precondition to `[isOclType(Attribute)/]`.
+
+    _Note_: these two precondition will restrict the editor to disable undesirable edges.
+
+1. Add a Set operation under the Begin element.
+      1. Feature name: `attributes`. (This is related to the source object).
+      1. Value expression: `var:target`.
+      _Note_: this is a variable created automatically and refers to the selected target object.
 
    ![Create Edge between Attibute and Entity](mdsd/2015/sirius/attribute_edge_create.png)
-   
- 1. Create edge between Entities (using Java Code)
-   1. Add a _Edge Creation_ (right click on Section -> New Element Creation -> Edge Creation)
-   1. Set its edge mapping to _"Relation"_
-   _Note: this is the edge element that we defined previous (Visualizing edges/2nd step)_
-   1. Set its connection start precondition to [self->selectByType(Entity)/]
-   1. Set its connection end precondition to [self->selectByType(Entity)/]
-   1. Add an External Java Action operation under the Begin element (right click on the Begin element -> New Extension -> External Java Action)
+
+### Create inheritance edge
+
+Similar to the entity->attribute edge
+
+### Create edge between Entities (using Java Code)
+
+1. Add a _Edge Creation_ (right click on Section -> New Element Creation -> Edge Creation)
+1. Set its edge mapping to _"Relation"_
+
+  _Note: this is the edge element that we defined previous (Visualizing edges/2nd step)_
+1. Set its connection start precondition to [self->selectByType(Entity)/]
+1. Set its connection end precondition to [self->selectByType(Entity)/]
+1. Add an External Java Action operation under the Begin element (right click on the Begin element -> New Extension -> External Java Action)
       1. Set its Java Action Id to _"CreateRelation"_
       1. Add parameters: source, target, container (right click on the External Java Action -> New -> External Java Action Parameter)
          * Set their properties:
