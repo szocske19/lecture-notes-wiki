@@ -217,7 +217,7 @@ Creating Edges
       1. Specify an action class: `hu.bme.mit.mdsd.erdiagram.design.CreateRelationOperation`. Clicking on the "actionClass*:" link will automatically create the class for you. Insert the following code snippet:
    
 '''java
-		 public class CreateRelationOperation implements IExternalJavaAction {
+		public class CreateRelationOperation implements IExternalJavaAction {
 			@Override
 			public void execute(Collection<? extends EObject> selections, Map<String, Object> parameters) {
 
