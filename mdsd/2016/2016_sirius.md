@@ -216,7 +216,7 @@ Creating Edges
       1. Set its id to `hu.bme.mit.mdsd.erdiagram.design.CreateRelationOperation` (same as Java Action Id!)
       1. Specify an action class: `hu.bme.mit.mdsd.erdiagram.design.CreateRelationOperation`. Clicking on the "actionClass*:" link will automatically create the class for you. Insert the following code snippet:
    
-		 '''java
+'''java
 		 public class CreateRelationOperation implements IExternalJavaAction {
 			@Override
 			public void execute(Collection<? extends EObject> selections, Map<String, Object> parameters) {
@@ -250,7 +250,7 @@ Creating Edges
 				return true;
 			}
 		}
-		'''
+'''
 
 		_Note_: the added parameters can be reached in the `parameters` map.
 		
