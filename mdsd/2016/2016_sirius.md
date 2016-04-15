@@ -118,14 +118,14 @@ Create a `section` under the layer, this will represent a section on the palette
 1. Create a new instance operation (right click on Begin -> New Operation -> Create Instance).
 1. Set its reference name to `entities`.
 
-         _Note_: without any prefix, only the reference name.
+ _Note_: without any prefix, only the reference name.
 
-         _Note_: field is related to the domain class of the diagram (or the container node) where we add the new instance
+ _Note_: field is related to the domain class of the diagram (or the container node) where we add the new instance.
 
 1. Set its type name to Entity, as we want to create a new Entity.
 1. Set its variable name to `instance` (default).
 
-         _Note_: you can refer to this object later (`var:<variable name>`).
+ _Note_: you can refer to this object later (`var:<variable name>`).
 
 1. Create a new _change context_ and change the context to the newly created instance with the `var:instance` expression.
 
