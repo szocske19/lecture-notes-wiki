@@ -1,6 +1,6 @@
 # Sirius
 
-![The logo of Sirius](mdsd/2015/sirius/logo_Sirius.png)
+![The logo of Sirius](mdsd/2016/sirius/logo_Sirius.png)
 
 homesite: http://eclipse.org/sirius/
 
@@ -157,7 +157,7 @@ Create a `section` under the layer, this will represent a section on the **Palet
       1. Set its feature name to `name`.
       1. Set its value to `newEntity`. This will set the _name_ attribute of the new object.
 
-   ![Create Entity](mdsd/2015/sirius/create_entity.png)
+   ![Create Entity](mdsd/2016/sirius/create_entity.png)
 
 ### Create Attributes
 
@@ -177,7 +177,7 @@ Creating Edges
 ### Create edge between Entity and Attribute
    
 1. Add a _Edge Creation_ (right click on Section -> New Element Creation -> Edge Creation).
-1. Set its edge mapping to `entity_attribute`.
+1. Set its edge mapping to `EntityAttributeEdge`.
   
    _Note_: this is the edge element that we defined previous (Visualizing edges/1st step).
 
@@ -188,68 +188,59 @@ Creating Edges
 
 1. Add a Set operation under the Begin element.
       1. Feature name: `attributes`. (This is related to the source object).
-      1. Value expression: `var:target`.
-      _Note_: this is a variable created automatically and refers to the selected target object.
+      1. Value expression: `var:target`. This is a variable created automatically and refers to the selected target object.
 
-   ![Create Edge between Attibute and Entity](mdsd/2015/sirius/attribute_edge_create.png)
-
-### Create inheritance edge
-
-Similar to the entity->attribute edge.
+   ![Create Edge between Attibute and Entity](mdsd/2016/sirius/attribute_edge_create.png)
 
 ### Create edge between Entities (using Java Code)
 
 1. Add a _Edge Creation_ (right click on Section -> New Element Creation -> Edge Creation)
-1. Set its edge mapping to `Relation`
+1. Set its edge mapping to `RelationEdge`
 
   _Note_: this is the edge element that we defined previous (Visualizing edges/2nd step).
 1. Set its connection start precondition to [preSource.oclIsTypeOf(Entity)/].
 1. Set its connection end precondition to [preTarget.oclIsTypeOf(Entity)/].
 1. Add an External Java Action operation under the Begin element (right click on the Begin element -> New Extension -> External Java Action)
-      1. Set its Java Action Id to _"CreateRelation"_
-      1. Add parameters: source, target, container (right click on the External Java Action -> New -> External Java Action Parameter)
+      1. Set its Java Action Id to `hu.bme.mit.mdsd.erdiagram.design.CreateRelationOperation`.
+      1. Add parameters: source, target (right click on the External Java Action -> New -> External Java Action Parameter)
          * Set their properties:
             * name: _source_, value _var:source_
             * name: _target_, value _var:target_
-            * name: _container_, value _var:container_
             
-      ![Create Relation between Entities](mdsd/2015/sirius/relation_edge_create.png)
+      ![Create Relation between Entities](mdsd/2016/sirius/relation_edge_create.png)
       
-      1. Open the plugin.xml of the project
-      1. Switch to the extensions tab
-      1. Add a new extension: org.eclipse.sirius.externalJavaAction
-      1. Add a new java action under the extension
-      1. Set its id to _"CreateRelation"_ (same as Java Action Id!)
-      1. Create an action class: CreateRelationOperation
+      1. Open the plugin.xml of the project (or the manifest file).
+      1. Switch to the extensions tab.
+      1. Add a new extension: `org.eclipse.sirius.externalJavaAction`.
+      1. Add a new java action under the extension if it is missing.
+      1. Set its id to `hu.bme.mit.mdsd.erdiagram.design.CreateRelationOperation` (same as Java Action Id!)
+      1. Specify an action class: `hu.bme.mit.mdsd.erdiagram.design.CreateRelationOperation`. Clicking on the "actionClass*:" link will automatically create the class for you. Insert the following code snippet:
    
 		 '''java
 		 public class CreateRelationOperation implements IExternalJavaAction {
-		
+
 			@Override
-			public void execute(Collection<? extends EObject> selections,
-					Map<String, Object> parameters) {
-				
+			public void execute(Collection<? extends EObject> selections, Map<String, Object> parameters) {
+
 				Entity source = (Entity) parameters.get("source");
 				Entity target = (Entity) parameters.get("target");
-				EntityRelationDiagram diagram = (EntityRelationDiagram) parameters.get("container");
-				
-				Relation relation = ERDiagramFactory.eINSTANCE.createRelation();
-				
-				RelationEnding leftRelationEnding = ERDiagramFactory.eINSTANCE.createRelationEnding();
-				RelationEnding rightRelationEnding = ERDiagramFactory.eINSTANCE.createRelationEnding();
-				
-				relation.setLeftEnding(leftRelationEnding);
-				relation.setRightEnding(rightRelationEnding);
-				
-				leftRelationEnding.setTarget(source);
-				rightRelationEnding.setTarget(target);
-				
-				leftRelationEnding.setName("undefined");
-				rightRelationEnding.setName("undefined");
-				
-				diagram.getRelations().add(relation);
+
+				ErdiagramFactory factory = ErdiagramFactory.eINSTANCE;
+
+				Relation relation = factory.createRelation();
+				RelationEnding sourceEnding = factory.createRelationEnding();
+				RelationEnding targetEnding = factory.createRelationEnding();
+				relation.setName("newRelation");
+				relation.setLeftEnding(sourceEnding);
+				relation.setRightEnding(targetEnding);
+				sourceEnding.setTarget(source);
+				targetEnding.setTarget(target);
+
+				EntityRelationDiagram root = (EntityRelationDiagram) source.eContainer();
+				root.getRelations().add(relation);
+
 			}
-		
+
 			@Override
 			public boolean canExecute(Collection<? extends EObject> selections) {
 				for (EObject eObject : selections) {
@@ -259,38 +250,42 @@ Similar to the entity->attribute edge.
 				}
 				return true;
 			}
-		
+
 		}
 		'''
-		_Note: the added parameters can be reached in the "parameters" map_
+
+		_Note_: the added parameters can be reached in the `parameters` map.
 		
-		![Extension points](mdsd/2015/sirius/extensionpoint.png)
-      
+		![Extension points](mdsd/2016/sirius/extensionpoint.png)
+
+To try it out close the runtime eclipse and import the `*.design` project from the runtime workspace into the host Eclipse. Then start the runtime Eclipse again. This will install the plugin to the runtime Eclipse and the Relation edge creating should work.
+
 Validation
 ----------
 
-1. Create new validation for our diagram (right click on diagram element -> New Validation -> Validation)
-1. Create a new Semantic validation (right click on validation element -> New -> Semantic Validation)
-   1. Set its level to "Information"
-   1. Target class: "Attribute"
-   1. Message: "Hi! I'm an Address."
-   _Note: this describes what will happen when our model has a problem_
-   
+1. Create new validation for our diagram (right click on diagram element -> New Validation -> Validation).
+1. Create a new Semantic validation (right click on validation element -> New -> Semantic Validation).
+   1. Set its level to `Information`.
+   1. Target class: `Attribute`.
+   1. Message: `Unnamed attribute!`. This describes what will happen when our model has a problem.
    1. Create an Audit under the semantic validation (right click semantic validation -> new -> audit)
-      * Set its audit expression to _"[self.name <> 'address'/]"_
+      * Set its audit expression to `[name <> 'newAttribute'/]`.
 	  _Note: this describes whether our model is correct or not. If the expression returns false, the element is incorrect._
-   1. Create an Quick Fix under the semantic validation (right click semantic validation -> new -> quick fix)
+   1. Create a Quick Fix under the semantic validation (right click semantic validation -> new -> quick fix)
       * Create a Set operation under the Begin element
       _Note: this is also an operation sequence to be executed when someone click on the quick fix
         * feature: _"name"_, value: _"addresss"_
 
-   ![Extension points](mdsd/2015/sirius/validation.png)
-          
+   ![Extension points](mdsd/2016/sirius/validation.png)
+
+Now you can validate your diagram by right click -> "Validate diagram". Any newly created attribute should have an "I" mark next to its name. You can use the quick fix by finding this mark in the _Problems_ view, right clicking and Quick fix.          
 
 You can find the final state of the projects in [this repository](https://github.com/FTSRG/mdsd-examples) by checking out the ``Sirius`` branch.
 
 References
 ----------
 
-Sirius basic tutorial:
-Acceleo language references: [OCL|https://wiki.eclipse.org/Acceleo/OCL_Operations_Reference] [Acceleo|https://wiki.eclipse.org/Acceleo/Acceleo_Operations_Reference]
+Sirius basic tutorial: https://wiki.eclipse.org/Sirius/Tutorials/StarterTutorial
+Sirius advanced tutorial: https://wiki.eclipse.org/Sirius/Tutorials/AdvancedTutorial
+Sirius full documentation: https://www.eclipse.org/sirius/doc/
+Acceleo language references: [OCL](https://wiki.eclipse.org/Acceleo/OCL_Operations_Reference) [Acceleo](https://wiki.eclipse.org/Acceleo/Acceleo_Operations_Reference)
