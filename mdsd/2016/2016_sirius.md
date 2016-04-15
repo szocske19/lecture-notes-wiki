@@ -36,13 +36,13 @@ In the **Runtime Eclipse**
    _Note: this is a Sirius related project type to describe a Sirius editor_
 
 1. In _odesign_ editor, add a new view point: right click on the viewpoint (in the editor) -> New -> Viewpoint. Set its **Model File Extension** property to _"erdiagram"_.
-   ![Viewpoint added](mdsd/2015/sirius/viewpoint.png)
+   ![Viewpoint added](mdsd/2016/sirius/viewpoint.png)
    
 1. Under the viewpoint, create a diagram representation (right click on the viewpoint -> New Representation -> New Diagram Representation) and set its domain class to our root metamodel class: `EntityRelationDiagram`.
-   ![Diagram added](mdsd/2015/sirius/diagram.png)
+   ![Diagram added](mdsd/2016/sirius/diagram.png)
    
     The default layer is automatically created under the diagram representation. Layers can be switch on and off while using the diagram editor. We will use only the default one.
-   ![Layer added](mdsd/2015/sirius/layer.png)
+   ![Layer added](mdsd/2016/sirius/layer.png)
 
 Visualizing objects
 -------------------
@@ -73,7 +73,7 @@ Under the default layer:
 
    ![Style + Conditional Style added](mdsd/2016/sirius/conditional_style.png)
 
-Try it our
+Try it out
 ----------
 
 1. To try it out, import our example `hu.bme.mit.mdsd.erdiagram.examplediagram` to the runtime Eclipse.
