@@ -218,7 +218,6 @@ Creating Edges
    
 		 '''java
 		 public class CreateRelationOperation implements IExternalJavaAction {
-
 			@Override
 			public void execute(Collection<? extends EObject> selections, Map<String, Object> parameters) {
 
@@ -250,7 +249,6 @@ Creating Edges
 				}
 				return true;
 			}
-
 		}
 		'''
 
@@ -285,7 +283,7 @@ You can find the final state of the projects in [this repository](https://github
 References
 ----------
 
-Sirius basic tutorial: https://wiki.eclipse.org/Sirius/Tutorials/StarterTutorial
-Sirius advanced tutorial: https://wiki.eclipse.org/Sirius/Tutorials/AdvancedTutorial
-Sirius full documentation: https://www.eclipse.org/sirius/doc/
-Acceleo language references: [OCL](https://wiki.eclipse.org/Acceleo/OCL_Operations_Reference) [Acceleo](https://wiki.eclipse.org/Acceleo/Acceleo_Operations_Reference)
+* Sirius basic tutorial: https://wiki.eclipse.org/Sirius/Tutorials/StarterTutorial
+* Sirius advanced tutorial: https://wiki.eclipse.org/Sirius/Tutorials/AdvancedTutorial
+* Sirius full documentation: https://www.eclipse.org/sirius/doc/
+* Acceleo language references: [OCL](https://wiki.eclipse.org/Acceleo/OCL_Operations_Reference) [Acceleo](https://wiki.eclipse.org/Acceleo/Acceleo_Operations_Reference)
