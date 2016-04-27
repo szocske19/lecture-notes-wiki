@@ -21,7 +21,7 @@
 * [EMF-IncQuery](2016_incquery)
 * [Xtext](2016_xtext)
 * [Sirius](2016_sirius)
-* ([M2M (VIATRA+Xtend)](2016_viatra))
+* [DESMO-J](2016_desmo-j)
 * ([M2T](2016_xtend))
 
 ### MDSD 2015
