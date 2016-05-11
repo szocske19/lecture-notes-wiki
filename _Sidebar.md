@@ -22,7 +22,7 @@
 * [Xtext](2016_xtext)
 * [Sirius](2016_sirius)
 * [DESMO-J](2016_desmo-j)
-* ([M2T](2016_xtend))
+* ([M2M2C - (VIATRA)](2016_m2m2c))
 
 ### MDSD 2015
 
