@@ -1,7 +1,7 @@
 Lecture notes
 =============
 
-This wiki is a collection of technology descriptions and laboratory instructions mainly for the _Model Driven Software Development_ course but for others as well (e.g. the legacy _Service Integration_ course). The courses are part of the computer engineering master's programme held at the Budapest University of Technology and Economics by the Fault Tolerant Systems Research Group (FTSRG).
+This wiki is a collection of technology descriptions and laboratory instructions mainly for the _Model-Driven Software Development_ course but for others as well (e.g. the legacy _Service Integration_ course). The courses are part of the computer engineering master's programme held at the Budapest University of Technology and Economics by the Fault Tolerant Systems Research Group (FTSRG).
 
 The course home pages are available here:
 
