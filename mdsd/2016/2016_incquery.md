@@ -48,8 +48,8 @@ Setup the Laboratory
 	hu.bme.mit.mdsd.erdiagram.example
 	```
 
-1. Create a new IncQuery project in the host Eclipse and name it to ```hu.bme.mit.mdsd.erdiagram.queries```.
-1. Create a new query definition in a package named ```hu.bme.mit.mdsd.erdiagram.queries``` and a file named ```queries.eiq```. Also add two simple queries (and don't forget to save and build):
+1. Create a new IncQuery project in the host Eclipse and name it to `hu.bme.mit.mdsd.erdiagram.queries`.
+1. Create a new query definition in a package named `hu.bme.mit.mdsd.erdiagram.queries` and a file named `queries.eiq`. Also add two simple queries (and don't forget to save and build):
     
 	```java
 	package hu.bme.mit.mdsd.erdiagram.queries
@@ -123,9 +123,9 @@ Pattern Language
 
 1. The previous queries were ill-formedness constraints. Now let's create a well-formedness constraint, which checks if an entity is well-formed. 
 
-	This pattern shows how to reuse previously defined patterns as sub patterns. To do this, we use the ```find``` keyword then write the id of the sub pattern and finally add the variables. (Variables starting with ```_``` define _don't care_ variables, hence you cannot use them in other lines of the pattern). 
+	This pattern shows how to reuse previously defined patterns as sub patterns. To do this, we use the `find` keyword then write the id of the sub pattern and finally add the variables. (Variables starting with `_` define _don't care_ variables, hence you cannot use them in other lines of the pattern). 
 
-	This pattern also shows how to connect independent bodies in a pattern. To do this, we use the ```or``` keyword that states the pattern has a match if the first _or_ the second _or_ the third _or_ etc body has a match.
+	This pattern also shows how to connect independent bodies in a pattern. To do this, we use the `or` keyword that states the pattern has a match if the first _or_ the second _or_ the third _or_ etc body has a match.
 
 	```java
 	pattern badEntity(entity) {
@@ -307,7 +307,7 @@ A Few More Queries
 
 1. Create a pattern that detects a circle in the type hierarchy:
 
-    ```java
+	```java
 	pattern circleInTypeHierarchy(entity) {
 		find allSuperEntity(entity, entity);
 	}
@@ -327,7 +327,7 @@ A Few More Queries
 
 1. Extend the patterns to get the inherited relations and attributes too:
 
-    ```java
+	```java
 	pattern attribute(entity, attribute) {
 		Entity.attributes(entity,attribute);
 	} or {
@@ -338,7 +338,7 @@ A Few More Queries
 
     and
 
-    ```java
+	```java
 	pattern relation(entity1, entity2) {
 		Relation.leftEnding.target(relation, entity1);
 		Relation.rightEnding.target(relation, entity2);
