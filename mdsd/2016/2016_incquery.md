@@ -166,7 +166,7 @@ Pattern Language
 	}
 	```
 
-	Notice, that using ``neg find`` is equal to using the ``count`` keyword and ensure it "returns" zero.
+	Notice, that using `neg find` is equal to using the ``count`` keyword and ensure it "returns" zero.
 
 
 1. We can also get the number of attributes of an entity:
