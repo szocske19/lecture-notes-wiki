@@ -18,7 +18,7 @@
 * [Eclipse basics](2016_eclipse_basics)
 * [EGit](2016_git)
 * [EMF](2016_emf)
-* VIATRA Query
+* [VIATRA Query](2017_vql)
 
 ### MDSD 2016
 
