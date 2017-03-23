@@ -1,0 +1,160 @@
+Advanced EMF and VIATRA Query API
+===============================
+
+In this laboratory, we will briefly cover some advanced concepts of the Eclipse Modeling Framework and then learn how to use the VIATRA Query API.
+
+Setup
+-----
+
+1. Import all the projects from the ``VQL`` branch using this repository: https://github.com/FTSRG/mdsd-examples
+1. Create a new Java class in the ``hu.bme.mit.mdsd.example`` project named ``AdvancedEmfAndVqlApi`` with a main method.
+1. Use the ``ErdiagramModels`` class to load the example model.
+
+```java
+public class AdvancedEmfAndVqlApi {
+
+    public static void main(String[] args) throws ViatraQueryException {
+
+        ErdiagramModels erdiagramModels = new ErdiagramModels();
+        erdiagramModels.init();
+
+        Resource resource = erdiagramModels.loadResource(URI.createFileURI(
+                "C:\\Users\\meres\\git\\mdsd-examples\\hu.bme.mit.mdsd.erdiagram.examplediagrams\\My.erdiagram"));
+
+        EntityRelationDiagram model = erdiagramModels.getModelFromResource(resource);
+    }
+}
+```
+
+Advanced EMF
+------------
+
+### EcoreUtil
+
+EcoreUtil has a few interesting helper methods and nested classes that can be useful when working with EMF.
+For example, using the ``.getRootContainer()`` will return the root EObject of the model from any model element.
+
+```java
+Attribute attribute = model.getEntities().get(0).getAttributes().get(0);
+EObject rootContainer = EcoreUtil.getRootContainer(attribute);
+System.out.println(model.equals(rootContainer));
+// equals will compare by reference only
+```
+
+If you have to clone the whole model, there is a helper class for it called ``EcoreUtil.Copier``.
+Let's create a helper method for cloning the model, then try it out:
+
+```java
+public static EObject clone(EObject model) {
+    Copier copier = new Copier();
+    // copies the containment hierarchy only
+    // call this multiple times if there multiple roots
+    EObject clone = copier.copy(model);
+    // copies all the other references in the model
+    copier.copyReferences();
+    return clone;
+}
+```
+
+Two models can be compared using the ``EcoreUtil.EqualityHelper``, which also compares all the contained eObjects:
+
+```java
+public static void equals(EObject model, EObject clone) {
+    EqualityHelper helper = new EqualityHelper();
+    boolean equals = helper.equals(model, clone);
+    System.out.println(equals);
+}
+```
+
+Try it out:
+
+```java
+EntityRelationDiagram clone = (EntityRelationDiagram) clone(model);
+equals(model, clone);
+attribute.setName("something");
+equals(model, clone);
+```
+
+### Switch
+
+Besides the Java classes and interface EMF also generates a <Prefix>Switch that helps to do something based on the type of the model element (like a dispatch method in Xtend).
+Let's create a switch that returns a String (generic type argument) and overrides the ``caseAttribute()`` method and the ``defaultCase()`` method (otherwise it will return null).
+
+```java
+ErdiagramSwitch<String> erdiagramSwitch = new ErdiagramSwitch<String>() {
+    @Override
+    public String caseAttribute(Attribute object) {
+        return object.getName() + " : " + object.getType();
+    }
+
+    @Override
+    public String defaultCase(EObject object) {
+        return "default";
+    }
+};
+```
+
+Then iterate over the whole model using the ``eAllContents()`` method and call ``doSwitch()`` to do the switch.
+
+```java
+TreeIterator<EObject> treeIterator = model.eAllContents();
+while (treeIterator.hasNext()) {
+    EObject eObject = (EObject) treeIterator.next();
+    System.out.println(erdiagramSwitch.doSwitch(eObject));
+}
+```
+
+### Reflective API
+
+A very good concept of the EMF framework is that you can use the metamodel programatically and manipulate the instance model without knowing anything about the metamodel.
+Hence you can create metamodel independent tools.
+The most important concepts:
+* ``EPackage`` represents the metamodel.
+* ``EClass`` represents a class in the metamodel.
+* ``EAttribute`` and ``EReference`` are inherited from ``EStructuralFeature`` and represent the references and attributes.
+* Several other classes you will come across: ``EEnum``, ``EEnumLiteral``, ``EDataType``, ``EAnnotation``
+* An ``EObject`` always has an ``eClass()`` method that returns it's ``EClass``.
+* You can retrive a value of an attribute by this reflective method call: ``eObject.eGet(eAttribute)˙˙
+* Similarly, you can also set its value (if it is a String): ``eObject.eSet(eAttribute, "newValue")˙˙
+
+Let's traverse the model and obfuscate all the attributes that has ``"name"`` as a name:
+
+```java
+TreeIterator<EObject> treeIterator = model.eAllContents();
+while (treeIterator.hasNext()) {
+    EObject eObject = (EObject) treeIterator.next();
+
+    for (EAttribute eAttribute : eObject.eClass().getEAllAttributes()) {
+        if (eAttribute.getName().equals("name")) {
+            eObject.eSet(eAttribute,
+                    Integer.toString(eObject.eGet(eAttribute).hashCode()));
+        }
+    }
+    System.out.println(erdiagramSwitch.doSwitch(eObject));
+}
+```
+
+A bit more wierd concpet is that all these reflective classes are derived from ``EObject``.
+Yes, the Ecore model is an Ecore model :)
+
+Let's do a similar switch as before, but on the metamodel:
+
+```java
+EcoreSwitch<String> ecoreSwitch = new EcoreSwitch<String>() {
+    @Override
+    public String caseEAttribute(EAttribute object) {
+        return "Attrbiute: " + object.getName();
+    }
+    @Override
+    public String defaultCase(EObject object) {
+        return object.toString();
+    }
+};
+
+EPackage ePackage = model.eClass().getEPackage();
+TreeIterator<EObject> treeIterator2 = ePackage.eAllContents();
+while (treeIterator2.hasNext()) {
+    EObject eObject = (EObject) treeIterator2.next();
+    System.out.println(ecoreSwitch.doSwitch(eObject));
+}
+```
