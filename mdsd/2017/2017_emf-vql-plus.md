@@ -114,8 +114,8 @@ The most important concepts:
 * ``EAttribute`` and ``EReference`` are inherited from ``EStructuralFeature`` and represent the references and attributes.
 * Several other classes you will come across: ``EEnum``, ``EEnumLiteral``, ``EDataType``, ``EAnnotation``
 * An ``EObject`` always has an ``eClass()`` method that returns it's ``EClass``.
-* You can retrive a value of an attribute by this reflective method call: ``eObject.eGet(eAttribute)˙˙
-* Similarly, you can also set its value (if it is a String): ``eObject.eSet(eAttribute, "newValue")˙˙
+* You can retrive a value of an attribute by this reflective method call: ``eObject.eGet(eAttribute)``
+* Similarly, you can also set its value (if it is a String): ``eObject.eSet(eAttribute, "newValue")``
 
 Let's traverse the model and obfuscate all the attributes that has ``"name"`` as a name:
 
