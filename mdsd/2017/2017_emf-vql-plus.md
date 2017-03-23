@@ -305,3 +305,5 @@ navigationHelper.addInstanceListener(Sets.newHashSet(
 Entity entity = clone.getEntities().remove(0);
 clone.getEntities().add(entity);
 ```
+
+The final projects are available at the EmfVql2 branch: https://github.com/FTSRG/mdsd-examples
