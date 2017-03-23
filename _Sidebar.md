@@ -19,6 +19,10 @@
 * [EGit](2016_git)
 * [EMF](2016_emf)
 * [VIATRA Query](2017_vql)
+* EMF++ & VQL API
+* Xtext
+* Sirius
+* M2M2C
 
 ### MDSD 2016
 
