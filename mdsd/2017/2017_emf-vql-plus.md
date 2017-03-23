@@ -142,8 +142,12 @@ Let's do a similar switch as before, but on the metamodel:
 ```java
 EcoreSwitch<String> ecoreSwitch = new EcoreSwitch<String>() {
     @Override
-    public String caseEAttribute(EAttribute object) {
-        return "Attrbiute: " + object.getName();
+    public String caseEEnum(EEnum object) {
+        return "Enum: " + object.getName();
+    }
+    @Override
+    public String caseEEnumLiteral(EEnumLiteral object) {
+        return " Literal: " + object.getName();
     }
     @Override
     public String defaultCase(EObject object) {
@@ -157,4 +161,147 @@ while (treeIterator2.hasNext()) {
     EObject eObject = (EObject) treeIterator2.next();
     System.out.println(ecoreSwitch.doSwitch(eObject));
 }
+```
+
+### Adapters
+
+Adapters are for notifications.
+If the model is changed somehow, you will get a notification.
+This infrastructure is connected to the ``Notifier`` interface, which is the ancestor of the ``EObject``, ``Resource`` and ``ResourceSet`` interfaces.
+It has an ``eAdapters()`` method.
+There are quite a few built-in ``Adapter`` implementations that can be handy.
+However adapters are a bit hard to use and it's highly recommended to use VIATRA Query advanced features for notifications (see at the end of this tutorial).
+
+Let's create an adapter that notifies if something is changed in the root object:
+
+
+```java
+model.eAdapters().add(new AdapterImpl() {
+    @Override
+    public void notifyChanged(Notification msg) {
+
+        System.out.println(msg.getNotifier() + " : " + msg.getOldStringValue()
+                + " -> " + msg.getNewStringValue());
+
+        super.notifyChanged(msg);
+    }
+});
+
+model.setName("dfd");
+model.getEntities().remove(0);
+```
+
+// TODO: Editing domain
+
+// TODO: EMap, Contextual Explorer, XMI, LoadResource
+
+VIATRA Query API
+----------------
+
+You will need dependencies to the following:
+```java
+org.eclipse.viatra.query.runtime // query runtime
+org.eclipse.viatra.query.runtime.base.itc // needed for headless mode
+hu.bme.mit.mdsd.erdiagram.queries // queries of the previous laboratory
+com.google.common.collect // guava, we will using the Sets class only
+org.apache.log4j // logging utility that VIATRA uses
+```
+
+First of all, let us configure the log4j framework.
+It should be configured via file but now we will use a quick and dirty method.:
+
+```java
+BasicConfigurator.configure();
+Logger.getRootLogger().setLevel(Level.WARN);
+```
+
+The main API class of VIATRA Query is the ``ViatraQueryEngine`` which should be initialized on a model (Notifier).
+The ``EMFScope`` is required to wrap this notifier (here I use the cloned model so it is unchanged):
+
+```java
+EMFScope scope = new EMFScope(clone);
+ViatraQueryEngine queryEngine = ViatraQueryEngine.on(scope);
+```
+
+Notice that VIATRA generated a bunch of Java classes based on the vql file int .queries project.
+It generates four classes for each pattern (expect if it has a private modifier):
+* ``<patternName>QuerySpecification`` that represents a pattern.
+* ``<patternName>Matcher`` that represents a pattern initialized on a model.
+* ``<patternName>Match`` that represents a single result of a query on a model.
+* ``<patternName>Processor`` that can be used to do something on a match.
+
+The matcher has a lot of interesting methods, such as getting all the matches, counting the all the matches or you can use a filter on the result set.
+Let's see the API in use:
+
+```java
+// Get a matcher - it will return the very same matcher if called multiple times on the same engine
+EntityCompareMatcher matcher = queryEngine.getMatcher(EntityCompareQuerySpecification.instance());
+// Count matches
+int countMatches = matcher.countMatches();
+System.out.println(countMatches);
+
+// Filter matches by binding the first parameter
+Collection<EntityCompareMatch> allMatches = matcher.getAllMatches(clone.getEntities().get(0), null);
+for (EntityCompareMatch match : allMatches) {
+    System.out.println(match.getE1().getName() + " : " + match.getE2().getName());
+}
+
+// Do something for each match
+matcher.forEachMatch(new EntityCompareProcessor() {
+
+    @Override
+    public void process(Entity pE1, Entity pE2) {
+        System.out.println(pE1.getName() + " : " + pE2.getName());
+    }
+});
+```
+
+Initializing a matcher can be costly and it is better to them in batch.
+For this use ``QueryGroup`` and call the ``prepare()`` method:
+* either the generated java class based on the .vql file's name,
+* or for example an anonym implementation of the ``BaseQueryGroup``:
+
+```java
+Queries.instance().prepare(queryEngine);
+
+new BaseQueryGroup() {
+
+    @Override
+    public Set<IQuerySpecification<?>> getSpecifications() {
+        try {
+            return Sets.newHashSet(EntitiesQuerySpecification.instance());
+        } catch (ViatraQueryException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}.prepare(queryEngine);
+```
+
+Using the ``NavigationHelper`` of VIATRA Query (basically the indexer) also supports notifications basic indexing funcionality and for subsribing to various notifiactions.
+For example, you can subsribe to an appearance or disappearance of a specific type of ``EObject``:
+
+```java
+// Get the NavigationHepler
+NavigationHelper navigationHelper = EMFScope.extractUnderlyingEMFIndex(queryEngine);
+
+// Add listener to any inserted or deleted Entity
+navigationHelper.addInstanceListener(Sets.newHashSet(
+        ErdiagramPackage.Literals.ENTITY),
+        new InstanceListener() {
+
+            @Override
+            public void instanceInserted(EClass clazz, EObject instance) {
+                System.out.println("Inserted: " + instance);
+            }
+
+            @Override
+            public void instanceDeleted(EClass clazz, EObject instance) {
+                System.out.println("Deleted: " + instance);
+            }
+        });
+
+// Try it out
+Entity entity = clone.getEntities().remove(0);
+clone.getEntities().add(entity);
 ```
