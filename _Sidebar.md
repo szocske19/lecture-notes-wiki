@@ -20,7 +20,7 @@
 * [EMF](2016_emf)
 * [VIATRA Query](2017_vql)
 * [EMF++ & VQL API](2017_emf-vql-plus)
-* Xtext
+* [Xtext](2016_xtext)
 * Sirius
 * M2M2C
 
