@@ -21,7 +21,7 @@
 * [VIATRA Query](2017_vql)
 * [EMF++ & VQL API](2017_emf-vql-plus)
 * [Xtext](2016_xtext)
-* Sirius
+* [Sirius](2016_sirius)
 * M2M2C
 
 ### MDSD 2016
