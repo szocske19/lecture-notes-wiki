@@ -57,14 +57,14 @@ You can hit finish, or on the next page you can disable the "Testing support" as
 	* _referenceName_  ```=``` _ruleName_  -> single-valued EReference to hold one contained object described by called rule
 	* _referenceName_ ```+=``` _ruleName_  -> one contained object (described by called rule) put into a many-valued EReference (can hold a list of zero, one or more contained objects)
 	* _referenceName_ ```+=``` _ruleName_```*``` -> zero, one or more contained objects (each described by called rule) put into a many-valued EReference
-
+	
         The usage of ```*``` in the last example indicated the multiplicity:
 	* ``` ``` -> exactly one
 	* ```*``` -> zero, one or more
 	* ```+``` -> one or more
 	* ```?``` -> zero or one
-
-
+	
+	
 	_Note: by default, 'ruleName' will also be the type of the objects held by the containment reference, because the generated DOM uses rule names as type names (EClass names). This is possible to override, if we want the parsed model to conform to an existing Ecore metamodel._
 
 1. Defining an enumeration type for representing ER attribute types:
@@ -89,14 +89,11 @@ You can hit finish, or on the next page you can disable the "Testing support" as
 	
 	Between apostrophe characters, we can define terminals (or keywords) for our language. The 'ID' terminal rule comes from the _Terminals_ language, and defines a unique identifier. An ```Entity``` rule starts with the ```entity``` keyword, then a string conforming to the 'ID' terminal follows, which is stored in a _name_ attribute, and finally an optional ';' terminal character (keyword) concludes the rule. Note the multiplicity indicator '?'.
 
-Note that attribute assignment with a rule uses the same syntax as reference assignment:
+	Note that attribute assignment with a rule uses the same syntax as reference assignment. Some examples with attributes:
+	* _attributeName_  ```=``` _ruleName_  -> single-valued EAttribute to hold one data value described by called rule
+	* _attributeName_ ```+=``` _ruleName_  -> one data value (described by called rule) put into a many-valued EAttribute
 	
-	```
-        Some examples with attributes:
-	_attributeName_  = _ruleName_  -> single-valued EAttribute to hold one data value described by called rule
-	_attributeName_ += _ruleName_  -> one data value (described by called rule) put into a many-valued EAttribute (can hold a list of zero, one or more values)
-	```
-	
+
 1. Grouped multiplicities, Booleans 
 
 	Next version of _Entity_ rule, now with contained attributes:
@@ -115,14 +112,12 @@ Note that attribute assignment with a rule uses the same syntax as reference ass
 	;
 	```	
 
-        We can group expressions with parentheses  ('(', ')') to add a joint cardinality indicator character ('*', '?' demonstrated above) to the complex grouped expression. If an entity doesn't have any attributes, then the entire pair of curly braces can be omitted. Otherwise, there is one mandatory application of the 'Attribute' rule with the resulting object put into the 'attributes' containment reference. The first attribute is optionally followed by a number of additional attributes, each separated by a comma terminal character. 
+	We can group expressions with parentheses  (```(```, ```)```) to add a joint cardinality indicator character (see ```*```, ```?``` demonstrated above) to the complex grouped expression. If an entity doesn't have any attributes, then the entire pair of curly braces can be omitted. Otherwise, there is one mandatory application of the ```Attribute``` rule with the resulting object put into the ```attributes``` containment reference. The first attribute is optionally followed by a number of additional attributes, each separated by a comma terminal character. 
 
-        A special case of the EAttribute assignment syntax is demonstrated in the 'Attribute' rule. If the 'key' keyword is found, the grouped expression (with optionality indicator '?') will match, setting the boolean field 'isKey' to true.
+        A special case of the EAttribute assignment syntax is demonstrated in the ```'Attribute``` rule. If the 'key' keyword is found, the grouped expression (with optionality indicator ```?```) will match, setting the boolean field ```isKey``` to true.
 
-	```
-        Special case for Boole-valued attribute:
-	_attributeName_ ?= _keyword_ -> boolean attribute set to true (but only in case this expression, including the keyword, is applied to match the text)
-	```
+	Special case of attribute assignment syntax for Boole-valued attribute:
+	* _attributeName_ ?= _keyword_ -> boolean attribute set to true (but only in case this expression, including the keyword, is applied to match the text)
 
 1. Cross-reference an _instance_ of a rule applied elsewhere with square brackets `[...]`.
 	
