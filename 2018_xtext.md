@@ -7,7 +7,7 @@ homepage: https://eclipse.org/Xtext/
 Install Xtext
 -------------
 
-Install Xtext 2.11 using the releases update site: http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/
+Xtext is already installed in the provided virtual machine environment. To manually install it into a fresh Eclipse instance, add Xtext 2.11 using the releases update site: http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/
 
 (You can find the link here: https://eclipse.org/Xtext/download.html)
 
@@ -15,7 +15,7 @@ Click Help > Install New Software and complete with next, next finish.
 
 ![Install New Software](mdsd/2016/xtext/install.png)
 
-As you can see, we will need Xtend as well.
+As you can see, we will need _Xtend_ as well.
 
 Create an Xtext language without existing AST metamodel
 -------------------------------------------------------
