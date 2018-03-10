@@ -20,11 +20,14 @@ As you can see, we will need Xtend as well.
 Create an Xtext language without existing AST metamodel
 -------------------------------------------------------
 
-1. Create a new Xtext project with the following name: ```hu.bme.mit.mdsd.erdiagram.text```. Name of the language will be ```hu.bme.mit.mdsd.erdiagram.text.ERDiagramDsl```. It should conform to a fully qualified class name. File extension will be ```er```.
+1. Create a new Xtext project. 
 
-![New project](mdsd/2016/xtext/new-project.png)
+	Use the following project name: ```hu.bme.mit.mdsd.erdiagram.text```. Name of the language will be ```hu.bme.mit.mdsd.erdiagram.text.ERDiagramDsl```. It should conform to a fully qualified class name. File extension will be ```er```.
+	
+	![New project](mdsd/2016/xtext/new-project.png)
+	
+	You can hit finish, or on the next page you can disable the "Testing support" as we won't need that. This will produce a simple ```Hello``` language with greetings messages. It is worth to check this language.
 
-You can hit finish, or on the next page you can disable the "Testing support" as we won't need that. This will produce a simple ```Hello``` language with greetings messages. It is worth to check this language.
 
 1. Declare our language
 
@@ -35,6 +38,7 @@ You can hit finish, or on the next page you can disable the "Testing support" as
 	```
 	
 	The ```grammar``` keyword declares the name of our language. The ```with``` keyword defines an inheritance from another language. In this case, we inherit from the _Terminals_ language which enables us to use the ```ID``` rule (see later).
+
 	The ```generate``` keyword is responsible for generating the AST metamodel (more precisely, DOM metamodel) from the language definition. The metamodel will be expressed in Ecore, where the EPackage name will be _eRDiagramDsl_ and the package _namespace uri_ will be _http://www.bme.hu/mit/mdsd/erdiagram/text/ERDiagramDsl_. By default, the generated EClasses within the package will be named after name of the grammar rule that generated them.
 
 
