@@ -2,7 +2,7 @@
 
 ![The logo of Xtext](mdsd/2016/xtext/logo.jpg)
 
-homesite: https://eclipse.org/Xtext/
+homepage: https://eclipse.org/Xtext/
 
 Install Xtext
 -------------
@@ -20,7 +20,7 @@ As you can see, we will need Xtend as well.
 Create an Xtext language without existing AST metamodel
 -------------------------------------------------------
 
-1. Create a new Xtext project with the following name: ```hu.bme.mit.mdsd.erdiagram.text```. Name of the language will be ```hu.bme.mit.mdsd.erdiagram.text.ERDiagramDsl```. It should conform to a fully qualified class name. Extension will be ```er```.
+1. Create a new Xtext project with the following name: ```hu.bme.mit.mdsd.erdiagram.text```. Name of the language will be ```hu.bme.mit.mdsd.erdiagram.text.ERDiagramDsl```. It should conform to a fully qualified class name. File extension will be ```er```.
 
 ![New project](mdsd/2016/xtext/new-project.png)
 
@@ -53,20 +53,19 @@ You can hit finish, or on the next page you can disable the "Testing support" as
 	
 	This rule states that each file in our syntax consists of one or more ```Entity``` objects and zero or more ```Relation``` objects (rules). The entire model described by such a file will be stored in an EObject of type ```ERDiagram```, and the individual entities and relations will be stored in two containment EReferences of this root object, named _entities_ and _relations_ in this case.
 	
-	```
-        Some examples with containment references (attributes and cross-references work analogously, as we'll see):
-	_referenceName_  = _ruleName_  -> single-valued EReference to hold one contained object described by called rule
-	_referenceName_ += _ruleName_  -> one contained object (described by called rule) put into a many-valued EReference (can hold a list of zero, one or more contained objects)
-	_referenceName_ += _ruleName_* -> zero, one or more contained objects (each described by called rule) put into a many-valued EReference
+	Some examples with containment references (attributes and cross-references work analogously, as we'll see):
+	* _referenceName_  ```=``` _ruleName_  -> single-valued EReference to hold one contained object described by called rule
+	* _referenceName_ ```+=``` _ruleName_  -> one contained object (described by called rule) put into a many-valued EReference (can hold a list of zero, one or more contained objects)
+	* _referenceName_ ```+=``` _ruleName_```*``` -> zero, one or more contained objects (each described by called rule) put into a many-valued EReference
 
-        The usage of '*' in the last example indicated the multiplicity:
-	' ' -> exactly one
-	'*' -> zero, one or more
-	'+' -> one or more
-	'?' -> zero or one
-	```
+        The usage of ```*``` in the last example indicated the multiplicity:
+	* ``` ``` -> exactly one
+	* ```*``` -> zero, one or more
+	* ```+``` -> one or more
+	* ```?``` -> zero or one
 
-	_Note: by default, 'ruleName' will also be the type of the objects held by the containment reference, because the generated DOM uses rule names as type names (EClass names). This is possible to override._
+
+	_Note: by default, 'ruleName' will also be the type of the objects held by the containment reference, because the generated DOM uses rule names as type names (EClass names). This is possible to override, if we want the parsed model to conform to an existing Ecore metamodel._
 
 1. Defining an enumeration type for representing ER attribute types:
 
@@ -91,13 +90,13 @@ You can hit finish, or on the next page you can disable the "Testing support" as
 	Between apostrophe characters, we can define terminals (or keywords) for our language. The 'ID' terminal rule comes from the _Terminals_ language, and defines a unique identifier. An ```Entity``` rule starts with the ```entity``` keyword, then a string conforming to the 'ID' terminal follows, which is stored in a _name_ attribute, and finally an optional ';' terminal character (keyword) concludes the rule. Note the multiplicity indicator '?'.
 
 Note that attribute assignment with a rule uses the same syntax as reference assignment:
-
+	
 	```
         Some examples with attributes:
 	_attributeName_  = _ruleName_  -> single-valued EAttribute to hold one data value described by called rule
 	_attributeName_ += _ruleName_  -> one data value (described by called rule) put into a many-valued EAttribute (can hold a list of zero, one or more values)
 	```
-
+	
 1. Grouped multiplicities, Booleans 
 
 	Next version of _Entity_ rule, now with contained attributes:
@@ -239,7 +238,7 @@ Try our new language
 	
 	![General File with 'er' extension](mdsd/2016/xtext/general_file.png)
 	
-	Add xtex nature in the pop-up window.
+	Add Xtext nature in the pop-up window.
 	
 	![Xtext nature pop-up](mdsd/2016/xtext/xtext_nature.png)
 
@@ -277,7 +276,7 @@ Check out the generated AST
 	
 	![Open with Simple Ecore Model Editor](mdsd/2016/xtext/ecore_editor.png)
 	
-	This will show you the AST built from the text.
+	This will show you the AST (more precisely, the DOM) parsed from the text.
 	
 	![AST of the text](mdsd/2016/xtext/tree-editor.png)
 
@@ -291,6 +290,8 @@ Scoping defines which elements are referable by a given reference. For instance,
 1. Open our scope provider
 
 	![Scope Provider](mdsd/2016/xtext/scoping.png)
+
+	_Note: This is a Java class written in the _Xtend _language. Simple Java code is generated from Xtend files under the xtend-gen source folder (further description about the language can be found here: http://eclipse.org/xtend/)_
 
 1. Create the following method:
 
@@ -310,9 +311,8 @@ Scoping defines which elements are referable by a given reference. For instance,
 	}
 	```
 	
-	This scope restrict the available objects for the _isA_ reference of all the _Entity_ EClass. The ```Scopes``` class contains static methods to create scope descriptions from a list of EObjects.
+	This scope restricts the objects available as endpoints for the _isA_ reference of the _Entity_ EClass. The ```Scopes``` class contains static methods to create scope descriptions from a list of EObjects.
 	
-	_Note: This is an Xtend file, simple Java code is generated under the xtend-gen folder (further description about the language can be found here: http://eclipse.org/xtend/)_
 
 1. Check out in our example (Runtime Eclipse, example.er file).
 
