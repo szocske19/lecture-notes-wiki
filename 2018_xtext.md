@@ -58,7 +58,8 @@ You can hit finish, or on the next page you can disable the "Testing support" as
 	* _referenceName_ ```+=``` _ruleName_  -> one contained object (described by called rule) put into a many-valued EReference (can hold a list of zero, one or more contained objects)
 	* _referenceName_ ```+=``` _ruleName_```*``` -> zero, one or more contained objects (each described by called rule) put into a many-valued EReference
 	
-        The usage of ```*``` in the last example indicated the multiplicity:
+	
+	The usage of ```*``` in the last example indicated the multiplicity:
 	* ``` ``` -> exactly one
 	* ```*``` -> zero, one or more
 	* ```+``` -> one or more
@@ -114,10 +115,9 @@ You can hit finish, or on the next page you can disable the "Testing support" as
 
 	We can group expressions with parentheses  (```(```, ```)```) to add a joint cardinality indicator character (see ```*```, ```?``` demonstrated above) to the complex grouped expression. If an entity doesn't have any attributes, then the entire pair of curly braces can be omitted. Otherwise, there is one mandatory application of the ```Attribute``` rule with the resulting object put into the ```attributes``` containment reference. The first attribute is optionally followed by a number of additional attributes, each separated by a comma terminal character. 
 
-        A special case of the EAttribute assignment syntax is demonstrated in the ```'Attribute``` rule. If the 'key' keyword is found, the grouped expression (with optionality indicator ```?```) will match, setting the boolean field ```isKey``` to true.
 
-	Special case of attribute assignment syntax for Boole-valued attribute:
-	* _attributeName_ ?= _keyword_ -> boolean attribute set to true (but only in case this expression, including the keyword, is applied to match the text)
+	A special case of the EAttribute assignment syntax for Boole-valued attributes is demonstrated in the ```'Attribute``` rule. If the 'key' keyword is found, the grouped expression (with optionality indicator ```?```) will match, setting the boolean field ```isKey``` to true.
+	* _attributeName_ ```?=``` _keyword_ -> boolean attribute set to true (but only in case this expression, including the keyword, is applied to match the text)
 
 1. Cross-reference an _instance_ of a rule applied elsewhere with square brackets `[...]`.
 	
@@ -133,7 +133,7 @@ You can hit finish, or on the next page you can disable the "Testing support" as
 	;
 	```
 	
-	If we omit the square brackets (`isA+=Entity` instead of `isA+=[Entity]`), then we would have to apply the rule again starting with `entity` keyword, defining a new entity each time. With the square brackets we declare that only a cross-reference is needed to a rule instance applied elsewhere: '[' _eClass_ ']'.
+	If we omit the square brackets (`isA+=Entity` instead of `isA+=[Entity]`), then we would have to apply the rule again starting with `entity` keyword, defining a new entity each time. With the square brackets we declare that only a cross-reference is needed to a rule instance applied elsewhere: ```[``` _eClass_ `]`.
 	
 	_Note: in this case, 'eclass' equals with a rule name, because the generated AST uses rule names as type names._
 
@@ -286,7 +286,7 @@ Scoping defines which elements are referable by a given reference. For instance,
 
 	![Scope Provider](mdsd/2016/xtext/scoping.png)
 
-	_Note: This is a Java class written in the _Xtend _language. Simple Java code is generated from Xtend files under the xtend-gen source folder (further description about the language can be found here: http://eclipse.org/xtend/)_
+	_Note: This is a Java class written in the Xtend language. Simple Java code is generated from Xtend files under the xtend-gen source folder (further description about the language can be found here: http://eclipse.org/xtend/)_
 
 1. Create the following method:
 
@@ -379,9 +379,9 @@ Generate files on build
 Create an Xtext language with existing AST metamodel
 ----------------------------------------------------
 
-You may have noticed the _model_ folder in the Xtext project, which contains a generated ecore and genmodel file. Xtext uses EMF under the hood. Xtext can also work with existing ecore models and can generate a basic json like language.
+You may have noticed the _model_ folder in the Xtext project, which contains a generated ecore and genmodel file. Xtext uses EMF under the hood. Xtext can also work with existing ecore models.
 
-To make it work you either generate a new xtext project along with a new grammer from the existing ecore model or change your grammer int the following two points: (1) instead of `generate` you have to `import` the ecore model and (2) rules must be accompanied with a `returns <existing EClass>`.
+To make it work you either generate a new xtext project along with a new grammar from the existing ecore model or change your grammar at the following two points: (1) instead of `generate` you have to `import` the ecore model and (2) rules must be accompanied with a `returns <existing EClass>`.
 
 In this tutorial, we will generate a new language based on the previously create erdiagram and will highlight the differences.
 
