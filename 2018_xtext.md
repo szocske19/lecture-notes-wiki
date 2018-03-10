@@ -7,7 +7,7 @@ homepage: https://eclipse.org/Xtext/
 Install Xtext
 -------------
 
-Install Xtext 2.9 using the releases update site: http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/
+Install Xtext 2.11 using the releases update site: http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/
 
 (You can find the link here: https://eclipse.org/Xtext/download.html)
 
