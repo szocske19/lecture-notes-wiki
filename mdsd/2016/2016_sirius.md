@@ -58,10 +58,10 @@ Under the default layer:
 1. Define a style for the Node (right click on the Node -> New Style -> Square). You can change its properties if you want (e.g.: light blue color, disable icon). Also note the label expression is `feature:name` by default.
    ![Entity + Style added](mdsd/2016/sirius/style.png)
    
-1. Create a Node diagram element and set its domain class to `Attribute` and set its semantic candidate expression to `[entities.attributes->addAll(temporaralAttributes)/]`. Id can be `AttributeNode`.
+1. Create a Node diagram element and set its domain class to `Attribute` and set its semantic candidate expression to `[entities.attributes->addAll(temporalAttributes)/]`. Id can be `AttributeNode`.
    _Note_: inside the square brackets you can Acceleo expressions - [Acceleo](http://www.acceleo.org/doc/obeo/en/acceleo-2.6-reference.pdf).
 
-    _Note_: the `EntityRelationDiagram` has a `temporaralAttributes` containment reference for attributes not belonging to entities. This will be required later on.
+    _Note_: the `EntityRelationDiagram` has a `temporalAttributes` containment reference for attributes not belonging to entities. This will be required later on.
    
 1. Create styles and conditional styles for attributes based on the `isKey` properties. The condition will be the following: `[isKey/]`. Right click on the Node -> New Conditional Style -> Conditional Style and then you can create a new style under the conditional style element.
 
