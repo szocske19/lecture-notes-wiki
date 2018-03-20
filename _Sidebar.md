@@ -18,6 +18,8 @@
 * [Eclipse basics](2016_eclipse_basics)
 * [EGit](2016_git)
 * [EMF](2018_emf)
+* [VIATRA Query](2017_vql)
+* [Sirius](2016_sirius)
 
 ### MDSD 2017
 
