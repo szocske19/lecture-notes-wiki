@@ -138,7 +138,7 @@ Introduce multiple sequential transformations in order to
 
  - each event of this change model is used to invoke the API calls to modify the target model.
 
-##Level of Incrementality
+## Level of Incrementality
 
  - no incrementality: batch transformations
 	 - e. g. source code generation, not updated regenerated
@@ -157,7 +157,7 @@ Introduce multiple sequential transformations in order to
 		 - separation of concerns
 		 - reusability, maintainability
 
- #Design Space Exploration
+ # Design Space Exploration
 	 
  - find possible design options
  - needed inputs - declarative requirement/specification
