@@ -286,4 +286,4 @@ References
 * Sirius basic tutorial: https://wiki.eclipse.org/Sirius/Tutorials/StarterTutorial
 * Sirius advanced tutorial: https://wiki.eclipse.org/Sirius/Tutorials/AdvancedTutorial
 * Sirius full documentation: https://www.eclipse.org/sirius/doc/
-* Acceleo language references: [OCL](https://wiki.eclipse.org/Acceleo/OCL_Operations_Reference) [Acceleo](https://wiki.eclipse.org/Acceleo/Acceleo_Operations_Reference)
+* Acceleo language references: [AQL](https://www.eclipse.org/acceleo/documentation/aql.html) [OCL](https://wiki.eclipse.org/Acceleo/OCL_Operations_Reference) [Acceleo](https://wiki.eclipse.org/Acceleo/Acceleo_Operations_Reference)
