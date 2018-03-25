@@ -213,6 +213,14 @@ Create an Xtext language without existing AST metamodel
 	;
 	```
 
+1. Open the Xtext Syntax Graph View
+
+	_Window->Show View->Other...->Xtext Syntax Graph_
+
+	![New project](mdsd/2018/xtext/syntax_graph_view.png)
+
+	In this view you can see the graph representation of your xtext language. It offers a great help to check or understand the construction of a language.
+
 Building infrastructure
 -----------------------
 
@@ -365,16 +373,38 @@ Generate files on build
 	class ERDiagramDslGenerator extends AbstractGenerator {
 
 		override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-			fsa.generateFile('entities.txt', 'Entities: ' + 
-				resource.allContents
-					.filter(typeof(Entity))
-					.map[name]
-					.join(', '))
+			val diagram = resource.contents.get(0) as ERDiagram
+			fsa.generateFile('er.json', 
+				'''
+				{
+				"entities":[
+					«FOR entity : diagram.entities SEPARATOR ','»
+					{ 	"name":"«entity.name»",
+						"isA":[«FOR parent : entity.isA SEPARATOR ','»"«parent.name»"«ENDFOR»],
+						"attributes":[
+							«FOR attribute : entity.attributes SEPARATOR ','»
+							{"key":«attribute.isIsKey», "name":"«attribute.name»", "type":"«attribute.type»"}
+							«ENDFOR»
+						]
+					}
+					«ENDFOR»
+				],
+				"relations":[
+					«FOR relation : diagram.relations SEPARATOR ','»
+					{
+						"leftEnding":	{"multiplicity":"«relation.leftEnding.multiplicity»", 	"nullable":«relation.leftEnding.nullable», 	"target":"«relation.leftEnding.target.name»"}, 
+						"rightEnding":	{"multiplicity":"«relation.rightEnding.multiplicity»", 	"nullable":«relation.rightEnding.nullable»,	"target":"«relation.rightEnding.target.name»"}
+					}
+					«ENDFOR»
+					]
+				}
+				'''
+			)
 		}
 	}
 	```
 
-	The will generate the an _entities.txt_ file after modifying and building the example ERDiagram model containing the name of each entities.
+	Modifying and building the example ERDiagram model calls the `doGenerate` method which generates the _er.json_ file.
 
 1. Check it out.
 
@@ -419,13 +449,14 @@ In this tutorial, we will generate a new language based on the previously create
 		'{'
 			('entities' '{' entities+=Entity ( "," entities+=Entity)* '}' )?
 			('relations' '{' relations+=Relation ( "," relations+=Relation)* '}' )?
-			('temporalAttributes' '{' temporalAttributes+=Attribute ( "," temporalAttributes+=Attribute)* '}' )?
+			('temporaryAttributes' '{' temporaryAttributes+=Attribute ( "," temporaryAttributes+=Attribute)* '}' )?
 		'}';
 	```
 
 References
 ==========
 
-* detailed documentation: https://eclipse.org/Xtext/documentation/
+* Detailed documentation: https://eclipse.org/Xtext/documentation/
+* Debugging Xtext grammars: https://blogs.itemis.com/en/debugging-xtext-grammars-what-to-do-when-your-language-is-ambiguous
 
 	
