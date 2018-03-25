@@ -20,6 +20,7 @@
 * [EMF](2018_emf)
 * [VIATRA Query](2017_vql)
 * [Sirius](2016_sirius)
+* [Xtext](2018_xtext)
 
 ### MDSD 2017
 
