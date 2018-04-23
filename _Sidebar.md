@@ -17,7 +17,7 @@
 
 * [Eclipse basics](2016_eclipse_basics)
 * [EGit](2016_git)
-* [EMF](2018_emf)
+* [EMF](2018_emf) (incl. advanced topics)
 * [VIATRA Query](2017_vql)
 * [Sirius](2016_sirius)
 * [Xtext](2018_xtext)
