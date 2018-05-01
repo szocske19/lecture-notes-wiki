@@ -21,6 +21,7 @@
 * [VIATRA Query](2017_vql)
 * [Sirius](2016_sirius)
 * [Xtext](2018_xtext)
+* [M2M (VIATRA)](2018_m2m)
 
 ### MDSD 2017
 
